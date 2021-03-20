@@ -1,0 +1,52 @@
+{
+  "name": "untitled-frontend",
+  "version": "1.0.0",
+  "description": "제목없음",
+  "main": "Untitled-Frontend",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daitnu/untitled-frontend.git"
+  },
+  "keywords": [],
+  "author": "Jonghwa",
+  "contributors": [
+    {
+      "name": "sjh2428",
+      "email": "tjdwogh45@gmail.com",
+      "url": "https://github.com/sjh2428"
+    },
+    {
+      "name": "jonghwajoa",
+      "email": "jonghwa0710@gmail.com",
+      "url": "https://github.com/jonghwajoa"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Daitnu/untitled-frontend/issues"
+  },
+  "homepage": "https://github.com/Daitnu/untitled-frontend#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@types/moment": "^2.13.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-router": "^5.1.12",
+    "@types/styled-components": "^5.1.9",
+    "prettier": "^2.2.1",
+    "webpack": "^5.27.0",
+    "webpack-cli": "^4.5.0"
+  }
+}
