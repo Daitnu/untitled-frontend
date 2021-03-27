@@ -43,6 +43,26 @@ module.exports = {
           publicPath: '/',
         },
       },
+      {
+        test: /\.css$/,
+        use: [
+          'css-modules-typescript-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+        ],
+      },
+
+      // {
+      //   test: /\.css$/i,
+      //   loader: 'css-loader',
+      //   options: {
+      //     url: true,
+      //   },
+      // },
     ],
   },
 
