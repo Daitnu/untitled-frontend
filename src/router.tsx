@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 import { ResetCss } from '~/GlobalStyle';
 
-import App from './App';
+import StockList from './pages/StockList';
 
 export const history = createBrowserHistory();
 
@@ -20,7 +20,7 @@ const AppRouter: React.FC = () => (
     <ThemeProvider theme={theme}>
       <Router history={history}>
         <Switch>
-          <Route path="/" exact component={App} />
+          <Route path="/" exact component={StockList} />
         </Switch>
       </Router>
     </ThemeProvider>
