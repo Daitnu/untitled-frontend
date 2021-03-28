@@ -1,4 +1,5 @@
 import React from 'react';
+import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import Grid from '~/components/Grid';
 import Header from '~/components/Header';
 
@@ -22,42 +23,17 @@ const columns = [
   { name: 'marketCapitalization', header: '시가총액', sortable: true, sortingType: 'desc' },
 ];
 
-// const complexColumn = [
-//   {
-//     header: 'col1',
-//     name: 'col1',
-//   },
-//   {
-//     header: 'col2',
-//     name: 'col2',
-//   },
-//   {
-//     header: 'col3',
-//     name: 'col3',
-//   },
-// ];
-
-// const complexheader = {
-//   complexColumns: [
-//     {
-//       header: 'col1 + col2',
-//       name: 'parent1',
-//       childNames: ['col1', 'col2'],
-//     },
-//     {
-//       header: 'col1 + col2 + col3',
-//       name: 'parent2',
-//       childNames: ['parent1', 'col3'],
-//     },
-//   ],
-// };
-
 const StockList: React.FC = () => {
   return (
     <>
       <Header />
       <div style={{ height: '500px' }}>
         <Grid data={data} columns={columns}></Grid>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <BarChart />
+        <LineChart />
+        <PieChart />
       </div>
     </>
   );
