@@ -7,11 +7,15 @@ const Grid = ({ data, columns }) => (
     data={data}
     columns={columns}
     rowHeight={25}
-    bodyHeight={100}
+    bodyHeight={'auto'}
     heightResizable={true}
     rowHeaders={['rowNum']}
     scrollX={true}
     scrollY={true}
+    columnOptions={{
+      frozenCount: 3,
+      frozenBorderWidth: 2,
+    }}
   />
 );
 

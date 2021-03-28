@@ -3,12 +3,12 @@ import Grid from '~/components/Grid';
 import Header from '~/components/Header';
 
 const data = [
-  { name: 'Editor', price: 1010100, openPrice: 1111 },
-  { name: 'Grid', price: 5020, openPrice: 2222 },
-  { name: 'Chart', price: 5300, openPrice: 333 },
-  { name: 'Bar', price: 50000, openPrice: 111 },
-  { name: 'Pie', price: 2000, openPrice: 333 },
-  { name: 'Multiple', price: 10000, openPrice: 333 },
+  { name: 'Editor', price: 1010100, openPrice: 1111, marketCapitalization: 500 },
+  { name: 'Grid', price: 5020, openPrice: 2222, marketCapitalization: 300 },
+  { name: 'Chart', price: 5300, openPrice: 333, marketCapitalization: 400 },
+  { name: 'Bar', price: 50000, openPrice: 111, marketCapitalization: 500 },
+  { name: 'Pie', price: 2000, openPrice: 333, marketCapitalization: 600 },
+  { name: 'Multiple', price: 10000, openPrice: 333, marketCapitalization: 700 },
 ];
 
 const columns = [
@@ -18,7 +18,8 @@ const columns = [
   { name: 'openPrice', header: '시가' },
   { name: 'highPrice', header: '고가' },
   { name: 'lowPrice', header: '저가' },
-  { name: 'volume', header: '거래량' },
+  { name: 'volume', header: '거래량', sortable: true },
+  { name: 'marketCapitalization', header: '시가총액', sortable: true, sortingType: 'desc' },
 ];
 
 // const complexColumn = [
@@ -55,7 +56,7 @@ const StockList: React.FC = () => {
   return (
     <>
       <Header />
-      <div>
+      <div style={{ height: '500px' }}>
         <Grid data={data} columns={columns}></Grid>
       </div>
     </>
