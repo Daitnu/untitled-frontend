@@ -1,7 +1,8 @@
 import React from 'react';
 import { BarChart, LineChart, PieChart } from '~/components/Chart';
-import Grid from '~/components/Grid';
+import { Grid, FinancialStatementsGrid } from '~/components/Grid';
 import Header from '~/components/Header';
+import * as S from './styled';
 
 const data = [
   { name: 'Editor', price: 1010100, openPrice: 1111, marketCapitalization: 500 },
@@ -27,14 +28,19 @@ const StockList: React.FC = () => {
   return (
     <>
       <Header />
-      <div style={{ height: '500px' }}>
-        <Grid data={data} columns={columns}></Grid>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <BarChart />
-        <LineChart />
-        <PieChart />
-      </div>
+      <S.Wrap>
+        <S.Container>
+          <div style={{ height: '500px' }}>
+            <Grid data={data} columns={columns}></Grid>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <BarChart />
+            <LineChart />
+            <PieChart />
+          </div>
+          <FinancialStatementsGrid data={data} />
+        </S.Container>
+      </S.Wrap>
     </>
   );
 };

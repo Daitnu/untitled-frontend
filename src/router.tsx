@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 import { ResetCss } from '~/GlobalStyle';
 
-import StockList from './pages/StockList';
+import StockList from './pages/Stock/StockList';
 
 export const history = createBrowserHistory();
 

@@ -11,8 +11,16 @@ export const Container = styled.div`
   margin: auto;
   height: inherit;
   display: flex;
-  align-items: center;
+
   font-size: 1em;
   font-weight: bold;
   color: white;
+`;
+
+export const flexItem = styled.div`
+  border: 1px solid;
+  flex-basis: 200px;
+  height: inherit;
+  display: flex;
+  align-items: center;
 `;
