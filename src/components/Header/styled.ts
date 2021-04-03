@@ -18,7 +18,6 @@ export const Container = styled.div`
 `;
 
 export const flexItem = styled.div`
-  border: 1px solid;
   flex-basis: 200px;
   height: inherit;
   display: flex;

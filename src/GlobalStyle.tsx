@@ -24,6 +24,8 @@ export const ResetCss = createGlobalStyle`
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+  text-decoration: none;
+  color : inherit;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -48,4 +50,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+
 `;
