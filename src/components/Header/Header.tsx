@@ -21,6 +21,7 @@ const Header = () => {
         <S.flexItem>
           <Link to="/Mypage">Mypage</Link>
         </S.flexItem>
+        <S.flexItem>Login</S.flexItem>
       </S.Container>
     </S.Header>
   );
