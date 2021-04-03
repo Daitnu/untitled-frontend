@@ -3,7 +3,7 @@ import { Route, Switch, Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
 import { ResetCss } from '~/GlobalStyle';
-import { GroupPage, Mypage, NewsPage, RankingPage, StockListPage } from './pages';
+import { GroupPage, Mypage, NewsPage, RankingPage, StockListPage, NotFoundPage } from './pages';
 
 export const history = createBrowserHistory();
 
@@ -24,6 +24,7 @@ const AppRouter: React.FC = () => (
           <Route path="/group" component={GroupPage} />
           <Route path="/ranking" component={RankingPage} />
           <Route path="/mypage" component={Mypage} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </Router>
     </ThemeProvider>
