@@ -1,7 +1,6 @@
 import React from 'react';
 import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import { Grid, FinancialStatementsGrid } from '~/components/Grid';
-import Header from '~/components/Header';
 import * as S from './styled';
 
 const data = [
@@ -26,22 +25,19 @@ const columns = [
 
 const StockList: React.FC = () => {
   return (
-    <>
-      <Header />
-      <S.Wrap>
-        <S.Container>
-          <div style={{ height: '500px' }}>
-            <Grid data={data} columns={columns}></Grid>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <BarChart />
-            <LineChart />
-            <PieChart />
-          </div>
-          <FinancialStatementsGrid data={data} />
-        </S.Container>
-      </S.Wrap>
-    </>
+    <S.Wrap>
+      <S.Container>
+        <div style={{ height: '500px' }}>
+          <Grid data={data} columns={columns}></Grid>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <BarChart />
+          <LineChart />
+          <PieChart />
+        </div>
+        <FinancialStatementsGrid data={data} />
+      </S.Container>
+    </S.Wrap>
   );
 };
 
