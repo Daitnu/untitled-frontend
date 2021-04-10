@@ -11,7 +11,6 @@ export const Container = styled.div`
   margin: auto;
   height: inherit;
   display: flex;
-
   font-size: 1em;
   font-weight: bold;
   color: white;

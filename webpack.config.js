@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-
+  exclude: {},
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),
