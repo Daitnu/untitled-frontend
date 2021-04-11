@@ -7,16 +7,10 @@ TuiGrid.setLanguage('ko');
 TuiGrid.applyTheme('striped', {
   row: {
     hover: {
-      background: '#d0bfff',
+      background: '#e5dbff',
     },
   },
 });
-
-interface IGridOptions {
-  data: Array<JSON>;
-  columns: Array<JSON>;
-  onClick?: Function;
-}
 
 const Grid = ({ data, columns, onClick }) => (
   <ToastGrid
@@ -25,7 +19,7 @@ const Grid = ({ data, columns, onClick }) => (
     rowHeight={25}
     bodyHeight={'auto'}
     width={'auto'}
-    rowHeaders={['rowNum', 'checkbox']}
+    rowHeaders={['rowNum']}
     scrollX={true}
     scrollY={true}
     columnOptions={{

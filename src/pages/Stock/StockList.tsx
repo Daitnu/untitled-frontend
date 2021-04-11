@@ -2,6 +2,7 @@ import React from 'react';
 import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import { Grid, FinancialStatementsGrid } from '~/components/Grid';
 import testData from '~/data.json';
+import { IStockListData } from '~/types/data';
 import * as S from './styled';
 import { TOAST_GRID, URL } from '~/constant';
 import {} from 'react-router-dom';
@@ -16,9 +17,39 @@ const columns = [
     align: 'left',
   },
   // { name: 'changePercent', header: '전일종가' },
-  { name: 'todayClosePrice', header: '종가', valign: 'middle', sortable: true, width: 80, align: 'right' },
-  { name: 'changePrice', header: '전일비', valign: 'middle', sortable: true, width: 80, align: 'right' },
-  { name: 'changePercent', header: '등락률', valign: 'middle', sortable: true, width: 80, align: 'right' },
+  {
+    name: 'todayClosePrice',
+    header: '종가',
+    valign: 'middle',
+    sortable: true,
+    width: 90,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+  {
+    name: 'changePrice',
+    header: '전일비',
+    valign: 'middle',
+    sortable: true,
+    width: 90,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+  {
+    name: 'changePercent',
+    header: '등락률',
+    valign: 'middle',
+    sortable: true,
+    width: 80,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%';
+    },
+  },
   {
     name: 'changePercentWeek',
     header: '주간 등락률',
@@ -27,6 +58,9 @@ const columns = [
     width: 80,
     defaultValue: 0,
     align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%';
+    },
   },
   {
     name: 'changePercentMonth',
@@ -36,12 +70,61 @@ const columns = [
     width: 80,
     defaultValue: 0,
     align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%';
+    },
   },
-  { name: 'todayOpenPrice', header: '시가', valign: 'middle', width: 80, align: 'right' },
-  { name: 'todayHighPrice', header: '고가', valign: 'middle', width: 80, align: 'right' },
-  { name: 'todayLowPrice', header: '저가', valign: 'middle', width: 80, align: 'right' },
-  { name: 'volume', header: '거래량', valign: 'middle', sortable: true, width: 100, align: 'right' },
-  { name: 'sharesOutstanding', header: '발행주식수', valign: 'middle', width: 120, align: 'right' },
+  {
+    name: 'todayOpenPrice',
+    header: '시가',
+    valign: 'middle',
+    width: 80,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+  {
+    name: 'todayHighPrice',
+    header: '고가',
+    valign: 'middle',
+    width: 80,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+  {
+    name: 'todayLowPrice',
+    header: '저가',
+    valign: 'middle',
+    width: 80,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+  {
+    name: 'volume',
+    header: '거래량',
+    valign: 'middle',
+    sortable: true,
+    width: 100,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
+  {
+    name: 'sharesOutstanding',
+    header: '발행주식수',
+    valign: 'middle',
+    width: 120,
+    align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
+  },
   {
     name: 'marketCapitalization',
     header: '시가총액',
@@ -50,73 +133,29 @@ const columns = [
     sortingType: 'desc',
     width: 160,
     align: 'right',
+    formatter: ({ value }) => {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
   },
 ];
 
-interface IStockListData {
-  stockCode: string;
-  corpName: string;
-  marketKind: string;
-  department: string;
-  todayClosePrice: number;
-  changePrice: number;
-  changePercent: number;
-  todayOpenPrice: number;
-  todayHighPrice: number;
-  todayLowPrice: number;
-  volume: string;
-  tradeTotalPrice: string;
-  changePercentWeek?: number;
-  changePercentMonth?: number;
-  marketCapitalization: string;
-  sharesOutstanding: string;
-  MarketKindId: string;
-  _attributes: {
-    className: {
-      column: {
-        changePrice: Array<string>;
-        changePercent: Array<string>;
-        corpName: Array<string>;
-      };
-    };
-  };
-}
-
-interface ITestData {
-  ISU_SRT_CD: string;
-  ISU_ABBRV: string;
-  MKT_NM: string;
-  SECT_TP_NM: string;
-  TDD_CLSPRC: string;
-  CMPPREVDD_PRC: string;
-  FLUC_RT: string;
-  TDD_OPNPRC: string;
-  TDD_HGPRC: string;
-  TDD_LWPRC: string;
-  ACC_TRDVOL: string;
-  ACC_TRDVAL: string;
-  MKTCAP: string;
-  LIST_SHRS: string;
-  MKT_ID: string;
-}
-
 const sampleData = testData.data.slice(50);
 const stockListData = sampleData.map((data) => {
-  const stockData: IStockListData = {
+  const corpStockData: IStockListData = {
     stockCode: data.ISU_SRT_CD,
     corpName: data.ISU_ABBRV,
     marketKind: data.MKT_NM,
     department: data.SECT_TP_NM,
-    todayClosePrice: Number(data.TDD_CLSPRC.replace(',', '')),
-    changePrice: Number(data.CMPPREVDD_PRC.replace(',', '')),
-    changePercent: Number(data.FLUC_RT.replace(',', '')),
-    todayOpenPrice: Number(data.TDD_OPNPRC.replace(',', '')),
-    todayHighPrice: Number(data.TDD_HGPRC.replace(',', '')),
-    todayLowPrice: Number(data.TDD_LWPRC.replace(',', '')),
-    volume: data.ACC_TRDVOL,
-    tradeTotalPrice: data.ACC_TRDVAL,
-    marketCapitalization: data.MKTCAP,
-    sharesOutstanding: data.LIST_SHRS,
+    todayClosePrice: Number(data.TDD_CLSPRC.replaceAll(',', '')),
+    changePrice: Number(data.CMPPREVDD_PRC.replaceAll(',', '')),
+    changePercent: Number(data.FLUC_RT.replaceAll(',', '')),
+    todayOpenPrice: Number(data.TDD_OPNPRC.replaceAll(',', '')),
+    todayHighPrice: Number(data.TDD_HGPRC.replaceAll(',', '')),
+    todayLowPrice: Number(data.TDD_LWPRC.replaceAll(',', '')),
+    volume: Number(data.ACC_TRDVOL.replaceAll(',', '')),
+    tradeTotalPrice: Number(data.ACC_TRDVAL.replaceAll(',', '')),
+    sharesOutstanding: Number(data.LIST_SHRS.replaceAll(',', '')),
+    marketCapitalization: Number(data.MKTCAP.replaceAll(',', '')),
     MarketKindId: data.MKT_ID,
     _attributes: {
       className: {
@@ -131,14 +170,15 @@ const stockListData = sampleData.map((data) => {
 
   let pushClassName = '';
 
-  if (stockData.changePrice < 0) {
+  if (corpStockData.changePrice < 0) {
     pushClassName = TOAST_GRID.TOAST_GRID_STOCK_FELL;
-  } else if (0 < stockData.changePrice) {
+  } else if (0 < corpStockData.changePrice) {
     pushClassName = TOAST_GRID.TOAST_GRID_STOCK_ROSE;
   }
-  stockData._attributes.className.column.changePrice.push(pushClassName);
-  stockData._attributes.className.column.changePercent.push(pushClassName);
-  return stockData;
+
+  corpStockData._attributes.className.column.changePrice.push(pushClassName);
+  corpStockData._attributes.className.column.changePercent.push(pushClassName);
+  return corpStockData;
 });
 
 const onClick = (event) => {
@@ -154,12 +194,12 @@ const StockList: React.FC = () => {
         <div style={{ height: `calc(100%)` }}>
           <Grid data={stockListData} columns={columns} onClick={onClick}></Grid>
         </div>
-        {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
           <BarChart />
           <LineChart />
           <PieChart />
         </div>
-        <FinancialStatementsGrid data={data} /> */}
+        {/* <FinancialStatementsGrid data={data} /> */}
       </S.Container>
     </S.Wrap>
   );
