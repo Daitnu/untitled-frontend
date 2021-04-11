@@ -8,13 +8,12 @@ const Grid = ({ data, columns }) => (
     columns={columns}
     rowHeight={25}
     bodyHeight={'auto'}
-    heightResizable={true}
-    rowHeaders={['rowNum']}
+    width={'auto'}
+    rowHeaders={['rowNum', 'checkbox']}
     scrollX={true}
     scrollY={true}
     columnOptions={{
-      frozenCount: 3,
-      frozenBorderWidth: 2,
+      resizable: true,
     }}
   />
 );
