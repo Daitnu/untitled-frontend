@@ -52,10 +52,10 @@ const columns = [
   },
   {
     name: 'changePercentWeek',
-    header: '주간 등락률',
+    header: '주간등락률',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    width: 90,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => {
@@ -64,10 +64,10 @@ const columns = [
   },
   {
     name: 'changePercentMonth',
-    header: '월간 등락률',
+    header: '월간등락률',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    width: 90,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => {
