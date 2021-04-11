@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const RobotstxtPlugin = require('robotstxt-webpack-plugin');
+
+const robotsOptions = require('./robots-txt.config');
 
 module.exports = {
   mode: 'development',
@@ -11,7 +14,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-  exclude: {},
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),
@@ -77,5 +79,6 @@ module.exports = {
         files: './src/**/*.{ts,tsx,js,jsx}',
       },
     }),
+    new RobotstxtPlugin(robotsOptions),
   ],
 };
