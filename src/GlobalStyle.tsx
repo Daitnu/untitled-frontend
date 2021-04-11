@@ -66,4 +66,8 @@ table {
 .tui-grid-stock-link {
   cursor: pointer;
 }
+
+.tui-grid-cell-content {
+  margin: 0 10px;
+}
 `;

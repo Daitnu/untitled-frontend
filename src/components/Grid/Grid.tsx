@@ -3,8 +3,14 @@ import ToastGrid from '@toast-ui/react-grid';
 import 'tui-grid/dist/tui-grid.css';
 import TuiGrid from 'tui-grid';
 
-TuiGrid.applyTheme('clean');
 TuiGrid.setLanguage('ko');
+TuiGrid.applyTheme('striped', {
+  row: {
+    hover: {
+      background: '#d0bfff',
+    },
+  },
+});
 
 interface IGridOptions {
   data: Array<JSON>;

@@ -7,27 +7,50 @@ import { TOAST_GRID, URL } from '~/constant';
 import {} from 'react-router-dom';
 
 const columns = [
-  { name: 'marketKind', header: '시장구분', filter: 'select', valign: 'middle' },
+  { name: 'marketKind', header: '시장구분', filter: 'select', valign: 'middle', width: 100, align: 'left' },
   {
     name: 'corpName',
     header: '회사명',
-    onClick(event) {
-      console.log(`evetn ${event}`);
-    },
     valign: 'middle',
+    width: 150,
+    align: 'left',
   },
   // { name: 'changePercent', header: '전일종가' },
-  { name: 'todayClosePrice', header: '종가', valign: 'middle', sortable: true },
-  { name: 'changePrice', header: '전일비', valign: 'middle', sortable: true },
-  { name: 'changePercent', header: '등락률', valign: 'middle', sortable: true },
-  { name: 'changePercentWeek', header: '1주 등락률', valign: 'middle' },
-  { name: 'changePercentMonth', header: '1달 등락률', valign: 'middle' },
-  { name: 'todayOpenPrice', header: '시가', valign: 'middle' },
-  { name: 'todayHighPrice', header: '고가', valign: 'middle' },
-  { name: 'todayLowPrice', header: '저가', valign: 'middle' },
-  { name: 'volume', header: '거래량', valign: 'middle', sortable: true },
-  { name: 'sharesOutstanding', header: '발행주식수', valign: 'middle' },
-  { name: 'marketCapitalization', header: '시가총액', valign: 'middle', sortable: true, sortingType: 'desc' },
+  { name: 'todayClosePrice', header: '종가', valign: 'middle', sortable: true, width: 80, align: 'right' },
+  { name: 'changePrice', header: '전일비', valign: 'middle', sortable: true, width: 80, align: 'right' },
+  { name: 'changePercent', header: '등락률', valign: 'middle', sortable: true, width: 80, align: 'right' },
+  {
+    name: 'changePercentWeek',
+    header: '주간 등락률',
+    valign: 'middle',
+    sortable: true,
+    width: 80,
+    defaultValue: 0,
+    align: 'right',
+  },
+  {
+    name: 'changePercentMonth',
+    header: '월간 등락률',
+    valign: 'middle',
+    sortable: true,
+    width: 80,
+    defaultValue: 0,
+    align: 'right',
+  },
+  { name: 'todayOpenPrice', header: '시가', valign: 'middle', width: 80, align: 'right' },
+  { name: 'todayHighPrice', header: '고가', valign: 'middle', width: 80, align: 'right' },
+  { name: 'todayLowPrice', header: '저가', valign: 'middle', width: 80, align: 'right' },
+  { name: 'volume', header: '거래량', valign: 'middle', sortable: true, width: 100, align: 'right' },
+  { name: 'sharesOutstanding', header: '발행주식수', valign: 'middle', width: 120, align: 'right' },
+  {
+    name: 'marketCapitalization',
+    header: '시가총액',
+    valign: 'middle',
+    sortable: true,
+    sortingType: 'desc',
+    width: 160,
+    align: 'right',
+  },
 ];
 
 interface IStockListData {
@@ -43,8 +66,8 @@ interface IStockListData {
   todayLowPrice: number;
   volume: string;
   tradeTotalPrice: string;
-  changePercentWeek: number;
-  changePercentMonth: number;
+  changePercentWeek?: number;
+  changePercentMonth?: number;
   marketCapitalization: string;
   sharesOutstanding: string;
   MarketKindId: string;
