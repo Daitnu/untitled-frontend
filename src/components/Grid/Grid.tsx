@@ -6,7 +6,13 @@ import TuiGrid from 'tui-grid';
 TuiGrid.applyTheme('clean');
 TuiGrid.setLanguage('ko');
 
-const Grid = ({ data, columns }) => (
+interface IGridOptions {
+  data: Array<JSON>;
+  columns: Array<JSON>;
+  onClick?: Function;
+}
+
+const Grid = ({ data, columns, onClick }) => (
   <ToastGrid
     data={data}
     columns={columns}
@@ -19,6 +25,8 @@ const Grid = ({ data, columns }) => (
     columnOptions={{
       resizable: true,
     }}
+    showDummyRows={true}
+    onClick={onClick}
   />
 );
 

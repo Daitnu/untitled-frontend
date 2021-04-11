@@ -3,26 +3,31 @@ import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import { Grid, FinancialStatementsGrid } from '~/components/Grid';
 import testData from '~/data.json';
 import * as S from './styled';
+import { TOAST_GRID, URL } from '~/constant';
+import {} from 'react-router-dom';
 
 const columns = [
-  { name: 'marketKind', header: '시장구분', filter: 'select', aglin: 'center' },
+  { name: 'marketKind', header: '시장구분', filter: 'select', valign: 'middle' },
   {
     name: 'corpName',
     header: '회사명',
     onClick(event) {
       console.log(`evetn ${event}`);
     },
+    valign: 'middle',
   },
   // { name: 'changePercent', header: '전일종가' },
-  { name: 'todayClosePrice', header: '종가', sortable: true },
-  { name: 'changePrice', header: '전일비', sortable: true },
-  { name: 'changePercent', header: '등락률', sortable: true },
-  { name: 'todayOpenPrice', header: '시가' },
-  { name: 'todayHighPrice', header: '고가' },
-  { name: 'todayLowPrice', header: '저가' },
-  { name: 'volume', header: '거래량', sortable: true },
-  { name: 'sharesOutstanding', header: '발행주식수' },
-  { name: 'marketCapitalization', header: '시가총액', sortable: true, sortingType: 'desc' },
+  { name: 'todayClosePrice', header: '종가', valign: 'middle', sortable: true },
+  { name: 'changePrice', header: '전일비', valign: 'middle', sortable: true },
+  { name: 'changePercent', header: '등락률', valign: 'middle', sortable: true },
+  { name: 'changePercentWeek', header: '1주 등락률', valign: 'middle' },
+  { name: 'changePercentMonth', header: '1달 등락률', valign: 'middle' },
+  { name: 'todayOpenPrice', header: '시가', valign: 'middle' },
+  { name: 'todayHighPrice', header: '고가', valign: 'middle' },
+  { name: 'todayLowPrice', header: '저가', valign: 'middle' },
+  { name: 'volume', header: '거래량', valign: 'middle', sortable: true },
+  { name: 'sharesOutstanding', header: '발행주식수', valign: 'middle' },
+  { name: 'marketCapitalization', header: '시가총액', valign: 'middle', sortable: true, sortingType: 'desc' },
 ];
 
 interface IStockListData {
@@ -38,9 +43,20 @@ interface IStockListData {
   todayLowPrice: number;
   volume: string;
   tradeTotalPrice: string;
+  changePercentWeek: number;
+  changePercentMonth: number;
   marketCapitalization: string;
   sharesOutstanding: string;
   MarketKindId: string;
+  _attributes: {
+    className: {
+      column: {
+        changePrice: Array<string>;
+        changePercent: Array<string>;
+        corpName: Array<string>;
+      };
+    };
+  };
 }
 
 interface ITestData {
@@ -79,17 +95,41 @@ const stockListData = sampleData.map((data) => {
     marketCapitalization: data.MKTCAP,
     sharesOutstanding: data.LIST_SHRS,
     MarketKindId: data.MKT_ID,
+    _attributes: {
+      className: {
+        column: {
+          changePrice: [],
+          changePercent: [],
+          corpName: ['tui-grid-stock-link'],
+        },
+      },
+    },
   };
 
+  let pushClassName = '';
+
+  if (stockData.changePrice < 0) {
+    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_FELL;
+  } else if (0 < stockData.changePrice) {
+    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_ROSE;
+  }
+  stockData._attributes.className.column.changePrice.push(pushClassName);
+  stockData._attributes.className.column.changePercent.push(pushClassName);
   return stockData;
 });
+
+const onClick = (event) => {
+  const { columnName, rowKey } = event;
+  if (columnName !== 'corpName') return;
+  window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${stockListData[rowKey].stockCode}`, '_blank');
+};
 
 const StockList: React.FC = () => {
   return (
     <S.Wrap>
       <S.Container>
         <div style={{ height: `calc(100%)` }}>
-          <Grid data={stockListData.slice(50)} columns={columns}></Grid>
+          <Grid data={stockListData} columns={columns} onClick={onClick}></Grid>
         </div>
         {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
           <BarChart />

@@ -51,5 +51,19 @@ table {
 	border-spacing: 0;
 }
 
+.tui-grid-stock-rose {
+  color: #d90400;
+}
 
+.tui-grid-stock-fell {
+  color: #005dde;
+}
+
+.tui-grid-stock-maintained {
+  color: black;
+}
+
+.tui-grid-stock-link {
+  cursor: pointer;
+}
 `;
