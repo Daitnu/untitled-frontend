@@ -2,121 +2,121 @@ import React from 'react';
 import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import { Grid, FinancialStatementsGrid } from '~/components/Grid';
 import testData from '~/data.json';
-import { IStockListData } from '~/types/data';
+import { IStockListData } from '@t/data';
 import * as S from './styled';
-import { TOAST_GRID, URL } from '~/constant';
+import { TOAST_GRID, URL, COLUMN_NAMES } from '~/constant';
 import {} from 'react-router-dom';
 
 const ConvertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 const columns = [
-  { name: 'marketKind', header: '시장구분', filter: 'select', valign: 'middle', width: 100, align: 'left' },
+  { name: COLUMN_NAMES.MARKET_KIND, header: '시장구분', filter: 'select', valign: 'middle', width: 100, align: 'left' },
   {
-    name: 'corpName',
+    name: COLUMN_NAMES.CORPERATE_NAME,
     header: '회사명',
     valign: 'middle',
     width: 150,
     align: 'left',
   },
-  // { name: 'changePercent', header: '전일종가' },
   {
-    name: 'todayClosePrice',
+    name: COLUMN_NAMES.TODAY_CLOSE_PRICE,
     header: '종가',
     valign: 'middle',
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'changePrice',
+    name: COLUMN_NAMES.CHANGE_PRICE,
     header: '전일비',
     valign: 'middle',
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'changePercent',
+    name: COLUMN_NAMES.CHANGE_PERCENT,
     header: '등락률',
     valign: 'middle',
     sortable: true,
     width: 80,
     align: 'right',
-    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`
+    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
   },
   {
-    name: 'changePercentWeek',
+    name: COLUMN_NAMES.CHANGE_PERCENT_WEEK,
     header: '주간등락률',
     valign: 'middle',
     sortable: true,
     width: 90,
     defaultValue: 0,
     align: 'right',
-formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`
+    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
   },
   {
-    name: 'changePercentMonth',
+    name: COLUMN_NAMES.CHANGE_PERCENT_MONTH,
     header: '월간등락률',
     valign: 'middle',
     sortable: true,
     width: 90,
     defaultValue: 0,
     align: 'right',
-formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`
+    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
   },
   {
-    name: 'todayOpenPrice',
-    header: '시가',
+    name: COLUMN_NAMES.TODAY_OPEN_PRICE,
+    header: '시초가',
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'todayHighPrice',
+    name: COLUMN_NAMES.TODAY_HIGH_PRICE,
     header: '고가',
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'todayLowPrice',
+    name: COLUMN_NAMES.TODAY_LOW_PRICE,
     header: '저가',
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'volume',
+    name: COLUMN_NAMES.VOLUME,
     header: '거래량',
     valign: 'middle',
     sortable: true,
     width: 100,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'sharesOutstanding',
+    name: COLUMN_NAMES.SHARES_OUTSTANDING,
     header: '발행주식수',
     valign: 'middle',
     width: 120,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
   {
-    name: 'marketCapitalization',
+    name: COLUMN_NAMES.MARKET_CAPITALIZATION,
     header: '시가총액',
     valign: 'middle',
     sortable: true,
     sortingType: 'desc',
     width: 160,
     align: 'right',
-    formatter: ({ value }) =>  ConvertNumberSeparator(value)
+    formatter: ({ value }) => ConvertNumberSeparator(value),
   },
+  { name: COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
 const sampleData = testData.data.slice(50);
@@ -136,6 +136,7 @@ const stockListData = sampleData.map((data) => {
     tradeTotalPrice: Number(data.ACC_TRDVAL.replaceAll(',', '')),
     sharesOutstanding: Number(data.LIST_SHRS.replaceAll(',', '')),
     marketCapitalization: Number(data.MKTCAP.replaceAll(',', '')),
+    naverLink: '바로가기',
     MarketKindId: data.MKT_ID,
     _attributes: {
       className: {
@@ -143,6 +144,7 @@ const stockListData = sampleData.map((data) => {
           changePrice: [],
           changePercent: [],
           corpName: ['tui-grid-stock-link'],
+          naverLink: ['tui-grid-stock-link'],
         },
       },
     },
@@ -161,18 +163,23 @@ const stockListData = sampleData.map((data) => {
   return corpStockData;
 });
 
-const onClick = (event) => {
+const onClickCell = (event) => {
   const { columnName, rowKey } = event;
-  if (columnName !== 'corpName') return;
-  window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${stockListData[rowKey].stockCode}`, '_blank');
+  switch (columnName) {
+    case COLUMN_NAMES.NAVER_LINK:
+      window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${stockListData[rowKey].stockCode}`, '_blank');
+      break;
+    case COLUMN_NAMES.CORPERATE_NAME:
+      break;
+  }
 };
 
 const StockList: React.FC = () => {
   return (
     <S.Wrap>
       <S.Container>
-        <div style={{ height: `calc(100%)` }}>
-          <Grid data={stockListData} columns={columns} onClick={onClick}></Grid>
+        <div>
+          <Grid data={stockListData} columns={columns} onClick={onClickCell}></Grid>
         </div>
         {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
           <BarChart />
