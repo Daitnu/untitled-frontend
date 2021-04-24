@@ -5,7 +5,15 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { ThemeProvider } from 'styled-components';
 import { ResetCss } from '~/GlobalStyle';
-import { GroupPage, Mypage, NewsPage, RankingPage, StockListPage, NotFoundPage } from './pages';
+import {
+  GroupPage,
+  Mypage,
+  NewsPage,
+  RankingPage,
+  StockListPage,
+  NotFoundPage,
+  CorperateInfomationPage,
+} from './pages';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -37,6 +45,7 @@ const AppRouter: React.FC = () => (
           <Header />
           <Switch>
             <Route path="/" exact component={StockListPage} />
+            <Route path="/corp/:code" exact component={CorperateInfomationPage} />
             <Route path="/news" exact component={NewsPage} />
             <Route path="/group" component={GroupPage} />
             <Route path="/ranking" component={RankingPage} />
