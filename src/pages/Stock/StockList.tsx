@@ -7,6 +7,8 @@ import * as S from './styled';
 import { TOAST_GRID, URL } from '~/constant';
 import {} from 'react-router-dom';
 
+const ConvertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
 const columns = [
   { name: 'marketKind', header: '시장구분', filter: 'select', valign: 'middle', width: 100, align: 'left' },
   {
@@ -24,9 +26,7 @@ const columns = [
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) => ConvertNumberSeparator(value)
   },
   {
     name: 'changePrice',
@@ -35,9 +35,7 @@ const columns = [
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
   {
     name: 'changePercent',
@@ -46,9 +44,7 @@ const columns = [
     sortable: true,
     width: 80,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%';
-    },
+    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`
   },
   {
     name: 'changePercentWeek',
@@ -58,9 +54,7 @@ const columns = [
     width: 90,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%';
-    },
+formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`
   },
   {
     name: 'changePercentMonth',
@@ -70,9 +64,7 @@ const columns = [
     width: 90,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%';
-    },
+formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`
   },
   {
     name: 'todayOpenPrice',
@@ -80,9 +72,7 @@ const columns = [
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
   {
     name: 'todayHighPrice',
@@ -90,9 +80,7 @@ const columns = [
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
   {
     name: 'todayLowPrice',
@@ -100,9 +88,7 @@ const columns = [
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
   {
     name: 'volume',
@@ -111,9 +97,7 @@ const columns = [
     sortable: true,
     width: 100,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
   {
     name: 'sharesOutstanding',
@@ -121,9 +105,7 @@ const columns = [
     valign: 'middle',
     width: 120,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
   {
     name: 'marketCapitalization',
@@ -133,9 +115,7 @@ const columns = [
     sortingType: 'desc',
     width: 160,
     align: 'right',
-    formatter: ({ value }) => {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    formatter: ({ value }) =>  ConvertNumberSeparator(value)
   },
 ];
 
@@ -194,11 +174,11 @@ const StockList: React.FC = () => {
         <div style={{ height: `calc(100%)` }}>
           <Grid data={stockListData} columns={columns} onClick={onClick}></Grid>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
           <BarChart />
           <LineChart />
           <PieChart />
-        </div>
+        </div> */}
         {/* <FinancialStatementsGrid data={data} /> */}
       </S.Container>
     </S.Wrap>
