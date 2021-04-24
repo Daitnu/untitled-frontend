@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { Grid } from '~/components/Grid';
 import testData from '~/data.json';
 import { IStockListData } from '@t/data';
 import * as S from './styled';
 import { TOAST_GRID, URL, COLUMN_NAMES } from '~/constant';
-import {} from 'react-router-dom';
+import { PROJECT_NAME } from '~/constant';
 
 const ConvertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -170,11 +169,14 @@ const onClickCell = (event) => {
       window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${stockListData[rowKey].stockCode}`, '_blank');
       break;
     case COLUMN_NAMES.CORPERATE_NAME:
+      window.open(`/corp/${stockListData[rowKey].stockCode}`, '_blank');
       break;
   }
 };
 
 const StockList: React.FC = () => {
+  document.title = `국내주식목록:${PROJECT_NAME}`;
+
   return (
     <S.Wrap>
       <S.Container>

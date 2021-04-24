@@ -2,9 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import { FinancialStatementsTable } from '~/components/Table';
+import { PROJECT_NAME } from '~/constant';
 import * as S from './styled';
 
 const CorpInformation: React.FC = () => {
+  document.title = `국내주식목록:${PROJECT_NAME}`;
   const { code: stringCode } = useParams();
   const code = Number(stringCode);
 

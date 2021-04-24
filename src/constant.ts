@@ -23,3 +23,5 @@ export const COLUMN_NAMES = {
   MARKET_CAPITALIZATION: 'marketCapitalization', // 시가총액
   NAVER_LINK: 'naverLink', // 네이버바로가기
 };
+
+export const PROJECT_NAME = 'Untitled Project';
