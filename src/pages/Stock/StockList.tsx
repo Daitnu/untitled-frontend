@@ -1,6 +1,6 @@
 import React from 'react';
-import { BarChart, LineChart, PieChart } from '~/components/Chart';
-import { Grid, FinancialStatementsGrid } from '~/components/Grid';
+
+import { Grid } from '~/components/Grid';
 import testData from '~/data.json';
 import { IStockListData } from '@t/data';
 import * as S from './styled';
@@ -181,12 +181,6 @@ const StockList: React.FC = () => {
         <div>
           <Grid data={stockListData} columns={columns} onClick={onClickCell}></Grid>
         </div>
-        {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <BarChart />
-          <LineChart />
-          <PieChart />
-        </div> */}
-        {/* <FinancialStatementsGrid data={data} /> */}
       </S.Container>
     </S.Wrap>
   );
