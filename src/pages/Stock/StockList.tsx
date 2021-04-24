@@ -181,6 +181,9 @@ const StockList: React.FC = () => {
     <S.Wrap>
       <S.Container>
         <div>
+          <S.AdditionalFeatures>
+            <S.Calander>달력</S.Calander>
+          </S.AdditionalFeatures>
           <Grid data={stockListData} columns={columns} onClick={onClickCell}></Grid>
         </div>
       </S.Container>
