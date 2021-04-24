@@ -16,6 +16,7 @@ export interface IStockListData {
   changePercentMonth?: number;
   marketCapitalization: number;
   sharesOutstanding: number;
+  naverLink : string,
   MarketKindId: string;
   _attributes: {
     className: {
@@ -23,6 +24,7 @@ export interface IStockListData {
         changePrice: Array<string>;
         changePercent: Array<string>;
         corpName: Array<string>;
+        naverLink: Array<string>;
       };
     };
   };
