@@ -13,13 +13,17 @@ TuiGrid.applyTheme('striped', {
 });
 
 const Grid = ({ data, columns, onClick }) => (
+  
   <ToastGrid
     data={data}
     columns={columns}
     rowHeight={25}
-    bodyHeight={'auto'}
+    bodyHeight={900}
     width={'auto'}
-    rowHeaders={['rowNum']}
+    rowHeaders={[{
+    type : 'rowNum',
+    width: 60}
+    ]}
     scrollX={true}
     scrollY={true}
     columnOptions={{

@@ -49,7 +49,7 @@ const columns = [
     formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
   },
   {
-    name: COLUMN_NAMES.CHANGE_PERCENT_WEEK,
+    name: COLUMN_NAMES.CHANGE_PERCENT_FOR_A_WEEK,
     header: '주간등락률',
     valign: 'middle',
     sortable: true,
@@ -59,8 +59,18 @@ const columns = [
     formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
   },
   {
-    name: COLUMN_NAMES.CHANGE_PERCENT_MONTH,
+    name: COLUMN_NAMES.CHANGE_PERCENT_FOR_A_MONTH,
     header: '월간등락률',
+    valign: 'middle',
+    sortable: true,
+    width: 90,
+    defaultValue: 0,
+    align: 'right',
+    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
+  },
+  {
+    name: COLUMN_NAMES.CHANGE_PERCENT_FOR_THREE_MONTH,
+    header: '3달간등락률',
     valign: 'middle',
     sortable: true,
     width: 90,
@@ -122,8 +132,6 @@ const columns = [
   { name: COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
-// const sampleData = testData.data.slice(50);
-
 const stockListData = (responseData: IResponseStockQuote[]) => {
   return responseData.map((data) => {
     const corpStockData: IStockListData = {
@@ -143,6 +151,9 @@ const stockListData = (responseData: IResponseStockQuote[]) => {
       marketCapitalization: data.marketCapitalization,
       naverLink: '바로가기',
       MarketKindId: data.marketKindId,
+      changePercentForAWeek : data.changePercentForAWeek,
+      changePercentForAMonth : data.changePercentForAMonth,
+      changePercentForThreeMonth : data.changePercentForThreeMonth,
       _attributes: {
         className: {
           column: {
@@ -194,16 +205,13 @@ const StockList: React.FC = () => {
   return (
     <S.Wrap>
       <S.Container>
-        <div>
-          <S.AdditionalFeatures>
-            <S.Calander>달력</S.Calander>
-          </S.AdditionalFeatures>
+        <>
           <Grid
-            data={response && response.data && stockListData(response.data.slice(0, 50))}
+            data={response && response.data && stockListData(response.data)}
             columns={columns}
-            onClick={response && response.data && onClickCell(response.data.slice(0, 50))}
+            onClick={onClickCell}
           />
-        </div>
+        </>
       </S.Container>
     </S.Wrap>
   );

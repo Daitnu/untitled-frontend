@@ -12,8 +12,9 @@ export interface IStockListData {
   todayLowPrice: number;
   volume: number;
   tradeTotalPrice: number;
-  changePercentWeek?: number;
-  changePercentMonth?: number;
+  changePercentForAWeek : number;
+  changePercentForAMonth : number;
+  changePercentForThreeMonth : number;
   marketCapitalization: number;
   sharesOutstanding: number;
   naverLink : string,
