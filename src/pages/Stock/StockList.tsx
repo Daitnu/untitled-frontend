@@ -179,11 +179,11 @@ const onClickCell = (event) => {
 
 const StockList: React.FC = () => {
   document.title = `국내주식목록:${PROJECT_NAME}`;
-  const {stockQuotes} = useSelector((root: RootState) => root);
+  const { stockQuotes } = useSelector((root: RootState) => root);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(stockQuotesGetRequest())
+    dispatch(stockQuotesGetRequest());
   }, []);
 
   return (
