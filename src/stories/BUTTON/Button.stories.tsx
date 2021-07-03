@@ -7,7 +7,7 @@ export default {
   title: 'Example/Button',
   component: Button,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    backgroundColor: { control: ' ' },
   },
 } as Meta;
 
@@ -15,7 +15,7 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  primary: true,
+  color: "primary",
   label: 'Button',
 };
 
@@ -24,9 +24,27 @@ Secondary.args = {
   label: 'Button',
 };
 
+export const StockUp = Template.bind({});
+StockUp.args = {
+  label: 'Button',
+  color: 'stock--up'
+};
+
+export const StockDown = Template.bind({});
+StockDown.args = {
+  label: 'Button',
+  color: 'stock--down'
+};
+
 export const Large = Template.bind({});
 Large.args = {
   size: 'large',
+  label: 'Button',
+};
+
+export const Medium = Template.bind({});
+Medium.args = {
+  size: 'medium',
   label: 'Button',
 };
 

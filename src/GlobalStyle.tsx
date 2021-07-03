@@ -51,11 +51,11 @@ table {
 	border-spacing: 0;
 }
 
-.tui-grid-stock-rose {
+.tui-grid-stock-up {
   color: #d90400;
 }
 
-.tui-grid-stock-fell {
+.tui-grid-stock-down {
   color: #005dde;
 }
 
