@@ -22,6 +22,9 @@ export const COLUMN_NAMES = {
   SHARES_OUTSTANDING: 'sharesOutstanding', // 발행주식수
   MARKET_CAPITALIZATION: 'marketCapitalization', // 시가총액
   NAVER_LINK: 'naverLink', // 네이버바로가기
+  CHANGE_PERCENT_FOR_A_WEEK : "changePercentForAWeek",
+	CHANGE_PERCENT_FOR_A_MONTH : "changePercentForAMonth",
+	CHANGE_PERCENT_FOR_THREE_MONTH : "changePercentForThreeMonth"
 };
 
 export const PROJECT_NAME = 'Untitled Project';
