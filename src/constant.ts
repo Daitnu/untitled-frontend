@@ -1,6 +1,6 @@
 export const TOAST_GRID = {
-  TOAST_GRID_STOCK_FELL: 'tui-grid-stock-fell',
-  TOAST_GRID_STOCK_ROSE: 'tui-grid-stock-rose',
+  TOAST_GRID_STOCK_DOWN: 'tui-grid-stock-down',
+  TOAST_GRID_STOCK_UP: 'tui-grid-stock-up',
 };
 
 export const URL = {

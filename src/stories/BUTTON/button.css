@@ -16,6 +16,18 @@
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 }
+.storybook-button--stock--up {
+  color: white;
+  background-color: #ed3738;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+}
+
+.storybook-button--stock--down {
+  color: white;
+  background-color: #097df3;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+}
+
 .storybook-button--small {
   font-size: 12px;
   padding: 10px 16px;

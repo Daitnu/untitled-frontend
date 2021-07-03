@@ -152,9 +152,9 @@ const stockListData = sampleData.map((data) => {
   let pushClassName = '';
 
   if (corpStockData.changePrice < 0) {
-    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_FELL;
+    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_DOWN;
   } else if (0 < corpStockData.changePrice) {
-    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_ROSE;
+    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_UP;
   }
 
   corpStockData._attributes.className.column.changePrice.push(pushClassName);
