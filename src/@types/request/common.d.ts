@@ -1,6 +1,6 @@
 export interface RequestParam<T> {
   url: string;
   data?: T;
-  token: string;
+  token?: string;
   options?: object;
 }
