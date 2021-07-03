@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '~/components/Grid';
 import testData from '~/data.json';
 import { IStockListData } from '@t/data';
 import * as S from './styled';
 import { TOAST_GRID, URL, COLUMN_NAMES } from '~/constant';
 import { PROJECT_NAME } from '~/constant';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/store';
+import { stockQuotesGetRequest } from '~/store/stock/stockQuoteStore';
 
 const ConvertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -176,6 +179,12 @@ const onClickCell = (event) => {
 
 const StockList: React.FC = () => {
   document.title = `국내주식목록:${PROJECT_NAME}`;
+  const {stockQuotes} = useSelector((root: RootState) => root);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(stockQuotesGetRequest())
+  }, []);
 
   return (
     <S.Wrap>

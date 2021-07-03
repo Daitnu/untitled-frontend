@@ -2,7 +2,11 @@ import React from 'react';
 import { Route, Switch, Router } from 'react-router';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
+import rootReducer, { rootSaga } from './store';
+import createSagaMiddleware from 'redux-saga';
 import { ThemeProvider } from 'styled-components';
 import { ResetCss } from '~/GlobalStyle';
 import {
@@ -17,24 +21,17 @@ import {
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-const counterReducer = (state = { value: 0 }, action) => {
-  switch (action.type) {
-    case 'counter/incremented':
-      return { value: state.value + 1 };
-    case 'counter/decremented':
-      return { value: state.value - 1 };
-    default:
-      return state;
-  }
-};
-
 export const history = createBrowserHistory();
-const store = createStore(counterReducer);
 export const theme = {
   colors: {
     primary: '#0070f3',
   },
 };
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware, logger)));
+
+sagaMiddleware.run(rootSaga);
 
 const AppRouter: React.FC = () => (
   <>
