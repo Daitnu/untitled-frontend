@@ -8,6 +8,7 @@ import { PROJECT_NAME } from '~/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store';
 import { stockQuotesGetRequest } from '~/store/stock/stockQuoteStore';
+import { IResponseStockQuote } from '~/@types/response';
 
 const ConvertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -121,65 +122,69 @@ const columns = [
   { name: COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
-const sampleData = testData.data.slice(50);
-const stockListData = sampleData.map((data) => {
-  const corpStockData: IStockListData = {
-    stockCode: data.ISU_SRT_CD,
-    corpName: data.ISU_ABBRV,
-    marketKind: data.MKT_NM,
-    department: data.SECT_TP_NM,
-    todayClosePrice: Number(data.TDD_CLSPRC.replaceAll(',', '')),
-    changePrice: Number(data.CMPPREVDD_PRC.replaceAll(',', '')),
-    changePercent: Number(data.FLUC_RT.replaceAll(',', '')),
-    todayOpenPrice: Number(data.TDD_OPNPRC.replaceAll(',', '')),
-    todayHighPrice: Number(data.TDD_HGPRC.replaceAll(',', '')),
-    todayLowPrice: Number(data.TDD_LWPRC.replaceAll(',', '')),
-    volume: Number(data.ACC_TRDVOL.replaceAll(',', '')),
-    tradeTotalPrice: Number(data.ACC_TRDVAL.replaceAll(',', '')),
-    sharesOutstanding: Number(data.LIST_SHRS.replaceAll(',', '')),
-    marketCapitalization: Number(data.MKTCAP.replaceAll(',', '')),
-    naverLink: '바로가기',
-    MarketKindId: data.MKT_ID,
-    _attributes: {
-      className: {
-        column: {
-          changePrice: [],
-          changePercent: [],
-          corpName: ['tui-grid-stock-link'],
-          naverLink: ['tui-grid-stock-link'],
+// const sampleData = testData.data.slice(50);
+
+const stockListData = (responseData: IResponseStockQuote[]) => {
+  return responseData.map((data) => {
+    const corpStockData: IStockListData = {
+      stockCode: data.corpCode,
+      corpName: data.corpName,
+      marketKind: data.marketKind,
+      department: data.department,
+      todayClosePrice: data.todayClosePrice,
+      changePrice: data.changePrice,
+      changePercent: data.changePercent,
+      todayOpenPrice: data.todayOpenPrice,
+      todayHighPrice: data.todayHighPrice,
+      todayLowPrice: data.todayLowPrice,
+      volume: data.volume,
+      tradeTotalPrice: data.tradeTotalPrice,
+      sharesOutstanding: data.sharesOutstanding,
+      marketCapitalization: data.marketCapitalization,
+      naverLink: '바로가기',
+      MarketKindId: data.marketKindId,
+      _attributes: {
+        className: {
+          column: {
+            changePrice: [],
+            changePercent: [],
+            corpName: ['tui-grid-stock-link'],
+            naverLink: ['tui-grid-stock-link'],
+          },
         },
       },
-    },
-  };
+    };
 
-  let pushClassName = '';
+    let pushClassName = '';
 
-  if (corpStockData.changePrice < 0) {
-    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_DOWN;
-  } else if (0 < corpStockData.changePrice) {
-    pushClassName = TOAST_GRID.TOAST_GRID_STOCK_UP;
-  }
+    if (corpStockData.changePrice < 0) {
+      pushClassName = TOAST_GRID.TOAST_GRID_STOCK_DOWN;
+    } else if (0 < corpStockData.changePrice) {
+      pushClassName = TOAST_GRID.TOAST_GRID_STOCK_UP;
+    }
 
-  corpStockData._attributes.className.column.changePrice.push(pushClassName);
-  corpStockData._attributes.className.column.changePercent.push(pushClassName);
-  return corpStockData;
-});
+    corpStockData._attributes.className.column.changePrice.push(pushClassName);
+    corpStockData._attributes.className.column.changePercent.push(pushClassName);
+    return corpStockData;
+  });
+};
 
-const onClickCell = (event) => {
+const onClickCell = (responseData: IResponseStockQuote[]) => (event) => {
   const { columnName, rowKey } = event;
+  console.log(columnName, rowKey);
   switch (columnName) {
     case COLUMN_NAMES.NAVER_LINK:
-      window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${stockListData[rowKey].stockCode}`, '_blank');
+      window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${responseData[rowKey].corpCode}`, '_blank');
       break;
     case COLUMN_NAMES.CORPERATE_NAME:
-      window.open(`/corp/${stockListData[rowKey].stockCode}`, '_blank');
+      window.open(`/corp/${responseData[rowKey].corpCode}`, '_blank');
       break;
   }
 };
 
 const StockList: React.FC = () => {
   document.title = `국내주식목록:${PROJECT_NAME}`;
-  const { stockQuotes } = useSelector((root: RootState) => root);
+  const { response } = useSelector((root: RootState) => root.stockQuotes);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -193,7 +198,11 @@ const StockList: React.FC = () => {
           <S.AdditionalFeatures>
             <S.Calander>달력</S.Calander>
           </S.AdditionalFeatures>
-          <Grid data={stockListData} columns={columns} onClick={onClickCell}></Grid>
+          <Grid
+            data={response && response.data && stockListData(response.data.slice(0, 50))}
+            columns={columns}
+            onClick={response && response.data && onClickCell(response.data.slice(0, 50))}
+          />
         </div>
       </S.Container>
     </S.Wrap>
