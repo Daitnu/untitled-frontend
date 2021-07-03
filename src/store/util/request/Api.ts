@@ -4,7 +4,7 @@ import { RequestParam } from '~/@types/request';
 
 const API_SERVER = 'http://localhost:8080';
 const MEDIA_TYPE = {
-  JSON: 'application/json',
+  JSON: 'application/json' as const,
 };
 
 const getHttpResponse = async <T>({ fn }): Promise<HTTPResponse<T>> => {
