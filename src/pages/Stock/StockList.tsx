@@ -1,135 +1,150 @@
 import React, { useEffect } from 'react';
 import { Grid } from '~/components/Grid';
-import testData from '~/data.json';
 import { IStockListData } from '@t/data';
 import * as S from './styled';
-import { TOAST_GRID, URL, COLUMN_NAMES } from '~/constant';
+import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constant';
 import { PROJECT_NAME } from '~/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store';
 import { stockQuotesGetRequest } from '~/store/stock/stockQuoteStore';
 import { IResponseStockQuote } from '~/@types/response';
 
-const ConvertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const BILLION = 1000000000000;
+const SHILLION = 100000000;
+const convertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+const convertKoreanWon = (string) => {
+  let number = Number(string);
+  const billionWon = Math.floor(number / BILLION);
+  number = number % BILLION;
+  const shillionWon = Math.round(number / SHILLION);
+  return billionWon === 0 ? `${shillionWon}억` : `${billionWon}조 ${shillionWon}억`;
+};
 
 const columns = [
-  { name: COLUMN_NAMES.MARKET_KIND, header: '시장구분', filter: 'select', valign: 'middle', width: 100, align: 'left' },
   {
-    name: COLUMN_NAMES.CORPERATE_NAME,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_KIND,
+    header: '시장구분',
+    filter: 'select',
+    valign: 'middle',
+    width: 100,
+    align: 'left',
+  },
+  {
+    name: STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME,
     header: '회사명',
     valign: 'middle',
     width: 150,
     align: 'left',
   },
   {
-    name: COLUMN_NAMES.TODAY_CLOSE_PRICE,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_CLOSE_PRICE,
     header: '종가',
     valign: 'middle',
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.CHANGE_PRICE,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PRICE,
     header: '전일비',
     valign: 'middle',
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.CHANGE_PERCENT,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT,
     header: '등락률',
     valign: 'middle',
     sortable: true,
     width: 80,
     align: 'right',
-    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
   },
   {
-    name: COLUMN_NAMES.CHANGE_PERCENT_FOR_A_WEEK,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_WEEK,
     header: '주간등락률',
     valign: 'middle',
     sortable: true,
     width: 90,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
   },
   {
-    name: COLUMN_NAMES.CHANGE_PERCENT_FOR_A_MONTH,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_MONTH,
     header: '월간등락률',
     valign: 'middle',
     sortable: true,
     width: 90,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
   },
   {
-    name: COLUMN_NAMES.CHANGE_PERCENT_FOR_THREE_MONTH,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_THREE_MONTH,
     header: '3달간등락률',
     valign: 'middle',
     sortable: true,
     width: 90,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${ConvertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
   },
   {
-    name: COLUMN_NAMES.TODAY_OPEN_PRICE,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
     header: '시초가',
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.TODAY_HIGH_PRICE,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_HIGH_PRICE,
     header: '고가',
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.TODAY_LOW_PRICE,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_LOW_PRICE,
     header: '저가',
     valign: 'middle',
     width: 80,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.VOLUME,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.VOLUME,
     header: '거래량',
     valign: 'middle',
     sortable: true,
     width: 100,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.SHARES_OUTSTANDING,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.SHARES_OUTSTANDING,
     header: '발행주식수',
     valign: 'middle',
     width: 120,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertNumberSeparator(value),
   },
   {
-    name: COLUMN_NAMES.MARKET_CAPITALIZATION,
+    name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_CAPITALIZATION,
     header: '시가총액',
     valign: 'middle',
     sortable: true,
     sortingType: 'desc',
     width: 160,
     align: 'right',
-    formatter: ({ value }) => ConvertNumberSeparator(value),
+    formatter: ({ value }) => convertKoreanWon(value),
   },
-  { name: COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
+  { name: STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
 const stockListData = (responseData: IResponseStockQuote[]) => {
@@ -151,9 +166,9 @@ const stockListData = (responseData: IResponseStockQuote[]) => {
       marketCapitalization: data.marketCapitalization,
       naverLink: '바로가기',
       MarketKindId: data.marketKindId,
-      changePercentForAWeek : data.changePercentForAWeek,
-      changePercentForAMonth : data.changePercentForAMonth,
-      changePercentForThreeMonth : data.changePercentForThreeMonth,
+      changePercentForAWeek: data.changePercentForAWeek,
+      changePercentForAMonth: data.changePercentForAMonth,
+      changePercentForThreeMonth: data.changePercentForThreeMonth,
       _attributes: {
         className: {
           column: {
@@ -184,10 +199,10 @@ const onClickCell = (responseData: IResponseStockQuote[]) => (event) => {
   const { columnName, rowKey } = event;
   console.log(columnName, rowKey);
   switch (columnName) {
-    case COLUMN_NAMES.NAVER_LINK:
+    case STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK:
       window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${responseData[rowKey].corpCode}`, '_blank');
       break;
-    case COLUMN_NAMES.CORPERATE_NAME:
+    case STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME:
       window.open(`/corp/${responseData[rowKey].corpCode}`, '_blank');
       break;
   }
