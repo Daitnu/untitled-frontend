@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import { dailyStockPricesGetsGetSaga } from './stock';
-import stockQuotes from './stock/dailyStockPricesStore';
+import dailyStockPrices from './stock/dailyStockPricesStore';
 
-const rootReducer = combineReducers({ stockQuotes });
+const rootReducer = combineReducers({ dailyStockPrices });
 
 export default rootReducer;
 

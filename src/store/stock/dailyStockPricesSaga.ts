@@ -7,7 +7,7 @@ const api = new DailyStockPricesApi();
 
 const dailyStockPricesGet$ = makeApiCallSagaFunc({
   type: STOCK_QUOTES_GET,
-  apiFunc: api.getStockQuotes.bind(api),
+  apiFunc: api.getdailyStockPrices.bind(api),
 });
 
 export function* dailyStockPricesGetsGetSaga() {

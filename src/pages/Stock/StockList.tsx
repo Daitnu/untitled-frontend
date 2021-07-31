@@ -6,7 +6,7 @@ import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constant';
 import { PROJECT_NAME } from '~/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store';
-import { stockQuotesGetRequest } from '~/store/stock/dailyStockPricesStore';
+import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import { IResponseDailyStockPrices } from '~/@types/response';
 
 const BILLION = 1000000000000;
@@ -210,11 +210,11 @@ const onClickCell = (responseData: IResponseDailyStockPrices[]) => (event) => {
 
 const StockList: React.FC = () => {
   document.title = `국내주식목록:${PROJECT_NAME}`;
-  const { response } = useSelector((root: RootState) => root.stockQuotes);
+  const { response } = useSelector((root: RootState) => root.dailyStockPrices);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(stockQuotesGetRequest());
+    dispatch(dailyStockPricesGetRequest());
   }, []);
 
   return (

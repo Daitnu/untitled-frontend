@@ -7,7 +7,7 @@ export default class StockQuoteApi extends Api {
     super();
   }
 
-  public async getStockQuotes(): Promise<HTTPResponse<IResponseDailyStockPrices> | BusinessErrorResponse> {
+  public async getdailyStockPrices(): Promise<HTTPResponse<IResponseDailyStockPrices> | BusinessErrorResponse> {
     return this.get<IResponseDailyStockPrices>({ url: URL.STOCK_QUOTE });
   }
 }
