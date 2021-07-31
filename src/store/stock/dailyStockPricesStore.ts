@@ -10,7 +10,7 @@ export const dailyStockPricesGetRequest = () => ({
   type: DAILY_STOCK_PRICES_GET_REQUEST,
 });
 
-export const dailyStockPricesGetSuccess = (payload: HTTPResponse<IResponseDailyStockPrices[]>) => ({
+export const dailyStockPricesGetSuccess = (payload: HTTPResponse<IResponseDailyStockPrices>) => ({
   type: DAILY_STOCK_PRICES_GET_SUCCESS,
   payload,
 });
@@ -20,6 +20,6 @@ export const dailyStockPricesGetFailure = (payload: BusinessErrorResponse) => ({
   payload,
 });
 
-const dailyStockPricesGetReducer = makeApiReducer<HTTPResponse<IResponseDailyStockPrices[]>>(DAILY_STOCK_PRICES_GET);
+const dailyStockPricesGetReducer = makeApiReducer<HTTPResponse<IResponseDailyStockPrices>>(DAILY_STOCK_PRICES_GET);
 
 export default dailyStockPricesGetReducer;

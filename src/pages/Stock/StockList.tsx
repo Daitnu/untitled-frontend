@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import { Grid } from '~/components/Grid';
+import { useDispatch, useSelector } from 'react-redux';
 import { IStockListData } from '@t/data';
-import * as S from './styled';
+import { IResponseDailyStockPrices } from '@t/response';
+import { Grid } from '~/components/Grid';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constant';
 import { PROJECT_NAME } from '~/constant';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
-import { IResponseDailyStockPrices } from '~/@types/response';
+import * as S from './styled';
 
 const BILLION = 1000000000000;
 const SHILLION = 100000000;
 const convertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-const convertKoreanWon = (string) => {
+const convertStringToKoreanWon = (string) => {
   let number = Number(string);
   const billionWon = Math.floor(number / BILLION);
   number = number % BILLION;
@@ -20,7 +20,12 @@ const convertKoreanWon = (string) => {
   return billionWon === 0 ? `${shillionWon}억` : `${billionWon}조 ${shillionWon}억`;
 };
 
-const columns = [
+/**
+ * headers = [시장구분회사명/종가/전일비/등락률/1W등락률/1M등락률/3M등락률
+ *            /시초가/고가/저가/거래량/발행주식수/시가총액/네이버주식바로가기
+ *            /21per/22per/23per/성장률]
+ */
+const gridColumns = [
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_KIND,
     header: '시장구분',
@@ -142,15 +147,15 @@ const columns = [
     sortingType: 'desc',
     width: 160,
     align: 'right',
-    formatter: ({ value }) => convertKoreanWon(value),
+    formatter: ({ value }) => convertStringToKoreanWon(value),
   },
   { name: STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
-const stockListData = (responseData: IResponseDailyStockPrices[]) => {
+const stockListData = (responseData: IResponseDailyStockPrices) => {
   return responseData.map((data) => {
     const corpStockData: IStockListData = {
-      stockCode: data.corpCode,
+      corpCode: data.corpCode,
       corpName: data.corpName,
       marketKind: data.marketKind,
       department: data.department,
@@ -165,7 +170,7 @@ const stockListData = (responseData: IResponseDailyStockPrices[]) => {
       sharesOutstanding: data.sharesOutstanding,
       marketCapitalization: data.marketCapitalization,
       naverLink: '바로가기',
-      MarketKindId: data.marketKindId,
+      marketKindId: data.marketKindId,
       changePercentForAWeek: data.changePercentForAWeek,
       changePercentForAMonth: data.changePercentForAMonth,
       changePercentForThreeMonth: data.changePercentForThreeMonth,
@@ -195,7 +200,7 @@ const stockListData = (responseData: IResponseDailyStockPrices[]) => {
   });
 };
 
-const onClickCell = (responseData: IResponseDailyStockPrices[]) => (event) => {
+const onClickCell = (responseData: IResponseDailyStockPrices) => (event) => {
   const { columnName, rowKey } = event;
   console.log(columnName, rowKey);
   switch (columnName) {
@@ -223,7 +228,7 @@ const StockList: React.FC = () => {
         <>
           <Grid
             data={response && response.data && stockListData(response.data)}
-            columns={columns}
+            columns={gridColumns}
             onClick={onClickCell}
           />
         </>
