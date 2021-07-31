@@ -6,7 +6,7 @@ import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constant';
 import { PROJECT_NAME } from '~/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store';
-import { stockQuotesGetRequest } from '~/store/stock/stockQuoteStore';
+import { stockQuotesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import { IResponseDailyStockPrices } from '~/@types/response';
 
 const BILLION = 1000000000000;

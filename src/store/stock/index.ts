@@ -1,2 +1,2 @@
-export * from './stockQuoteStore';
-export * from './stockQuoteSaga';
+export * from './dailyStockPricesStore';
+export * from './dailyStockPricesSaga';

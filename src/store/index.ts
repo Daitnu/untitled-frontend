@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import { stockQuotesGetsGetSaga } from './stock';
-import stockQuotes from './stock/stockQuoteStore';
+import { dailyStockPricesGetsGetSaga } from './stock';
+import stockQuotes from './stock/dailyStockPricesStore';
 
 const rootReducer = combineReducers({ stockQuotes });
 
@@ -10,5 +10,5 @@ export default rootReducer;
 export type RootState = ReturnType<typeof rootReducer>;
 
 export function* rootSaga() {
-  yield all([stockQuotesGetsGetSaga()]);
+  yield all([dailyStockPricesGetsGetSaga()]);
 }
