@@ -1,4 +1,4 @@
-export interface IResponseStockQuote {
+export interface IResponseDailyStockPrices {
   corpCode: string;
   corpName: string;
   marketKind: string;
@@ -19,6 +19,6 @@ export interface IResponseStockQuote {
   changePercentForThreeMonth: number;
 }
 
-export interface IResponseStockQuoteList {
-  result: IResponseStockQuote[];
+export interface IResponseDailyStockPricesList {
+  result: IResponseDailyStockPrices[];
 }

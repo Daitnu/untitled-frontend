@@ -7,7 +7,7 @@ import { PROJECT_NAME } from '~/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store';
 import { stockQuotesGetRequest } from '~/store/stock/stockQuoteStore';
-import { IResponseStockQuote } from '~/@types/response';
+import { IResponseDailyStockPrices } from '~/@types/response';
 
 const BILLION = 1000000000000;
 const SHILLION = 100000000;
@@ -147,7 +147,7 @@ const columns = [
   { name: STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
-const stockListData = (responseData: IResponseStockQuote[]) => {
+const stockListData = (responseData: IResponseDailyStockPrices[]) => {
   return responseData.map((data) => {
     const corpStockData: IStockListData = {
       stockCode: data.corpCode,
@@ -195,7 +195,7 @@ const stockListData = (responseData: IResponseStockQuote[]) => {
   });
 };
 
-const onClickCell = (responseData: IResponseStockQuote[]) => (event) => {
+const onClickCell = (responseData: IResponseDailyStockPrices[]) => (event) => {
   const { columnName, rowKey } = event;
   console.log(columnName, rowKey);
   switch (columnName) {

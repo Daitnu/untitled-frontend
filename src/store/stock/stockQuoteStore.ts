@@ -1,4 +1,4 @@
-import { BusinessErrorResponse, HTTPResponse, IResponseStockQuote } from '~/@types/response';
+import { BusinessErrorResponse, HTTPResponse, IResponseDailyStockPrices } from '~/@types/response';
 import { makeApiReducer } from '../util';
 
 export const STOCK_QUOTES_GET = 'STOCK_QUOTES_GET' as const;
@@ -10,7 +10,7 @@ export const stockQuotesGetRequest = () => ({
   type: STOCK_QUOTES_GET_REQUEST,
 });
 
-export const stockQuotesGetSuccess = (payload: HTTPResponse<IResponseStockQuote[]>) => ({
+export const stockQuotesGetSuccess = (payload: HTTPResponse<IResponseDailyStockPrices[]>) => ({
   type: STOCK_QUOTES_GET_SUCCESS,
   payload,
 });
@@ -20,6 +20,6 @@ export const stockQuotesGetFailure = (payload: BusinessErrorResponse) => ({
   payload,
 });
 
-const stockQuotesGetReducer = makeApiReducer<HTTPResponse<IResponseStockQuote[]>>(STOCK_QUOTES_GET);
+const stockQuotesGetReducer = makeApiReducer<HTTPResponse<IResponseDailyStockPrices[]>>(STOCK_QUOTES_GET);
 
 export default stockQuotesGetReducer;
