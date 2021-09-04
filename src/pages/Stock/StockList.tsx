@@ -39,9 +39,9 @@ const gridColumns = [
     name: STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME,
     header: '회사명',
     valign: 'middle',
-    width: 150,
     align: 'left',
   },
+  { name: STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK, width: 100, header: '네이버주식', align: 'center' },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_CLOSE_PRICE,
     header: '종가',
@@ -220,7 +220,6 @@ const gridColumns = [
     align: 'right',
     formatter: ({ value }) => convertStringToKoreanWon(value),
   },
-  { name: STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK, header: '네이버주식', align: 'center' },
 ];
 
 const converToStockListData = (responseData: IResponseDailyStockPrices) => {
@@ -282,7 +281,8 @@ const converToStockListData = (responseData: IResponseDailyStockPrices) => {
   });
 };
 
-const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => {
+const onClickGridCell = (responseData) => (event) => {
+  console.log(event);
   const { columnName, rowKey } = event;
   console.log(columnName, rowKey);
   switch (columnName) {
@@ -311,7 +311,7 @@ const StockList: React.FC = () => {
           <Grid
             data={response && response.data && converToStockListData(response.data)}
             columns={gridColumns}
-            onClick={onClickGridCell}
+            onClick={onClickGridCell(response && response.data && converToStockListData(response.data))}
           />
         </>
       </S.Container>
