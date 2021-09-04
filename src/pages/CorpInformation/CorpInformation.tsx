@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { BarChart, LineChart, PieChart } from '~/components/Chart';
 import { FinancialStatementsTable } from '~/components/Table';
-import { PROJECT_NAME } from '~/constant';
+import { PROJECT_NAME } from '~/constants';
 import * as S from './styled';
 
 const CorpInformation: React.FC = () => {

@@ -1,24 +1,32 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IStockListData } from '@t/data';
-import { IResponseDailyStockPrices } from '~/@types/data/';
+import 'tui-grid/dist/tui-grid.css';
+import TuiGrid, { ColumnOptions } from 'tui-grid';
+import ToastGrid from '@toast-ui/react-grid';
+
+import { IDailyStockPrice, IStockListData } from '~/@types/data';
+import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
+import { convert } from '~/utils';
 import { Grid } from '~/components/Grid';
-import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constant';
-import { PROJECT_NAME } from '~/constant';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import * as S from './styled';
 
-const BILLION = 1000000000000;
-const SHILLION = 100000000;
-const convertNumberSeparator = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-const convertStringToKoreanWon = (string) => {
-  let number = Number(string);
-  const billionWon = Math.floor(number / BILLION);
-  number = number % BILLION;
-  const shillionWon = Math.round(number / SHILLION);
-  return billionWon === 0 ? `${shillionWon}억` : `${billionWon}조 ${shillionWon}억`;
-};
+document.title = `국내주식목록 : ${PROJECT_NAME}`;
+
+TuiGrid.setLanguage('ko');
+TuiGrid.applyTheme('striped', {
+  row: {
+    hover: {
+      background: '#e5dbff',
+    },
+  },
+  cell: {
+    focused: {
+      border: '0',
+    },
+  },
+});
 
 /**
  * headers = [시장구분회사명/종가/전일비/등락률/1W등락률/1M등락률/3M등락률
@@ -26,7 +34,7 @@ const convertStringToKoreanWon = (string) => {
  *            /per21/per22/per23/성장률/시초가/고가/저가/거래량/발행주식수
  *            /시가총액/네이버주식바로가기]
  */
-const gridColumns = [
+const gridColumns: ColumnOptions[] = [
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_KIND,
     header: '시장구분',
@@ -49,7 +57,7 @@ const gridColumns = [
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => convert.NumberToSeparatorString(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PRICE,
@@ -58,7 +66,7 @@ const gridColumns = [
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => `${convertNumberSeparator(value)}원`,
+    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT,
@@ -67,7 +75,7 @@ const gridColumns = [
     sortable: true,
     width: 80,
     align: 'right',
-    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_WEEK,
@@ -77,7 +85,7 @@ const gridColumns = [
     width: 80,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_MONTH,
@@ -87,7 +95,7 @@ const gridColumns = [
     width: 80,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_THREE_MONTH,
@@ -97,7 +105,7 @@ const gridColumns = [
     width: 80,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${convertNumberSeparator(value)}%`,
+    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT21,
@@ -188,7 +196,7 @@ const gridColumns = [
     width: 100,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => Math.round(value),
+    formatter: ({ value }) => `${Math.round(Number(value))}`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
@@ -196,7 +204,7 @@ const gridColumns = [
     valign: 'middle',
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => convert.NumberToSeparatorString(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_HIGH_PRICE,
@@ -204,7 +212,7 @@ const gridColumns = [
     valign: 'middle',
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => convert.NumberToSeparatorString(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_LOW_PRICE,
@@ -212,7 +220,7 @@ const gridColumns = [
     valign: 'middle',
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => convert.NumberToSeparatorString(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.VOLUME,
@@ -221,7 +229,7 @@ const gridColumns = [
     sortable: true,
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => convert.NumberToSeparatorString(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.SHARES_OUTSTANDING,
@@ -229,7 +237,7 @@ const gridColumns = [
     valign: 'middle',
     width: 120,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => convert.NumberToSeparatorString(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_CAPITALIZATION,
@@ -239,21 +247,19 @@ const gridColumns = [
     sortingType: 'desc',
     width: 110,
     align: 'right',
-    formatter: ({ value }) => convertStringToKoreanWon(value),
+    formatter: ({ value }) => convert.StringToKoreanWon(value),
   },
 ];
 
-const converToStockListData = (responseData: IResponseDailyStockPrices) => {
-  return responseData.map((data) => {
-    const per21 = data.year21 ? data.marketCapitalization / (data.year21 * SHILLION) : 0;
-    const per22 = data.year22 ? data.marketCapitalization / (data.year22 * SHILLION) : 0;
-    const per23 = data.year23 ? data.marketCapitalization / (data.year23 * SHILLION) : 0;
-    const rateOfGrowth = per21 !== 0 && per23 !== 0 ? ((data.year23 - data.year21) * 100) / Math.abs(data.year21) : 0;
+const converToStockListData = (responseData) => {
+  return responseData.map((data: IDailyStockPrice) => {
+    const per21 = data.profit21 ? data.marketCapitalization / (data.profit21 * SHILLION) : 0;
+    const per22 = data.profit22 ? data.marketCapitalization / (data.profit22 * SHILLION) : 0;
+    const per23 = data.profit23 ? data.marketCapitalization / (data.profit23 * SHILLION) : 0;
+    const rateOfGrowth =
+      per21 !== 0 && per23 !== 0 ? ((data.profit23 - data.profit21) * 100) / Math.abs(data.profit21) : 0;
     const stockListData: IStockListData = {
       ...data,
-      profit21: data.year21,
-      profit22: data.year22,
-      profit23: data.year23,
       per21,
       per22,
       per23,
@@ -314,7 +320,6 @@ const onClickGridCell = (responseData) => (event) => {
 };
 
 const StockList: React.FC = () => {
-  document.title = `국내주식목록:${PROJECT_NAME}`;
   const { response } = useSelector((root: RootState) => root.dailyStockPrices);
   const dispatch = useDispatch();
 

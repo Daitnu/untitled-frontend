@@ -1,7 +1,3 @@
-import { IGridOptions, IStockListData, ITestData } from './data';
-
-export { IGridOptions, IStockListData, ITestData };
-
 declare module '*.jpg' {
   const value: any;
   export = value;
