@@ -17,4 +17,8 @@ export interface IDailyStockPrice {
   changePercentForAWeek: number;
   changePercentForAMonth: number;
   changePercentForThreeMonth: number;
+  rateOfGrowth?: number;
+  year21: number;
+  year22: number;
+  year23: number;
 }

@@ -25,6 +25,13 @@ export const STOCK_LIST_GRID_COLUMN_NAMES = {
   CHANGE_PERCENT_FOR_A_WEEK: 'changePercentForAWeek',
   CHANGE_PERCENT_FOR_A_MONTH: 'changePercentForAMonth',
   CHANGE_PERCENT_FOR_THREE_MONTH: 'changePercentForThreeMonth',
+  RATE_OF_GROWTH: 'rateOfGrowth',
+  PROFIT21: 'year21',
+  PROFIT22: 'year22',
+  PROFIT23: 'year23',
+  PER21: 'per21',
+  PER22: 'per22',
+  PER23: 'per23',
 };
 
 export const PROJECT_NAME = 'Untitled Project';
