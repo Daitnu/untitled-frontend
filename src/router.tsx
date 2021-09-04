@@ -8,7 +8,7 @@ import logger from 'redux-logger';
 import rootReducer, { rootSaga } from './store';
 import createSagaMiddleware from 'redux-saga';
 import { ThemeProvider } from 'styled-components';
-import { ResetCss } from '~/GlobalStyle';
+import { ResetCss } from '~/globalStyles/';
 import {
   GroupPage,
   Mypage,
