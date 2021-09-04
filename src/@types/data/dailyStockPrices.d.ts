@@ -1,4 +1,7 @@
 import { IDailyStockPrice } from '@t/common';
+
+export type IResponseDailyStockPrices = IDailyStockPrice[];
+
 export interface IStockListData extends IDailyStockPrice {
   naverLink: string;
   rateOfGrowth?: number;

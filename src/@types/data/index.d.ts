@@ -1,1 +1,1 @@
-export * from './dailyStockPriceGridData';
+export * from './dailyStockPrices';

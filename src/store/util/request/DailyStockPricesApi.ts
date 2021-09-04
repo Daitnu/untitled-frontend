@@ -1,4 +1,5 @@
-import { BusinessErrorResponse, HTTPResponse, IResponseDailyStockPrices } from '~/@types/response';
+import { BusinessErrorResponse, HTTPResponse } from '~/@types/response';
+import { IResponseDailyStockPrices } from '~/@types/data/';
 import { URL } from '~/libs';
 import Api from './Api';
 

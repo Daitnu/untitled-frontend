@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IStockListData } from '@t/data';
-import { IResponseDailyStockPrices } from '@t/response';
+import { IResponseDailyStockPrices } from '~/@types/data/';
 import { Grid } from '~/components/Grid';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constant';
 import { PROJECT_NAME } from '~/constant';
@@ -134,7 +134,12 @@ const gridColumns = [
     header: 'PER21',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    filter: {
+      type: 'number',
+      operator: 'OR',
+      showClearBtn: true, // default false
+    },
+    width: 100,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => Number(value).toFixed(2),
@@ -144,7 +149,12 @@ const gridColumns = [
     header: 'PER22',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    filter: {
+      type: 'number',
+      operator: 'OR',
+      showClearBtn: true, // default false
+    },
+    width: 100,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => Number(value).toFixed(2),
@@ -154,7 +164,12 @@ const gridColumns = [
     header: 'PER23',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    filter: {
+      type: 'number',
+      operator: 'OR',
+      showClearBtn: true, // default false
+    },
+    width: 100,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => Number(value).toFixed(2),
@@ -164,10 +179,16 @@ const gridColumns = [
     header: '성장률',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    filter: {
+      type: 'number',
+      operator: 'OR',
+      showApplyBtn: true,
+      showClearBtn: true, // default false
+    },
+    width: 100,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${Math.round(value)}%`,
+    formatter: ({ value }) => Math.round(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
