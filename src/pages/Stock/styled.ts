@@ -5,7 +5,7 @@ export const Wrap = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 2100px;
+  max-width: 2150px;
   margin: auto;
 `;
 

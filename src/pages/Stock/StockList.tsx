@@ -58,7 +58,7 @@ const gridColumns = [
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => convertNumberSeparator(value),
+    formatter: ({ value }) => `${convertNumberSeparator(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT,
@@ -173,7 +173,7 @@ const gridColumns = [
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
     header: '시초가',
     valign: 'middle',
-    width: 80,
+    width: 100,
     align: 'right',
     formatter: ({ value }) => convertNumberSeparator(value),
   },
@@ -181,7 +181,7 @@ const gridColumns = [
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_HIGH_PRICE,
     header: '고가',
     valign: 'middle',
-    width: 80,
+    width: 100,
     align: 'right',
     formatter: ({ value }) => convertNumberSeparator(value),
   },
@@ -189,7 +189,7 @@ const gridColumns = [
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_LOW_PRICE,
     header: '저가',
     valign: 'middle',
-    width: 80,
+    width: 100,
     align: 'right',
     formatter: ({ value }) => convertNumberSeparator(value),
   },
@@ -227,7 +227,7 @@ const converToStockListData = (responseData: IResponseDailyStockPrices) => {
     const per21 = data.year21 ? data.marketCapitalization / (data.year21 * SHILLION) : 0;
     const per22 = data.year22 ? data.marketCapitalization / (data.year22 * SHILLION) : 0;
     const per23 = data.year23 ? data.marketCapitalization / (data.year23 * SHILLION) : 0;
-    const rateOfGrowth = per21 !== 0 && per23 !== 0 ? (per23 - per21) / per21 : 0;
+    const rateOfGrowth = per21 !== 0 && per23 !== 0 ? ((data.year23 - data.year21) * 100) / Math.abs(data.year21) : 0;
     const stockListData: IStockListData = {
       ...data,
       profit21: data.year21,
@@ -238,29 +238,14 @@ const converToStockListData = (responseData: IResponseDailyStockPrices) => {
       per23,
       rateOfGrowth,
       naverLink: '바로가기',
-      // corpCode: data.corpCode,
-      // corpName: data.corpName,
-      // marketKind: data.marketKind,
-      // department: data.department,
-      // todayClosePrice: data.todayClosePrice,
-      // changePrice: data.changePrice,
-      // changePercent: data.changePercent,
-      // todayOpenPrice: data.todayOpenPrice,
-      // todayHighPrice: data.todayHighPrice,
-      // todayLowPrice: data.todayLowPrice,
-      // volume: data.volume,
-      // tradeTotalPrice: data.tradeTotalPrice,
-      // sharesOutstanding: data.sharesOutstanding,
-      // marketCapitalization: data.marketCapitalization,
-      // marketKindId: data.marketKindId,
-      // changePercentForAWeek: data.changePercentForAWeek,
-      // changePercentForAMonth: data.changePercentForAMonth,
-      // changePercentForThreeMonth: data.changePercentForThreeMonth,
       _attributes: {
         className: {
           column: {
             changePrice: [],
             changePercent: [],
+            changePercentForAWeek: [],
+            changePercentForAMonth: [],
+            changePercentForThreeMonth: [],
             corpName: ['tui-grid-stock-link'],
             naverLink: ['tui-grid-stock-link'],
           },
@@ -268,17 +253,29 @@ const converToStockListData = (responseData: IResponseDailyStockPrices) => {
       },
     };
 
-    let pushClassName = '';
-    if (stockListData.changePrice < 0) {
-      pushClassName = TOAST_GRID.TOAST_GRID_STOCK_DOWN;
-    } else if (0 < stockListData.changePrice) {
-      pushClassName = TOAST_GRID.TOAST_GRID_STOCK_UP;
-    }
+    const changePricePushClassName = getClassNameByChangePriceOrPercent(stockListData.changePrice);
+    const changePercent1WPushClassName = getClassNameByChangePriceOrPercent(stockListData.changePercentForAWeek);
+    const changePercent1MPushClassName = getClassNameByChangePriceOrPercent(stockListData.changePercentForAMonth);
+    const changePercent3MPushClassName = getClassNameByChangePriceOrPercent(stockListData.changePercentForThreeMonth);
 
-    stockListData._attributes.className.column.changePrice.push(pushClassName);
-    stockListData._attributes.className.column.changePercent.push(pushClassName);
+    stockListData._attributes.className.column.changePrice.push(changePricePushClassName);
+    stockListData._attributes.className.column.changePercent.push(changePricePushClassName);
+    stockListData._attributes.className.column.changePercentForAWeek.push(changePercent1WPushClassName);
+    stockListData._attributes.className.column.changePercentForAMonth.push(changePercent1MPushClassName);
+    stockListData._attributes.className.column.changePercentForThreeMonth.push(changePercent3MPushClassName);
+
     return stockListData;
   });
+};
+
+const getClassNameByChangePriceOrPercent = (priceOrPercent: number) => {
+  let returnClassNmae = '';
+  if (priceOrPercent < 0) {
+    returnClassNmae = TOAST_GRID.TOAST_GRID_STOCK_DOWN;
+  } else if (0 < priceOrPercent) {
+    returnClassNmae = TOAST_GRID.TOAST_GRID_STOCK_UP;
+  }
+  return returnClassNmae;
 };
 
 const onClickGridCell = (responseData) => (event) => {

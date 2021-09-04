@@ -13,6 +13,9 @@ export interface IStockListData extends IDailyStockPrice {
       column: {
         changePrice: Array<string>;
         changePercent: Array<string>;
+        changePercentForAWeek: Array<string>;
+        changePercentForAMonth: Array<string>;
+        changePercentForThreeMonth: Array<string>;
         corpName: Array<string>;
         naverLink: Array<string>;
       };
