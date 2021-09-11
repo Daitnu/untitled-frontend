@@ -2,7 +2,7 @@ import { SHILLION, BILLION } from '~/constants';
 
 export const NumberToSeparatorString = (string) => string.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-export const StringToKoreanWon = (string) => {
+export const StringToKoreanWon = (string: string): string => {
   let number = Number(string);
   const billionWon = Math.floor(number / BILLION);
   number = number % BILLION;
