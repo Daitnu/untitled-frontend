@@ -45,10 +45,10 @@ const AppRouter: React.FC = () => (
           <Switch>
             <Route path="/" exact component={StockListPage} />
             <Route path="/corp/:code" exact component={CorperateInfomationPage} />
-            <Route path="/news" exact component={NewsPage} />
+            {/* <Route path="/news" exact component={NewsPage} />
             <Route path="/group" component={GroupPage} />
             <Route path="/ranking" component={RankingPage} />
-            <Route path="/mypage" component={Mypage} />
+            <Route path="/mypage" component={Mypage} /> */}
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="*" component={NotFoundPage} />

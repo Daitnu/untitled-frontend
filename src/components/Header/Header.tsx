@@ -9,19 +9,21 @@ const Header = () => {
         <S.flexItem>
           <Link to="/">Untitled Project</Link>
         </S.flexItem>
-        <S.flexItem>
+        {/* <S.flexItem>
           <Link to="/news">News</Link>
         </S.flexItem>
         <S.flexItem>
-          <Link to="/Ranking">Ranking</Link>
+          <Link to="/ranking">Ranking</Link>
         </S.flexItem>
         <S.flexItem>
-          <Link to="/Group">Group</Link>
+          <Link to="/group">Group</Link>
         </S.flexItem>
         <S.flexItem>
-          <Link to="/Mypage">Mypage</Link>
+          <Link to="/mypage">Mypage</Link>
+        </S.flexItem> */}
+        <S.flexItem>
+          <Link to="/login">Login</Link>
         </S.flexItem>
-        <S.flexItem>Login</S.flexItem>
       </S.Container>
     </S.Header>
   );
