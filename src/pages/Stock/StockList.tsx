@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'tui-grid/dist/tui-grid.css';
-import TuiGrid, { ColumnOptions } from 'tui-grid';
+import TuiGrid, { ColumnOptions, CellValue } from 'tui-grid';
 import ToastGrid from '@toast-ui/react-grid';
 
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
@@ -251,7 +251,15 @@ const gridColumns: ColumnOptions[] = [
     sortingType: 'desc',
     width: 110,
     align: 'right',
-    formatter: ({ value }) => convert.StringToKoreanWon(value),
+    formatter: ({ value }) => {
+      if (value === null || value === undefined) {
+        value = '0';
+      }
+      if (typeof value !== 'string') {
+        value = value.toString();
+      }
+      return convert.StringToKoreanWon(value);
+    },
   },
 ];
 
