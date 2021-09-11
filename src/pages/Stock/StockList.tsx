@@ -46,6 +46,7 @@ const gridColumns: ColumnOptions[] = [
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME,
     header: '회사명',
+    filter: 'select',
     valign: 'middle',
     align: 'left',
   },
@@ -145,6 +146,7 @@ const gridColumns: ColumnOptions[] = [
     filter: {
       type: 'number',
       operator: 'OR',
+      showApplyBtn: true,
       showClearBtn: true, // default false
     },
     width: 100,
@@ -160,6 +162,7 @@ const gridColumns: ColumnOptions[] = [
     filter: {
       type: 'number',
       operator: 'OR',
+      showApplyBtn: true,
       showClearBtn: true, // default false
     },
     width: 100,
@@ -175,6 +178,7 @@ const gridColumns: ColumnOptions[] = [
     filter: {
       type: 'number',
       operator: 'OR',
+      showApplyBtn: true,
       showClearBtn: true, // default false
     },
     width: 100,
@@ -311,7 +315,7 @@ const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => 
   console.log(columnName, rowKey);
   switch (columnName) {
     case STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK:
-      window.open(`${URL.NAVER_FINANCE}/item/main.nhn?code=${responseData[rowKey].corpCode}`, '_blank');
+      window.open(`${URL.NAVER_FINANCE}/item/coinfo.nhn?code=${responseData[rowKey].corpCode}`, '_blank');
       break;
     case STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME:
       window.open(`/corp/${responseData[rowKey].corpCode}`, '_blank');
