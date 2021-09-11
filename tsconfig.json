@@ -19,7 +19,7 @@
     "paths": {
       "~/*": ["src/*"],
       "@t/*": ["src/@types/*"],
-      "Assets/*": ["src/assets/*"]
+      "Assets/*": ["assets/*"]
     },
     "sourceMap": true
   },
