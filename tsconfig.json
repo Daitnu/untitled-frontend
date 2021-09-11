@@ -18,7 +18,8 @@
     "baseUrl": "./",
     "paths": {
       "~/*": ["src/*"],
-      "@t/*": ["src/@types/*"]
+      "@t/*": ["src/@types/*"],
+      "Assets/*": ["src/assets/*"]
     },
     "sourceMap": true
   },
