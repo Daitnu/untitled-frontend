@@ -73,7 +73,11 @@ table {
 }
 `;
 
-export const FullScreenWrap = styled.div`
+interface IFullScreenWrap {
+  bg: any;
+}
+
+export const FullScreenWrap = styled.div<IFullScreenWrap>`
   overflow: hidden;
   position: relative;
   box-sizing: border-box;

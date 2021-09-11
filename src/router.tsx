@@ -17,6 +17,8 @@ import {
   StockListPage,
   NotFoundPage,
   CorperateInfomationPage,
+  LoginPage,
+  RegisterPage,
 } from './pages';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -47,6 +49,8 @@ const AppRouter: React.FC = () => (
             <Route path="/group" component={GroupPage} />
             <Route path="/ranking" component={RankingPage} />
             <Route path="/mypage" component={Mypage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/register" component={RegisterPage} />
             <Route path="*" component={NotFoundPage} />
           </Switch>
           <Footer />
