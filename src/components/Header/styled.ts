@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Header = styled.div`
   height: 50px;
   background-color: #20232a;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;
 
 export const Container = styled.div`
