@@ -15,7 +15,7 @@ interface IError {
 
 const LoginForm: React.FC = () => {
   const [user, setUser] = useState<IUser>({ id: '', pw: '' });
-  const [errorMessage, setErrorMessage] = useState<IError>({ message: '' });
+  const [errorMessage] = useState<IError>({ message: '' });
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const changedField: string = id;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'tui-grid/dist/tui-grid.css';
-import TuiGrid, { ColumnOptions, CellValue } from 'tui-grid';
+import TuiGrid, { ColumnOptions } from 'tui-grid';
 import ToastGrid from '@toast-ui/react-grid';
 
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
