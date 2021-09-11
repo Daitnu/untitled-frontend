@@ -6,7 +6,7 @@ import ToastGrid from '@toast-ui/react-grid';
 
 import { IDailyStockPrice, IStockListData } from '~/@types/data';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
-import { convert } from '~/utils';
+import { convert } from '~/libs';
 import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
