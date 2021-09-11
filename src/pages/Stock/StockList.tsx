@@ -320,12 +320,18 @@ const onClickGridCell = (responseData) => (event) => {
 };
 
 const StockList: React.FC = () => {
-  const { response } = useSelector((root: RootState) => root.dailyStockPrices);
+  const { response, error: dailyStockpricesResponseError } = useSelector((root: RootState) => root.dailyStockPrices);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(dailyStockPricesGetRequest());
   }, []);
+
+  useEffect(() => {
+    if (dailyStockpricesResponseError !== null) {
+      alert('서버와의 통신에 실패하였습니다.');
+    }
+  }, [dailyStockpricesResponseError]);
 
   return (
     <S.Wrap>
