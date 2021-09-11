@@ -38,3 +38,9 @@ export const PROJECT_NAME = 'Untitled Project';
 
 export const BILLION = 1000000000000;
 export const SHILLION = 100000000;
+
+export const BREAK_POINT_MOBILE = '768px';
+
+export const KEY_CODE = {
+  ENTER: 13,
+};
