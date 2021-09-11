@@ -4,7 +4,7 @@ import 'tui-grid/dist/tui-grid.css';
 import TuiGrid, { ColumnOptions } from 'tui-grid';
 import ToastGrid from '@toast-ui/react-grid';
 
-import { IDailyStockPrice, IStockListData } from '~/@types/data';
+import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
 import { convert } from '~/libs';
 import { Grid } from '~/components/Grid';
@@ -251,7 +251,7 @@ const gridColumns: ColumnOptions[] = [
   },
 ];
 
-const converToStockListData = (responseData) => {
+const converToStockListData = (responseData: IResponseDailyStockPrices) => {
   return responseData.map((data: IDailyStockPrice) => {
     const per21 = data.profit21 ? data.marketCapitalization / (data.profit21 * SHILLION) : 0;
     const per22 = data.profit22 ? data.marketCapitalization / (data.profit22 * SHILLION) : 0;
@@ -305,7 +305,7 @@ const getClassNameByChangePriceOrPercent = (priceOrPercent: number) => {
   return returnClassNmae;
 };
 
-const onClickGridCell = (responseData) => (event) => {
+const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => {
   console.log(event);
   const { columnName, rowKey } = event;
   console.log(columnName, rowKey);
@@ -337,11 +337,13 @@ const StockList: React.FC = () => {
     <S.Wrap>
       <S.Container>
         <>
-          <Grid
-            data={response && response.data && converToStockListData(response.data)}
-            columns={gridColumns}
-            onClick={onClickGridCell(response && response.data && converToStockListData(response.data))}
-          />
+          {response && response.data && (
+            <Grid
+              data={converToStockListData(response.data)}
+              columns={gridColumns}
+              onClick={onClickGridCell(converToStockListData(response.data))}
+            />
+          )}
         </>
       </S.Container>
     </S.Wrap>
