@@ -3,13 +3,13 @@ import * as GS from '~/globalStyles';
 import { BREAK_POINT_MOBILE } from '~/constants';
 import backgroundImg from 'Assets/space.jpg';
 
-const width = 760;
-const height = 600;
+const width = 760 as const;
+const height = 600 as const;
 
 const UNIT = {
-  REM: 'rem',
-  EM: 'em',
-  PX: 'px',
+  REM: 'rem' as const,
+  EM: 'em' as const,
+  PX: 'px' as const,
 };
 
 interface IimageInputCard {

@@ -15,7 +15,7 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  color: "primary",
+  color: 'primary',
   label: 'Button',
 };
 
@@ -27,13 +27,13 @@ Secondary.args = {
 export const StockUp = Template.bind({});
 StockUp.args = {
   label: 'Button',
-  color: 'stock--up'
+  color: 'stock--up',
 };
 
 export const StockDown = Template.bind({});
 StockDown.args = {
   label: 'Button',
-  color: 'stock--down'
+  color: 'stock--down',
 };
 
 export const Large = Template.bind({});
