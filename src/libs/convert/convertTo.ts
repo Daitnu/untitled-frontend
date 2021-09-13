@@ -35,8 +35,15 @@ export const NumberToSeparatorString = (value: number | string) =>
 
 export const StringToKoreanWon = (value: number | string): string => {
   let number = Number(value);
+  let isNegative = false;
+
+  if (number < 0) isNegative = true;
+  number = Math.abs(number);
+
   const billionWon = Math.floor(number / BILLION);
   number = number % BILLION;
   const shillionWon = Math.round(number / SHILLION);
-  return billionWon === 0 ? `${shillionWon}억` : `${billionWon}조 ${Math.abs(shillionWon)}억`;
+
+  const returnStringValue = billionWon === 0 ? `${shillionWon}억` : `${billionWon}조 ${shillionWon}억`;
+  return isNegative ? `-${returnStringValue}` : returnStringValue;
 };
