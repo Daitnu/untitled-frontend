@@ -153,7 +153,7 @@ const gridColumns: ColumnOptions[] = [
       type: 'number',
       operator: 'OR',
       showApplyBtn: true,
-      showClearBtn: true, // default false
+      showClearBtn: true,
     },
     width: 100,
     defaultValue: 0,
@@ -169,7 +169,7 @@ const gridColumns: ColumnOptions[] = [
       type: 'number',
       operator: 'OR',
       showApplyBtn: true,
-      showClearBtn: true, // default false
+      showClearBtn: true,
     },
     width: 100,
     defaultValue: 0,
@@ -185,7 +185,7 @@ const gridColumns: ColumnOptions[] = [
       type: 'number',
       operator: 'OR',
       showApplyBtn: true,
-      showClearBtn: true, // default false
+      showClearBtn: true,
     },
     width: 100,
     defaultValue: 0,
@@ -201,7 +201,7 @@ const gridColumns: ColumnOptions[] = [
       type: 'number',
       operator: 'OR',
       showApplyBtn: true,
-      showClearBtn: true, // default false
+      showClearBtn: true,
     },
     width: 100,
     defaultValue: 0,
