@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ToastGrid from '@toast-ui/react-grid';
 import 'tui-grid/dist/tui-grid.css';
 import TuiGrid from 'tui-grid';
@@ -18,6 +18,8 @@ TuiGrid.applyTheme('striped', {
 });
 
 const Grid = ({ data, columns, onClick }) => {
+  const gridRef = useRef(null);
+
   return (
     <ToastGrid
       data={data}
@@ -38,6 +40,7 @@ const Grid = ({ data, columns, onClick }) => {
       }}
       showDummyRows={true}
       onClick={onClick}
+      ref={gridRef}
     />
   );
 };

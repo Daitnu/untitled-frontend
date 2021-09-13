@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'tui-grid/dist/tui-grid.css';
 import TuiGrid, { ColumnOptions } from 'tui-grid';
-import ToastGrid from '@toast-ui/react-grid';
-
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
 import { convert } from '~/libs';
@@ -11,6 +9,8 @@ import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import * as S from './styled';
+import { CustomTextEditor } from './CustomField';
+import { formatterValueToNumber } from '~/libs/convert/convertTo';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -56,9 +56,9 @@ const gridColumns: ColumnOptions[] = [
     header: '종가',
     valign: 'middle',
     sortable: true,
-    width: 90,
+    width: 100,
     align: 'right',
-    formatter: ({ value }) => convert.NumberToSeparatorString(value),
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PRICE,
@@ -67,7 +67,7 @@ const gridColumns: ColumnOptions[] = [
     sortable: true,
     width: 90,
     align: 'right',
-    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}원`,
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT,
@@ -76,7 +76,7 @@ const gridColumns: ColumnOptions[] = [
     sortable: true,
     width: 80,
     align: 'right',
-    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_WEEK,
@@ -86,7 +86,7 @@ const gridColumns: ColumnOptions[] = [
     width: 80,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_MONTH,
@@ -96,7 +96,7 @@ const gridColumns: ColumnOptions[] = [
     width: 80,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_THREE_MONTH,
@@ -106,37 +106,43 @@ const gridColumns: ColumnOptions[] = [
     width: 80,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${convert.NumberToSeparatorString(value)}%`,
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT21,
     header: '순이익21',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    width: 100,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${value}억`,
+    editor: {
+      type: CustomTextEditor,
+      options: {
+        maxLength: 7,
+      },
+    },
+    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT22,
     header: '순이익22',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    width: 100,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${value}억`,
+    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT23,
     header: '순이익23',
     valign: 'middle',
     sortable: true,
-    width: 80,
+    width: 100,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${value}억`,
+    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PER21,
@@ -200,7 +206,7 @@ const gridColumns: ColumnOptions[] = [
     width: 100,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${Math.round(Number(value))}`,
+    formatter: ({ value }) => `${Math.round(Number(value))}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
@@ -208,7 +214,7 @@ const gridColumns: ColumnOptions[] = [
     valign: 'middle',
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convert.NumberToSeparatorString(value),
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_HIGH_PRICE,
@@ -216,7 +222,7 @@ const gridColumns: ColumnOptions[] = [
     valign: 'middle',
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convert.NumberToSeparatorString(value),
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_LOW_PRICE,
@@ -224,7 +230,7 @@ const gridColumns: ColumnOptions[] = [
     valign: 'middle',
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convert.NumberToSeparatorString(value),
+    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.VOLUME,
@@ -233,7 +239,7 @@ const gridColumns: ColumnOptions[] = [
     sortable: true,
     width: 100,
     align: 'right',
-    formatter: ({ value }) => convert.NumberToSeparatorString(value),
+    formatter: ({ value }) => convert.getSeparatorStringFromFormatterValue(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.SHARES_OUTSTANDING,
@@ -241,7 +247,7 @@ const gridColumns: ColumnOptions[] = [
     valign: 'middle',
     width: 120,
     align: 'right',
-    formatter: ({ value }) => convert.NumberToSeparatorString(value),
+    formatter: ({ value }) => convert.getSeparatorStringFromFormatterValue(value),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_CAPITALIZATION,
@@ -251,15 +257,7 @@ const gridColumns: ColumnOptions[] = [
     sortingType: 'desc',
     width: 110,
     align: 'right',
-    formatter: ({ value }) => {
-      if (value === null || value === undefined) {
-        value = '0';
-      }
-      if (typeof value !== 'string') {
-        value = value.toString();
-      }
-      return convert.StringToKoreanWon(value);
-    },
+    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value),
   },
 ];
 
