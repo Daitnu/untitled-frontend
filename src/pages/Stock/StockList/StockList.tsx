@@ -316,15 +316,15 @@ const getClassNameByChangePriceOrPercent = (priceOrPercent: number) => {
 };
 
 const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => {
-  console.log(event);
+  console.log('onclick grid cell', event);
   const { columnName, rowKey } = event;
   console.log(columnName, rowKey);
   switch (columnName) {
     case STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK:
-      window.open(`${URL.NAVER_FINANCE}/item/coinfo.nhn?code=${responseData[rowKey].corpCode}`, '_blank');
+      window.open(`${URL.NAVER_FINANCE}/item/coinfo.nhn?code=${responseData[rowKey].stockCode}`, '_blank');
       break;
     case STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME:
-      window.open(`/corp/${responseData[rowKey].corpCode}`, '_blank');
+      window.open(`/corp/${responseData[rowKey].stockCode}`, '_blank');
       break;
   }
 };

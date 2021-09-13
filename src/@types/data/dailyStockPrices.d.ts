@@ -1,5 +1,5 @@
 export interface IDailyStockPrice {
-  corpCode: string;
+  stockCode: string;
   corpName: string;
   marketKind: string;
   department: string;
