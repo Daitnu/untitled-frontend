@@ -3,7 +3,7 @@ import { IResponseDailyStockPrices } from '~/@types/data/';
 import { URL } from '~/libs';
 import Api from './Api';
 
-export default class StockQuoteApi extends Api {
+export default class DailyStockPriceApi extends Api {
   constructor() {
     super();
   }

@@ -46,7 +46,7 @@ export default class Api {
         Accept: MEDIA_TYPE.JSON,
       },
       timeout: 5000,
-      withCredentials: true,
+      withCredentials: false,
     });
   }
 
