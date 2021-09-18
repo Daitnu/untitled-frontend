@@ -145,7 +145,7 @@ const gridColumns: ColumnOptions[] = [
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PER21,
-    header: 'PER21',
+    header: 'PER21(배)',
     valign: 'middle',
     sortable: true,
     filter: {
@@ -154,14 +154,14 @@ const gridColumns: ColumnOptions[] = [
       showApplyBtn: true,
       showClearBtn: true,
     },
-    width: 100,
+    width: 110,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => Number(value).toFixed(2),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PER22,
-    header: 'PER22',
+    header: 'PER22(배)',
     valign: 'middle',
     sortable: true,
     filter: {
@@ -170,14 +170,14 @@ const gridColumns: ColumnOptions[] = [
       showApplyBtn: true,
       showClearBtn: true,
     },
-    width: 100,
+    width: 110,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => Number(value).toFixed(2),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.PER23,
-    header: 'PER23',
+    header: 'PER23(배)',
     valign: 'middle',
     sortable: true,
     filter: {
@@ -186,14 +186,14 @@ const gridColumns: ColumnOptions[] = [
       showApplyBtn: true,
       showClearBtn: true,
     },
-    width: 100,
+    width: 110,
     defaultValue: 0,
     align: 'right',
     formatter: ({ value }) => Number(value).toFixed(2),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.RATE_OF_GROWTH,
-    header: '성장률',
+    header: '성장률(%)',
     valign: 'middle',
     sortable: true,
     filter: {
@@ -202,10 +202,10 @@ const gridColumns: ColumnOptions[] = [
       showApplyBtn: true,
       showClearBtn: true,
     },
-    width: 100,
+    width: 110,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => `${Math.round(Number(value))}%`,
+    formatter: ({ value }) => Math.round(Number(value)).toFixed(0),
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
