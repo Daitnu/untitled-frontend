@@ -1,7 +1,7 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { makeApiCallSagaFunc } from '../util';
+import { makeApiCallSagaFunc } from '../apiUtil';
 import { DAILY_STOCK_PRICES_GET, DAILY_STOCK_PRICES_GET_REQUEST } from '../stock';
-import { DailyStockPricesApi } from '../util/request';
+import DailyStockPricesApi from './DailyStockPricesApi';
 
 const api = new DailyStockPricesApi();
 

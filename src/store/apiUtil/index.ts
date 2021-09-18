@@ -1,7 +1,8 @@
 import { call, put } from 'redux-saga/effects';
-import { BusinessErrorResponse } from '~/@types/response';
-import { ApiState, ApiCallSagaFunc } from '~/@types/store';
+import { BusinessErrorResponse } from '@t/response';
+import { ApiState, ApiCallSagaFunc } from '@t/store';
 import { historyPush } from './history';
+export { default as Api } from './request/Api';
 
 /**
  * @param type product인지 coupon인지 등을 나타내는 상수
