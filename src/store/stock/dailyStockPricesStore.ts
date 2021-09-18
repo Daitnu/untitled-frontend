@@ -1,6 +1,6 @@
 import { makeApiReducer } from '../util';
-import { BusinessErrorResponse, HTTPResponse } from '~/@types/response';
-import { IResponseDailyStockPrices } from '~/@types/data/';
+import { BusinessErrorResponse, HTTPResponse } from '@t/response';
+import { IResponseDailyStockPrices } from '@t/data';
 
 export const DAILY_STOCK_PRICES_GET = 'DAILY_STOCK_PRICES_GET' as const;
 export const DAILY_STOCK_PRICES_GET_REQUEST = 'DAILY_STOCK_PRICES_GET_REQUEST' as const;
