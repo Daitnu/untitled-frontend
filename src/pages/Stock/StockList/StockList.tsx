@@ -10,7 +10,6 @@ import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import * as S from './styled';
 import { CustomTextEditor } from './CustomField';
-import { formatterValueToNumber } from '~/libs/convert/convertTo';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 

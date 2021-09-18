@@ -17,9 +17,24 @@ TuiGrid.applyTheme('striped', {
   },
 });
 
-const Grid = ({ data, columns, onClick }) => {
-  const gridRef = useRef(null);
+const onEditingFinishedHandle = (event, data) => {
+  const { columnName, rowKey, value } = event;
+  const currentValue = data[rowKey][columnName];
+  const inputValue = value;
 
+  console.log(data[rowKey]);
+  data[event.rowKey][columnName] = inputValue;
+
+  if (currentValue != inputValue) {
+    // TODO: API로직작성
+    console.log('값이다름');
+    return;
+  }
+
+  console.log('값이 같음');
+};
+
+const Grid = ({ data, columns, onClick }) => {
   return (
     <ToastGrid
       data={data}
@@ -40,7 +55,8 @@ const Grid = ({ data, columns, onClick }) => {
       }}
       showDummyRows={true}
       onClick={onClick}
-      ref={gridRef}
+      onEditingFinish={(event) => onEditingFinishedHandle(event, data)}
+      onSort={(event) => console.log('onsort event', event)}
     />
   );
 };

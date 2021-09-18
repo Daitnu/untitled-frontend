@@ -5,6 +5,8 @@ export class CustomTextEditor {
     const el = document.createElement('input');
     const { maxLength } = props.columnInfo.editor.options;
 
+    console.log('columns ', props.rows);
+
     el.type = 'text';
     el.maxLength = maxLength;
     el.value = String(props.value);
@@ -12,7 +14,7 @@ export class CustomTextEditor {
     el.addEventListener('keydown', (event) => {
       const pressKey = event.key;
 
-      if (Number.isInteger(Number(pressKey))) {
+      if (Number.isInteger(Number(pressKey)) || pressKey === '-') {
         return true;
       } else if (pressKey === 'Backspace') {
         return true;
@@ -20,9 +22,6 @@ export class CustomTextEditor {
       event.preventDefault();
     });
 
-    el.addEventListener('focusout', (event) => {
-      console.log('enter !!', this.getValue());
-    });
     this.el = el;
   }
 
