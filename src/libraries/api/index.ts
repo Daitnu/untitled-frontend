@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { HTTPResponse, BusinessErrorResponse } from '@t/response';
 import { RequestParam } from '@t/request';
+export * from './history';
 
 const API_SERVER = 'http://localhost:8080';
 const MEDIA_TYPE = {

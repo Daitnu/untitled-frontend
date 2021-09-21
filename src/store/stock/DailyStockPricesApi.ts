@@ -1,7 +1,7 @@
 import { BusinessErrorResponse, HTTPResponse } from '~/@types/response';
 import { IResponseDailyStockPrices } from '~/@types/data/';
-import { URL } from '~/libraries';
-import { Api } from '../apiUtil';
+import { URL } from '~/libraries/url';
+import Api from '~/libraries/api';
 
 export default class DailyStockPriceApi extends Api {
   constructor() {
