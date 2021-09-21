@@ -69,16 +69,14 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
         };
       case SUCCESS:
         return {
+          ...initialState,
           ...state,
-          loading: false,
           response: action.payload,
-          error: null,
         };
       case FAILURE:
         return {
+          ...initialState,
           ...state,
-          loading: false,
-          response: null,
           error: action.payload,
         };
       case CLEAR:
