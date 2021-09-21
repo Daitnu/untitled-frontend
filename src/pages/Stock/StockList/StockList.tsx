@@ -344,8 +344,16 @@ const StockList: React.FC = () => {
 
   return (
     <S.Wrap>
-      <S.Container>
-        <>
+      <S.Section>
+        <S.ContainerMiddle border="2px solid #6741d9">
+          <h1>섹션영역입니다.</h1>
+          <button>버어튼</button>
+          <button>버어튼</button>
+          <button>버어튼</button>
+        </S.ContainerMiddle>
+      </S.Section>
+      <S.Section>
+        <S.ContainerWide>
           {response && response.data && (
             <Grid
               data={converToStockListData(response.data)}
@@ -353,8 +361,8 @@ const StockList: React.FC = () => {
               onClick={onClickGridCell(converToStockListData(response.data))}
             />
           )}
-        </>
-      </S.Container>
+        </S.ContainerWide>
+      </S.Section>
     </S.Wrap>
   );
 };

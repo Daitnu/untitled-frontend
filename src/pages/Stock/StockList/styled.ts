@@ -1,13 +1,34 @@
 import styled from 'styled-components';
+import { CommonDiv } from '~/globalStyles';
 
 export const Wrap = styled.div`
   min-height: 600px;
 `;
 
-export const Container = styled.div`
+export const ContainerMiddle = styled(CommonDiv)`
+  padding: 0.5rem;
+  width: 95%;
+  margin: auto;
+`;
+
+export const ContainerWide = styled(CommonDiv)`
+  background-color: ${(props) => props.bgColor};
+
   width: 99%;
   max-width: 2300px;
   margin: auto;
+`;
+
+export const Section = styled(CommonDiv)`
+  background-color: ${(props) => props.bgColor};
+
+  &:first-child {
+    margin-top: 1rem;
+  }
+
+  & + & {
+    margin-top: 1rem;
+  }
 `;
 
 export const AdditionalFeatures = styled.div`
