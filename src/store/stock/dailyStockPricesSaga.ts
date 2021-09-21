@@ -1,5 +1,5 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import { makeApiCallSagaFunc } from '../apiUtil';
+import { makeApiCallSagaFunc } from '~/libraries/sagaUtils';
 import { DAILY_STOCK_PRICES_GET, DAILY_STOCK_PRICES_GET_REQUEST } from '../stock';
 import DailyStockPricesApi from './DailyStockPricesApi';
 

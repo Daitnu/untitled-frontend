@@ -1,4 +1,4 @@
-import { makeApiReducer } from '../apiUtil';
+import { makeApiReducer } from '~/libraries/sagaUtils';
 import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 import { IResponseDailyStockPrices } from '@t/data';
 
