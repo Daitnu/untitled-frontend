@@ -4,7 +4,7 @@ import 'tui-grid/dist/tui-grid.css';
 import TuiGrid, { ColumnOptions } from 'tui-grid';
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
-import { convert } from '~/libs';
+import { convert } from '~/libraries';
 import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
