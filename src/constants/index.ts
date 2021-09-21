@@ -1,12 +1,9 @@
+export * from './url';
+export * from './color';
+
 export const TOAST_GRID = {
   TOAST_GRID_STOCK_DOWN: 'tui-grid-stock-down',
   TOAST_GRID_STOCK_UP: 'tui-grid-stock-up',
-};
-
-export const URL = {
-  NAVER_FINANCE: 'https://finance.naver.com',
-  STOCK_QUOTE: '/stock/' as const,
-  CORPERATION_CONSENSUS: '/corperation/consensus/' as const,
 };
 
 export const STOCK_LIST_GRID_COLUMN_NAMES = {
