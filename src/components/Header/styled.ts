@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { COLOR } from '~/constants';
 
 export const Header = styled.div`
   height: 50px;
-  background-color: #20232a;
+  background-color: ${COLOR.DARK};
   /* margin-bottom: 20px; */
 `;
 
