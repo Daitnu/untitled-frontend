@@ -11,6 +11,7 @@ import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore'
 import * as S from './styled';
 import { CustomTextEditor } from './CustomField';
 import { COLOR } from '~/constants';
+import { SliderWithInput } from '~/components/Molecules';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -206,7 +207,7 @@ const gridColumns: ColumnOptions[] = [
     width: 110,
     defaultValue: 0,
     align: 'right',
-    formatter: ({ value }) => Math.round(Number(value)).toFixed(0),
+    formatter: ({ value }) => `${Math.round(Number(value)).toFixed(0)}%`,
   },
   {
     name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
@@ -346,9 +347,9 @@ const StockList: React.FC = () => {
   return (
     <S.Wrap>
       <S.Section>
-        <S.ContainerMiddle border={`2px solid ${COLOR.VIOLET3}`} bgColor={COLOR.CYAN4}>
+        <S.ContainerMiddle border={`2px solid ${COLOR.GRAPE0}`}>
           <h1>섹션영역입니다.</h1>
-          <button>버어튼</button>
+          <SliderWithInput firstNumber={1} lastNumber={100} />
           <button>버어튼</button>
           <button>버어튼</button>
         </S.ContainerMiddle>
