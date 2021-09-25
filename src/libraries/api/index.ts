@@ -8,13 +8,13 @@ const MEDIA_TYPE = {
   JSON: 'application/json' as const,
 };
 
-const getHttpResponse = async <T>({ fn }): Promise<HTTPResponse<T>> => {
+const executeHttpRequest = async <T>({ fn }): Promise<HTTPResponse<T>> => {
   try {
     const result = await fn();
     const { status, data: resData, headers } = result;
     const successResponse: HTTPResponse<T> = { status, data: resData, headers };
     return successResponse;
-  } catch (err) {
+  } catch (err: any) {
     let errResponse: BusinessErrorResponse = { status: 0, message: '', code: '', errors: [] };
     if (!err.response) {
       errResponse = {
@@ -63,7 +63,7 @@ export default class Api {
       url += '?' + toQueryString(data);
     }
     const fn = () => this.axiosInstance.get(url, { headers: { Authorization: token }, ...options });
-    return getHttpResponse<T>({ fn });
+    return executeHttpRequest<T>({ fn });
   }
 
   /**
@@ -75,7 +75,7 @@ export default class Api {
    */
   public async post<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
     const fn = () => this.axiosInstance.post(url, data, { headers: { Authorization: token } });
-    return getHttpResponse<T>({ fn });
+    return executeHttpRequest<T>({ fn });
   }
 
   /**
@@ -87,7 +87,7 @@ export default class Api {
    */
   public async patch<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
     const fn = () => this.axiosInstance.patch(url, data, { headers: { Authorization: token } });
-    return getHttpResponse<T>({ fn });
+    return executeHttpRequest<T>({ fn });
   }
 
   /**
@@ -99,6 +99,6 @@ export default class Api {
    */
   public async delete<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
     const fn = () => this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
-    return getHttpResponse<T>({ fn });
+    return executeHttpRequest<T>({ fn });
   }
 }
