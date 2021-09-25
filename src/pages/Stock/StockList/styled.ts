@@ -12,16 +12,12 @@ export const ContainerMiddle = styled(CommonDiv)`
 `;
 
 export const ContainerWide = styled(CommonDiv)`
-  background-color: ${(props) => props.bgColor};
-
   width: 99%;
   max-width: 2300px;
   margin: auto;
 `;
 
 export const Section = styled(CommonDiv)`
-  background-color: ${(props) => props.bgColor};
-
   &:first-child {
     margin-top: 1rem;
   }
