@@ -6,45 +6,37 @@ interface SilderWidthInputFn {
   lastNumber: number;
 }
 
-export const SliderWithInput = ({ firstNumber = 0, lastNumber = 0 }) => {
+export const SliderWithInput = ({ firstNumber = 0, lastNumber = 0 }: SilderWidthInputFn) => {
   const [rangeValues, setRangeValues] = useState([firstNumber, lastNumber]);
 
   const onChangeSliderHandler = (newRangeValues) => {
     setRangeValues(newRangeValues);
   };
 
-  const onChangeInputNumberHandler = (newValue) => {
+  const onBlurInputNumberHandler = (e) => {
+    const newValue = e.target.value;
     const newRagneValue = [...rangeValues];
     newRagneValue[0] = newValue;
-    setRangeValues(newRagneValue);
-    onChangeSliderHandler([...newRagneValue]);
+    setRangeValues(newRagneValue.sort());
   };
 
-  const onChangeInputLastNumberHandler = (newValue) => {
+  const onBlurInputLastNumberHandler = (e) => {
+    const newValue = e.target.value;
     const newRagneValue = [...rangeValues];
     newRagneValue[1] = newValue;
-    setRangeValues(newRagneValue);
-    onChangeSliderHandler(newRagneValue);
-    onChangeSliderHandler([...newRagneValue]);
+    setRangeValues(newRagneValue.sort());
   };
-
-  console.log(rangeValues);
 
   return (
     <Row>
       <Col span={6}>
-        <Slider range defaultValue={[rangeValues[0], rangeValues[1]]} onChange={onChangeSliderHandler} />
+        <Slider range value={[rangeValues[0], rangeValues[1]]} onChange={onChangeSliderHandler} />
       </Col>
       <Col span={3}>
-        <InputNumber min={firstNumber} max={lastNumber} value={rangeValues[0]} onChange={onChangeInputNumberHandler} />
+        <InputNumber min={firstNumber} max={lastNumber} value={rangeValues[0]} onBlur={onBlurInputNumberHandler} />
       </Col>
       <Col span={3}>
-        <InputNumber
-          min={firstNumber}
-          max={lastNumber}
-          value={rangeValues[1]}
-          onChange={onChangeInputLastNumberHandler}
-        />
+        <InputNumber min={firstNumber} max={lastNumber} value={rangeValues[1]} onBlur={onBlurInputLastNumberHandler} />
       </Col>
     </Row>
   );
