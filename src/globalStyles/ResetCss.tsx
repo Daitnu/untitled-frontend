@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { BREAK_POINT_MOBILE } from '~/constants';
+import 'antd/dist/antd.css';
 
 export const ResetCss = createGlobalStyle`
   body {
