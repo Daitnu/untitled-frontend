@@ -10,6 +10,7 @@ import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import * as S from './styled';
 import { CustomTextEditor } from './CustomField';
+import { COLOR } from '~/constants';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -345,7 +346,7 @@ const StockList: React.FC = () => {
   return (
     <S.Wrap>
       <S.Section>
-        <S.ContainerMiddle border="2px solid #6741d9">
+        <S.ContainerMiddle border={`2px solid ${COLOR.VIOLET3}`} bgColor={COLOR.CYAN4}>
           <h1>섹션영역입니다.</h1>
           <button>버어튼</button>
           <button>버어튼</button>
