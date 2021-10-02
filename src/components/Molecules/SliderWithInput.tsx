@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Slider, InputNumber, Row, Col } from 'antd';
+import { Slider, InputNumber, Checkbox, Row, Col } from 'antd';
 
 interface SilderWidthInputFn {
-  firstNumber: number;
-  lastNumber: number;
+  labelName: string;
+  min: number;
+  max: number;
 }
 
-export const SliderWithInput = ({ firstNumber = 0, lastNumber = 0 }: SilderWidthInputFn) => {
-  const [rangeValues, setRangeValues] = useState([firstNumber, lastNumber]);
+export const SliderWithInput = ({ labelName, min = 0, max = 0 }: SilderWidthInputFn) => {
+  const [rangeValues, setRangeValues] = useState([min, max]);
 
   const onChangeSliderHandler = (newRangeValues) => {
     setRangeValues(newRangeValues);
@@ -20,23 +21,31 @@ export const SliderWithInput = ({ firstNumber = 0, lastNumber = 0 }: SilderWidth
     setRangeValues(newRagneValue.sort());
   };
 
-  const onBlurInputLastNumberHandler = (e) => {
+  const onBlurInputmaxHandler = (e) => {
     const newValue = e.target.value;
     const newRagneValue = [...rangeValues];
     newRagneValue[1] = newValue;
     setRangeValues(newRagneValue.sort());
   };
 
+  const onChangeCheckbox = (e) => {
+    console.log(`checked = ${e.target.checked}`);
+  };
+
+  console.log('range ', rangeValues);
   return (
     <Row>
+      <label color="magenta">{labelName}</label>
+      <Checkbox onChange={onChangeCheckbox}>음수제거</Checkbox>
       <Col span={6}>
         <Slider range value={[rangeValues[0], rangeValues[1]]} onChange={onChangeSliderHandler} />
       </Col>
-      <Col span={3}>
-        <InputNumber min={firstNumber} max={lastNumber} value={rangeValues[0]} onBlur={onBlurInputNumberHandler} />
+      <Col>
+        <InputNumber min={min} max={max} value={rangeValues[0]} onBlur={onBlurInputNumberHandler} />
       </Col>
-      <Col span={3}>
-        <InputNumber min={firstNumber} max={lastNumber} value={rangeValues[1]} onBlur={onBlurInputLastNumberHandler} />
+      <span>~</span>
+      <Col>
+        <InputNumber min={min} max={max} value={rangeValues[1]} onBlur={onBlurInputmaxHandler} />
       </Col>
     </Row>
   );
