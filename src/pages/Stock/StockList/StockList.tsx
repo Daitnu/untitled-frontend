@@ -10,8 +10,7 @@ import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import * as S from './styled';
 import { CustomTextEditor } from './CustomField';
-import { COLOR } from '~/constants';
-import { SliderWithInput } from '~/components/Molecules';
+import { StockListSearch } from '~/components/StockListSearch';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -344,25 +343,24 @@ const StockList: React.FC = () => {
     }
   }, [dailyStockpricesResponseError]);
 
+  // TODO: Store값으로 Loading중인거 확인가능할듯..?
+  if (!response || !response.data) {
+    return <div>Loading..</div>;
+  }
+
+  const { data } = response;
+  const gridDatas = converToStockListData(data);
+
   return (
     <S.Wrap>
       <S.Section>
-        <S.ContainerMiddle border={`2px solid ${COLOR.GRAPE0}`}>
-          <h1>섹션영역입니다.</h1>
-          <SliderWithInput firstNumber={1} lastNumber={100} />
-          <button>버어튼</button>
-          <button>버어튼</button>
+        <S.ContainerMiddle>
+          <StockListSearch gridDatas={gridDatas}></StockListSearch>
         </S.ContainerMiddle>
       </S.Section>
       <S.Section>
         <S.ContainerWide>
-          {response && response.data && (
-            <Grid
-              data={converToStockListData(response.data)}
-              columns={gridColumns}
-              onClick={onClickGridCell(converToStockListData(response.data))}
-            />
-          )}
+          <Grid data={gridDatas} columns={gridColumns} onClick={onClickGridCell(gridDatas)} />
         </S.ContainerWide>
       </S.Section>
     </S.Wrap>
