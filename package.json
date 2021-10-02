@@ -7,9 +7,7 @@
     "start": "webpack serve --open",
     "dev": "webpack serve",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -34,6 +32,7 @@
     "url": "https://github.com/Daitnu/untitled-frontend/issues"
   },
   "homepage": "https://github.com/Daitnu/untitled-frontend#readme",
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@babel/runtime": "^7.13.10",
     "@reduxjs/toolkit": "^1.5.1",
