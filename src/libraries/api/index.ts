@@ -11,8 +11,8 @@ const MEDIA_TYPE = {
 const executeHttpRequest = async <T>({ fn }): Promise<HTTPResponse<T>> => {
   try {
     const result = await fn();
-    const { status, data: resData, headers } = result;
-    const successResponse: HTTPResponse<T> = { status, data: resData, headers };
+    const { status, data, headers } = result;
+    const successResponse: HTTPResponse<T> = { status, data, headers };
     return successResponse;
   } catch (err: any) {
     let errResponse: BusinessErrorResponse = { status: 0, message: '', code: '', errors: [] };
