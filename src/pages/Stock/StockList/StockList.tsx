@@ -8,9 +8,10 @@ import { convert } from '~/libraries/convert';
 import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
-import * as S from './styled';
 import { CustomTextEditor } from './CustomField';
 import { StockListSearch } from '~/components/StockListSearch';
+import * as S from './styled';
+import { SimplePageTemplate } from '~/templates/SimplePageTemplate';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -352,18 +353,20 @@ const StockList: React.FC = () => {
   const gridDatas = converToStockListData(data);
 
   return (
-    <S.Wrap>
-      <S.Section>
-        <S.ContainerMiddle>
-          <StockListSearch gridDatas={gridDatas}></StockListSearch>
-        </S.ContainerMiddle>
-      </S.Section>
-      <S.Section>
-        <S.ContainerWide>
-          <Grid data={gridDatas} columns={gridColumns} onClick={onClickGridCell(gridDatas)} />
-        </S.ContainerWide>
-      </S.Section>
-    </S.Wrap>
+    <SimplePageTemplate>
+      <S.Wrap>
+        <S.Section>
+          <S.ContainerMiddle>
+            <StockListSearch gridDatas={gridDatas}></StockListSearch>
+          </S.ContainerMiddle>
+        </S.Section>
+        <S.Section>
+          <S.ContainerWide>
+            <Grid data={gridDatas} columns={gridColumns} onClick={onClickGridCell(gridDatas)} />
+          </S.ContainerWide>
+        </S.Section>
+      </S.Wrap>
+    </SimplePageTemplate>
   );
 };
 

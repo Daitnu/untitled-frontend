@@ -11,8 +11,6 @@ import { history } from './libraries/api';
 import rootReducer, { rootSaga } from './store';
 import { ResetCss } from '~/globalStyles/';
 import { StockListPage, NotFoundPage, CorperateInfomationPage, LoginPage, RegisterPage } from './pages';
-import Header from './components/Header';
-import Footer from './components/Footer';
 
 export const theme = {
   colors: {
@@ -31,7 +29,6 @@ const AppRouter: React.FC = () => (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <Router history={history}>
-          <Header />
           <Switch>
             <Route path="/" exact component={StockListPage} />
             <Route path="/corp/:code" exact component={CorperateInfomationPage} />
@@ -39,7 +36,6 @@ const AppRouter: React.FC = () => (
             <Route path="/register" component={RegisterPage} />
             <Route path="*" component={NotFoundPage} />
           </Switch>
-          <Footer />
         </Router>
       </Provider>
     </ThemeProvider>

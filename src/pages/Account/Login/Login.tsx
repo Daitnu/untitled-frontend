@@ -3,17 +3,20 @@ import * as S from './styled';
 import * as GS from '~/globalStyles';
 import LoginForm from '~/components/Forms/Login/LoginForm';
 import backgoundImage from 'Assets/back.jpg';
+import { SimplePageTemplate } from '~/templates';
 
 const LoginPage: React.FC = () => {
   return (
-    <GS.FullScreenWrap bg={backgoundImage}>
-      <S.CenterWrap>
-        <S.LoginFormArea>
-          <LoginForm />
-        </S.LoginFormArea>
-        <S.BackgoundImage />
-      </S.CenterWrap>
-    </GS.FullScreenWrap>
+    <SimplePageTemplate>
+      <GS.FullScreenWrap bg={backgoundImage}>
+        <S.CenterWrap>
+          <S.LoginFormArea>
+            <LoginForm />
+          </S.LoginFormArea>
+          <S.BackgoundImage />
+        </S.CenterWrap>
+      </GS.FullScreenWrap>
+    </SimplePageTemplate>
   );
 };
 
