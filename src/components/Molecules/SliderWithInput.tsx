@@ -34,18 +34,24 @@ export const SliderWithInput = ({ labelName, min = 0, max = 0 }: SilderWidthInpu
 
   console.log('range ', rangeValues);
   return (
-    <Row>
-      <label color="magenta">{labelName}</label>
-      <Checkbox onChange={onChangeCheckbox}>음수제거</Checkbox>
-      <Col span={6}>
-        <Slider range value={[rangeValues[0], rangeValues[1]]} onChange={onChangeSliderHandler} />
+    <Row align="middle">
+      <Col flex="70px">
+        <label color="magenta">{labelName}</label>
       </Col>
-      <Col>
-        <InputNumber min={min} max={max} value={rangeValues[0]} onBlur={onBlurInputNumberHandler} />
+      <Col flex="110px">
+        <Checkbox onChange={onChangeCheckbox}>음수제거</Checkbox>
       </Col>
-      <span>~</span>
-      <Col>
-        <InputNumber min={min} max={max} value={rangeValues[1]} onBlur={onBlurInputmaxHandler} />
+      <Col flex="auto">
+        <Row align="middle">
+          <Col flex="700px">
+            <Slider range value={[rangeValues[0], rangeValues[1]]} onChange={onChangeSliderHandler} />
+          </Col>
+          <Col flex="200px">
+            <InputNumber min={min} max={max} value={rangeValues[0]} onBlur={onBlurInputNumberHandler} />
+            <span>~</span>
+            <InputNumber min={min} max={max} value={rangeValues[1]} onBlur={onBlurInputmaxHandler} />
+          </Col>
+        </Row>
       </Col>
     </Row>
   );
