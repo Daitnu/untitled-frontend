@@ -106,7 +106,9 @@ const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => 
 };
 
 const StockList: React.FC = () => {
-  const { response, error: dailyStockpricesResponseError } = useSelector((root: RootState) => root.dailyStockPrices);
+  const { loading, response, error: dailyStockpricesResponseError } = useSelector(
+    (root: RootState) => root.dailyStockPrices,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -120,16 +122,8 @@ const StockList: React.FC = () => {
 
   // TODO: Store값으로 Loading중인거 확인가능할듯..?
 
-  let content = (
-    <S.Section>
-      <Loading></Loading>
-    </S.Section>
-  );
-
-  if (dailyStockpricesResponseError !== null) {
-    const { message: errorMessage, status, code } = dailyStockpricesResponseError;
-    content = <Alert showIcon={false} message={status} description={errorMessage} type="error" banner closable />;
-  } else if (response && response.data) {
+  let content;
+  if (response && response.data) {
     const { data } = response;
     const gridDatas = converToStockListData(data);
     content = (
@@ -149,7 +143,7 @@ const StockList: React.FC = () => {
   }
 
   return (
-    <SimplePageTemplate>
+    <SimplePageTemplate isLoading={loading} error={dailyStockpricesResponseError}>
       <S.Wrap>{content}</S.Wrap>
     </SimplePageTemplate>
   );
