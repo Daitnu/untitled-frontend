@@ -143,3 +143,10 @@ export const IconStyle = styled(BackgroundImageStyle)`
   width: 30px;
   height: 30px;
 `;
+
+export const LoadingWarp = styled.div`
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+`;

@@ -4,14 +4,15 @@ import 'tui-grid/dist/tui-grid.css';
 import TuiGrid, { ColumnOptions } from 'tui-grid';
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
-import { convert } from '~/libraries/convert';
 import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
-import { CustomTextEditor } from './CustomField';
 import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
 import { SimplePageTemplate } from '~/templates/SimplePageTemplate';
+import { gridColumns } from './columnOptions';
+import { Alert, Space, Spin } from 'antd';
+import { Loading } from '~/components/Loading';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -35,232 +36,6 @@ TuiGrid.applyTheme('striped', {
  *            /per21/per22/per23/성장률/시초가/고가/저가/거래량/발행주식수
  *            /시가총액/네이버주식바로가기]
  */
-const gridColumns: ColumnOptions[] = [
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_KIND,
-    header: '시장구분',
-    filter: 'select',
-    valign: 'middle',
-    width: 100,
-    align: 'left',
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME,
-    header: '회사명',
-    filter: 'select',
-    valign: 'middle',
-    align: 'left',
-  },
-  { name: STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK, width: 100, header: '네이버주식', align: 'center' },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_CLOSE_PRICE,
-    header: '종가',
-    valign: 'middle',
-    sortable: true,
-    width: 100,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PRICE,
-    header: '전일비',
-    valign: 'middle',
-    sortable: true,
-    width: 90,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT,
-    header: '1D등락률',
-    valign: 'middle',
-    sortable: true,
-    width: 80,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_WEEK,
-    header: '1W등락률',
-    valign: 'middle',
-    sortable: true,
-    width: 80,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_A_MONTH,
-    header: '1M등락률',
-    valign: 'middle',
-    sortable: true,
-    width: 80,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.CHANGE_PERCENT_FOR_THREE_MONTH,
-    header: '3M등락률',
-    valign: 'middle',
-    sortable: true,
-    width: 80,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}%`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT21,
-    header: '순이익21',
-    valign: 'middle',
-    sortable: true,
-    width: 100,
-    defaultValue: 0,
-    align: 'right',
-    editor: {
-      type: CustomTextEditor,
-      options: {
-        maxLength: 7,
-      },
-    },
-    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT22,
-    header: '순이익22',
-    valign: 'middle',
-    sortable: true,
-    width: 100,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.PROFIT23,
-    header: '순이익23',
-    valign: 'middle',
-    sortable: true,
-    width: 100,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.PER21,
-    header: 'PER21(배)',
-    valign: 'middle',
-    sortable: true,
-    filter: {
-      type: 'number',
-      operator: 'OR',
-      showApplyBtn: true,
-      showClearBtn: true,
-    },
-    width: 110,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => Number(value).toFixed(2),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.PER22,
-    header: 'PER22(배)',
-    valign: 'middle',
-    sortable: true,
-    filter: {
-      type: 'number',
-      operator: 'OR',
-      showApplyBtn: true,
-      showClearBtn: true,
-    },
-    width: 110,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => Number(value).toFixed(2),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.PER23,
-    header: 'PER23(배)',
-    valign: 'middle',
-    sortable: true,
-    filter: {
-      type: 'number',
-      operator: 'OR',
-      showApplyBtn: true,
-      showClearBtn: true,
-    },
-    width: 110,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => Number(value).toFixed(2),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.RATE_OF_GROWTH,
-    header: '성장률(%)',
-    valign: 'middle',
-    sortable: true,
-    filter: {
-      type: 'number',
-      operator: 'OR',
-      showApplyBtn: true,
-      showClearBtn: true,
-    },
-    width: 110,
-    defaultValue: 0,
-    align: 'right',
-    formatter: ({ value }) => `${Math.round(Number(value)).toFixed(0)}%`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_OPEN_PRICE,
-    header: '시초가',
-    valign: 'middle',
-    width: 100,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_HIGH_PRICE,
-    header: '고가',
-    valign: 'middle',
-    width: 100,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.TODAY_LOW_PRICE,
-    header: '저가',
-    valign: 'middle',
-    width: 100,
-    align: 'right',
-    formatter: ({ value }) => `${convert.getSeparatorStringFromFormatterValue(value)}원`,
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.VOLUME,
-    header: '거래량',
-    valign: 'middle',
-    sortable: true,
-    width: 100,
-    align: 'right',
-    formatter: ({ value }) => convert.getSeparatorStringFromFormatterValue(value),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.SHARES_OUTSTANDING,
-    header: '발행주식수',
-    valign: 'middle',
-    width: 120,
-    align: 'right',
-    formatter: ({ value }) => convert.getSeparatorStringFromFormatterValue(value),
-  },
-  {
-    name: STOCK_LIST_GRID_COLUMN_NAMES.MARKET_CAPITALIZATION,
-    header: '시가총액',
-    valign: 'middle',
-    sortable: true,
-    sortingType: 'desc',
-    width: 110,
-    align: 'right',
-    formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value),
-  },
-];
 
 const converToStockListData = (responseData: IResponseDailyStockPrices) => {
   return responseData.map((data: IDailyStockPrice) => {
@@ -345,16 +120,17 @@ const StockList: React.FC = () => {
   }, [dailyStockpricesResponseError]);
 
   // TODO: Store값으로 Loading중인거 확인가능할듯..?
-  if (!response || !response.data) {
-    return <div>Loading..</div>;
-  }
+  let content = (
+    <S.Section>
+      <Loading></Loading>
+    </S.Section>
+  );
 
-  const { data } = response;
-  const gridDatas = converToStockListData(data);
-
-  return (
-    <SimplePageTemplate>
-      <S.Wrap>
+  if (response && response.data) {
+    const { data } = response;
+    const gridDatas = converToStockListData(data);
+    content = (
+      <>
         <S.Section>
           <S.ContainerMiddle>
             <StockListSearch gridDatas={gridDatas}></StockListSearch>
@@ -365,7 +141,13 @@ const StockList: React.FC = () => {
             <Grid data={gridDatas} columns={gridColumns} onClick={onClickGridCell(gridDatas)} />
           </S.ContainerWide>
         </S.Section>
-      </S.Wrap>
+      </>
+    );
+  }
+
+  return (
+    <SimplePageTemplate>
+      <S.Wrap>{content}</S.Wrap>
     </SimplePageTemplate>
   );
 };
