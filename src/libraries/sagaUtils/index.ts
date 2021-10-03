@@ -29,7 +29,7 @@ export const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCal
     }
   };
 
-const initialState = { loading: false, response: null, error: null };
+const initialState = { loading: false, response: null, errors: null };
 
 /**
  *
@@ -72,14 +72,14 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
           ...state,
           loading: false,
           response: action.payload,
-          error: null,
+          errors: null,
         };
       case FAILURE:
         return {
           ...state,
           loading: false,
           response: null,
-          error: action.payload,
+          errors: action.payload,
         };
       case CLEAR:
         return {
