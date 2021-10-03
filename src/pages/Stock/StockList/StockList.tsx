@@ -115,18 +115,21 @@ const StockList: React.FC = () => {
 
   useEffect(() => {
     if (dailyStockpricesResponseError !== null) {
-      alert('서버와의 통신에 실패하였습니다.');
     }
   }, [dailyStockpricesResponseError]);
 
   // TODO: Store값으로 Loading중인거 확인가능할듯..?
+
   let content = (
     <S.Section>
       <Loading></Loading>
     </S.Section>
   );
 
-  if (response && response.data) {
+  if (dailyStockpricesResponseError !== null) {
+    const { message: errorMessage, status, code } = dailyStockpricesResponseError;
+    content = <Alert showIcon={false} message={status} description={errorMessage} type="error" banner closable />;
+  } else if (response && response.data) {
     const { data } = response;
     const gridDatas = converToStockListData(data);
     content = (
