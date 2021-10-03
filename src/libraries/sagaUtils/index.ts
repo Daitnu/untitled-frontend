@@ -18,13 +18,13 @@ export const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCal
       if (successCb !== undefined) {
         yield call(successCb, payload);
       }
-    } catch (err) {
-      yield put({ type: FAILURE, payload: err });
-      if (err.status === 401) {
+    } catch (error: any) {
+      yield put({ type: FAILURE, payload: error });
+      if (error.status === 401) {
         yield call(historyPush, '/');
       }
       if (failCb !== undefined) {
-        yield call(failCb, err);
+        yield call(failCb, error);
       }
     }
   };
@@ -60,6 +60,7 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
   type Action = Request | Success | Failure | Clear;
 
   return (state: ApiState<T> = initialState, action: Action): ApiState<T> => {
+    console.log('state', state);
     switch (action.type) {
       case REQUEST:
         return {
@@ -68,14 +69,16 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
         };
       case SUCCESS:
         return {
-          ...initialState,
           ...state,
+          loading: false,
           response: action.payload,
+          error: null,
         };
       case FAILURE:
         return {
-          ...initialState,
           ...state,
+          loading: false,
+          response: null,
           error: action.payload,
         };
       case CLEAR:
