@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'tui-grid/dist/tui-grid.css';
-import TuiGrid, { ColumnOptions } from 'tui-grid';
+import TuiGrid from 'tui-grid';
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
 import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
 import { Grid } from '~/components/Grid';
@@ -11,8 +11,6 @@ import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
 import { SimplePageTemplate } from '~/templates/SimplePageTemplate';
 import { gridColumns } from './columnOptions';
-import { Alert, Space, Spin } from 'antd';
-import { Loading } from '~/components/Loading';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -119,8 +117,6 @@ const StockList: React.FC = () => {
     if (dailyStockpricesResponseError !== null) {
     }
   }, [dailyStockpricesResponseError]);
-
-  // TODO: Store값으로 Loading중인거 확인가능할듯..?
 
   let content: JSX.Element | string = '';
   if (response && response.data) {
