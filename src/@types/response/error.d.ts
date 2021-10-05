@@ -3,6 +3,7 @@ export interface BusinessErrorResponse {
   message: string;
   code: string | null;
   errors: Array<FieldError> | null;
+  isError: boolean;
 }
 
 interface FieldError {
