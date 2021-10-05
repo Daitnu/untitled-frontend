@@ -95,3 +95,5 @@ export default class Api {
     return this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
   }
 }
+
+export const apiInstance = new Api();
