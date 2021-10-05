@@ -8,29 +8,6 @@ const MEDIA_TYPE = {
   JSON: 'application/json' as const,
 };
 
-const executeHttpRequest = async <T>({ fn }): Promise<HTTPResponse<T>> => {
-  try {
-    const result = await fn();
-    const { status, data, headers } = result;
-    const successResponse: HTTPResponse<T> = { status, data, headers };
-    return successResponse;
-  } catch (err: any) {
-    let errResponse: BusinessErrorResponse = { status: 0, message: '', code: '', errors: [] };
-    if (!err.response) {
-      errResponse = {
-        status: 500,
-        message: err.message,
-        code: null,
-        errors: null,
-      };
-      throw errResponse;
-    }
-    const { status, message, code } = err.response.data.errorCode;
-    errResponse = { status, message, code, errors: err.response.data.fieldErrors };
-    throw errResponse;
-  }
-};
-
 const toQueryString = (obj): string =>
   Object.entries(obj)
     .map(([k, v]) => `${k}=${v}`)
@@ -49,6 +26,26 @@ export default class Api {
       timeout: 5000,
       withCredentials: false,
     });
+
+    this.axiosInstance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        let errResponse: BusinessErrorResponse = { status: 0, message: '', code: '', errors: [], isError: true };
+        if (!error.response) {
+          errResponse = {
+            status: 500,
+            message: error.message,
+            code: null,
+            errors: null,
+            isError: error.isAxiosError,
+          };
+          throw errResponse;
+        }
+        const { status, message, code } = error.response.data.errorCode;
+        errResponse = { status, message, code, errors: error.response.data.fieldErrors, isError: true };
+        return Promise.reject(errResponse);
+      },
+    );
   }
 
   /**
@@ -62,8 +59,7 @@ export default class Api {
     if (data !== undefined) {
       url += '?' + toQueryString(data);
     }
-    const fn = () => this.axiosInstance.get(url, { headers: { Authorization: token }, ...options });
-    return executeHttpRequest<T>({ fn });
+    return this.axiosInstance.get(url, { headers: { Authorization: token }, ...options });
   }
 
   /**
@@ -74,8 +70,7 @@ export default class Api {
    * @returns {Promise<HTTPResponse<T>>}
    */
   public async post<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
-    const fn = () => this.axiosInstance.post(url, data, { headers: { Authorization: token } });
-    return executeHttpRequest<T>({ fn });
+    return this.axiosInstance.post(url, data, { headers: { Authorization: token } });
   }
 
   /**
@@ -86,8 +81,7 @@ export default class Api {
    * @returns {Promise<HTTPResponse<T>>}
    */
   public async patch<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
-    const fn = () => this.axiosInstance.patch(url, data, { headers: { Authorization: token } });
-    return executeHttpRequest<T>({ fn });
+    return this.axiosInstance.patch(url, data, { headers: { Authorization: token } });
   }
 
   /**
@@ -98,7 +92,6 @@ export default class Api {
    * @returns {Promise<HTTPResponse<T>>}
    */
   public async delete<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
-    const fn = () => this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
-    return executeHttpRequest<T>({ fn });
+    return this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
   }
 }
