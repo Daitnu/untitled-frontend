@@ -9,6 +9,7 @@ export default class DailyStockPriceApi extends Api {
   }
 
   public async getdailyStockPrices(): Promise<HTTPResponse<IResponseDailyStockPrices> | BusinessErrorResponse> {
-    return this.get<IResponseDailyStockPrices>({ url: URL.STOCK_QUOTE });
+    const fullPath = URL.STOCK + '/';
+    return this.get<IResponseDailyStockPrices>({ url: fullPath });
   }
 }
