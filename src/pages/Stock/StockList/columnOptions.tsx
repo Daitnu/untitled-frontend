@@ -1,7 +1,7 @@
 import { ColumnOptions } from 'tui-grid';
 import { SHILLION, STOCK_LIST_GRID_COLUMN_NAMES } from '~/constants';
 import { convert } from '~/libraries/convert';
-import { CustomTextEditor } from './CustomField';
+import { NumberInput } from './NumberInput';
 
 export const gridColumns: ColumnOptions[] = [
   {
@@ -86,7 +86,7 @@ export const gridColumns: ColumnOptions[] = [
     defaultValue: 0,
     align: 'right',
     editor: {
-      type: CustomTextEditor,
+      type: NumberInput,
       options: {
         maxLength: 7,
       },
@@ -101,6 +101,12 @@ export const gridColumns: ColumnOptions[] = [
     width: 100,
     defaultValue: 0,
     align: 'right',
+    editor: {
+      type: NumberInput,
+      options: {
+        maxLength: 7,
+      },
+    },
     formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
   },
   {
@@ -111,6 +117,12 @@ export const gridColumns: ColumnOptions[] = [
     width: 100,
     defaultValue: 0,
     align: 'right',
+    editor: {
+      type: NumberInput,
+      options: {
+        maxLength: 7,
+      },
+    },
     formatter: ({ value }) => convert.getKoreanWonFromFormatterValue(value, SHILLION),
   },
   {

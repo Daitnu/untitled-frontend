@@ -1,4 +1,4 @@
-export class CustomTextEditor {
+export class NumberInput {
   el: HTMLInputElement;
 
   constructor(props) {
