@@ -1,14 +1,15 @@
 import { BusinessErrorResponse, HTTPResponse } from '~/@types/response';
-import { URL } from '~/libs';
-import { Api } from '../apiUtil';
+import { URL } from '~/constants';
+import { apiInstance } from '~/libraries/api';
 
-export default class CorperationApi extends Api {
-  constructor() {
-    super();
-  }
+const updateCoperationProfit = async (
+  path: string,
+  data: Object,
+): Promise<HTTPResponse<null> | BusinessErrorResponse> => {
+  const fullPath = URL.CORPERATION_CONSENSUS + path;
+  return apiInstance.patch<null, Object>({ url: fullPath, data });
+};
 
-  public async putCoperationProfit(path: string, data: Object): Promise<HTTPResponse<null> | BusinessErrorResponse> {
-    const fullPath = URL.CORPERATION_CONSENSUS + path;
-    return this.patch<null>({ url: fullPath, ...data });
-  }
-}
+export default {
+  updateCoperationProfit,
+};

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import ToastGrid from '@toast-ui/react-grid';
 import 'tui-grid/dist/tui-grid.css';
 import TuiGrid from 'tui-grid';
+import corperationApi from '~/store/corperation/CorperationApi';
 
 TuiGrid.setLanguage('ko');
 TuiGrid.applyTheme('striped', {
@@ -17,21 +18,21 @@ TuiGrid.applyTheme('striped', {
   },
 });
 
-const onEditingFinishedHandle = (event, data) => {
+const onEditingFinishedHandle = async (event, gridData) => {
   const { columnName, rowKey, value } = event;
-  const currentValue = data[rowKey][columnName];
+  const currentValue = gridData[rowKey][columnName];
   const inputValue = value;
-
-  console.log(data[rowKey]);
-  data[event.rowKey][columnName] = inputValue;
-
-  if (currentValue != inputValue) {
-    // TODO: API로직작성
-    console.log('값이다름');
+  gridData[event.rowKey][columnName] = inputValue;
+  if (currentValue == inputValue) {
     return;
   }
+  // TODO: API로직작성
+  const data = {
+    [columnName]: inputValue,
+    stockCode: gridData[event.rowKey].stockCode,
+  };
 
-  console.log('값이 같음');
+  const response = await corperationApi.updateCoperationProfit(`/${columnName}`, data);
 };
 
 const Grid = ({ data, columns, onClick }) => {

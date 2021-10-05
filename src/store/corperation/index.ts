@@ -1,2 +1,2 @@
-export * from './corperationProfitSaga';
-export * from './corperationProfitStore';
+export * from './corperationSaga';
+export * from './corperationStore';
