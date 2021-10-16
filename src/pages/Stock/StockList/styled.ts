@@ -7,14 +7,12 @@ export const Wrap = styled.div`
 
 export const ContainerMiddle = styled(CommonDiv)`
   padding: 0.5rem;
-  width: 95%;
-  margin: auto;
+  width: 50%;
 `;
 
 export const ContainerWide = styled(CommonDiv)`
   width: 99%;
   max-width: 2300px;
-  margin: auto;
 `;
 
 export const Section = styled(CommonDiv)`

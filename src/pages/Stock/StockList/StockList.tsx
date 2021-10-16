@@ -11,6 +11,7 @@ import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
 import { SimplePageTemplate } from '~/templates/SimplePageTemplate';
 import { gridColumns } from './columnOptions';
+import { Col, Row } from 'antd';
 
 document.title = `국내주식목록 : ${PROJECT_NAME}`;
 
@@ -119,9 +120,14 @@ const StockList: React.FC = () => {
     content = (
       <>
         <S.Section>
-          <S.ContainerMiddle>
-            <StockListSearch gridDatas={gridDatas}></StockListSearch>
-          </S.ContainerMiddle>
+          <Row>
+            <Col span={12}>
+              <StockListSearch gridDatas={gridDatas}></StockListSearch>
+            </Col>
+            <Col span={12}>
+              <StockListSearch gridDatas={gridDatas}></StockListSearch>
+            </Col>
+          </Row>
         </S.Section>
         <S.Section>
           <S.ContainerWide>
