@@ -43,7 +43,7 @@ export const SliderWithInput = ({ labelName, min = 0, max = 0 }: SilderWidthInpu
       </Col>
       <Col flex="auto">
         <Row align="middle">
-          <Col flex="700px">
+          <Col flex="auto">
             <Slider range value={[rangeValues[0], rangeValues[1]]} onChange={onChangeSliderHandler} />
           </Col>
           <Col flex="200px">
