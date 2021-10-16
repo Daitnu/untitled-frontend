@@ -44,6 +44,7 @@ const Grid = ({ data, columns, onClick }) => {
       bodyHeight={900}
       width={'auto'}
       rowHeaders={[
+        'checkbox',
         {
           type: 'rowNum',
           width: 60,
