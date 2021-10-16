@@ -8,11 +8,6 @@ const MEDIA_TYPE = {
   JSON: 'application/json' as const,
 };
 
-const toQueryString = (obj): string =>
-  Object.entries(obj)
-    .map(([k, v]) => `${k}=${v}`)
-    .reduce((prev, cur) => `${prev}&${cur}`);
-
 export default class Api {
   private axiosInstance: AxiosInstance;
 
@@ -56,10 +51,7 @@ export default class Api {
    * @returns {Promise<HTTPResponse<T>>}
    */
   public async get<T, D = undefined>({ url, data, token, options }: RequestParam<D>): Promise<HTTPResponse<T>> {
-    if (data !== undefined) {
-      url += '?' + toQueryString(data);
-    }
-    return this.axiosInstance.get(url, { headers: { Authorization: token }, ...options });
+    return this.axiosInstance.get(url, { params: data, headers: { Authorization: token }, ...options });
   }
 
   /**
