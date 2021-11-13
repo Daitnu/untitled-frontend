@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import * as GS from '~/globalStyles';
 import userIcon from 'Assets/images/accounts/user.png';
 import passwordIcon from 'Assets/images/accounts/password.png';
+import emailIcon from 'Assets/images/accounts/email.png';
 import facebookIcon from 'Assets/facebook.png';
 import twitterIcon from 'Assets/twitter.png';
 import googleIcon from 'Assets/google.png';
@@ -117,6 +118,10 @@ export const UserIcon = styled(GS.IconStyle)`
 
 export const PasswordIcon = styled(GS.IconStyle)`
   background-image: url(${passwordIcon});
+`;
+
+export const EmailIcon = styled(GS.IconStyle)`
+  background-image: url(${emailIcon});
 `;
 
 export const FacebookIcon = styled(GS.IconStyle)`
