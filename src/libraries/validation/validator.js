@@ -10,8 +10,8 @@ export const form = ({ validations, values, returnAllError = false }) => {
     });
 
     if (validationResult.isError) {
-      allError.push(...validationResult.errors);
-      if (returnAllError === true) break;
+      allError.push(validationResult.errors);
+      if (returnAllError === false) break;
     }
   }
   return {
