@@ -4,7 +4,7 @@ import { ApiState, ApiCallSagaFunc } from '@t/store';
 import { historyPush } from '../api';
 
 /**
- * @param type product인지 coupon인지 등을 나타내는 상수
+ * @param type Action type
  * @param apiFunc Api 클래스의 상속을 받는 자식 클래스의 메소드
  * @param successCb payload(HTTPResponse)를 인자로 받는 cb
  * @param failCb err(BusinessErrorResponse)를 인자로 받는 cb
@@ -35,7 +35,7 @@ const initialState = { loading: false, response: null, errors: null };
  *
  * @param T API Response type
  * @param R API Request type
- * @param type product인지 coupon인지 등을 나타내는 상수
+ * @param type Action type
  */
 export const makeApiReducer = <T, R = undefined>(type: string) => {
   const REQUEST = `${type}_REQUEST` as 'REQUEST';

@@ -1,5 +1,5 @@
-import { IRequestAccountRegister } from '~/@types/request';
-import { BusinessErrorResponse, HTTPResponse, IResponseAccountRegister } from '~/@types/response';
+import { IRequestAccountRegister } from '@t/request';
+import { BusinessErrorResponse, HTTPResponse, IResponseAccountRegister } from '@t/response';
 import Api from '~/libraries/api';
 import API_PATH from '~/constants/path';
 
