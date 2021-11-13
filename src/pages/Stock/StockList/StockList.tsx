@@ -9,7 +9,7 @@ import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
-import { SimplePageTemplate } from '~/templates/SimplePageTemplate';
+import { SimplePageTemplate } from '~/components/templates/SimplePageTemplate';
 import { gridColumns } from './columnOptions';
 import { Col, Row } from 'antd';
 
