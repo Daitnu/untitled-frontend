@@ -4,13 +4,13 @@ import { ACCOUNT_REGISTER_POST, ACCOUNT_REGISTER_POST_REQUEST, accountRegisterPo
 import AccountApi from '~/libraries/api/account';
 import { HTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';
-import { URL } from '~/constants';
+import { PATH_URL } from '~/constants/path';
 
 const api = new AccountApi();
 
 const successCb = function* ({ status }: HTTPResponse<IResponseAccountRegister>) {
   if (status === 200) {
-    yield call(historyPush, URL.LOGIN);
+    yield call(historyPush, PATH_URL.LOGIN);
     yield put(accountRegisterPostClear());
   }
 };

@@ -1,7 +1,7 @@
 import { BusinessErrorResponse, HTTPResponse } from '~/@types/response';
 import { IResponseDailyStockPrices } from '~/@types/data/';
-import { URL } from '~/constants';
 import Api from '~/libraries/api';
+import API_PATH from '~/constants/path';
 
 export default class DailyStockPriceApi extends Api {
   constructor() {
@@ -9,7 +9,7 @@ export default class DailyStockPriceApi extends Api {
   }
 
   public async getdailyStockPrices(): Promise<HTTPResponse<IResponseDailyStockPrices> | BusinessErrorResponse> {
-    const fullPath = URL.STOCK + '/';
+    const fullPath = API_PATH.STOCK + '/';
     return this.get<IResponseDailyStockPrices>({ url: fullPath });
   }
 }

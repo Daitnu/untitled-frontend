@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import 'tui-grid/dist/tui-grid.css';
 import TuiGrid from 'tui-grid';
 import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@types/data';
-import { TOAST_GRID, URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
+import { TOAST_GRID, PATH_URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
 import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
@@ -95,7 +95,7 @@ const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => 
 
   switch (columnName) {
     case STOCK_LIST_GRID_COLUMN_NAMES.NAVER_LINK:
-      window.open(`${URL.NAVER_FINANCE}/item/coinfo.nhn?code=${responseData[rowKey].stockCode}`, '_blank');
+      window.open(`${PATH_URL.NAVER_FINANCE}/item/coinfo.nhn?code=${responseData[rowKey].stockCode}`, '_blank');
       break;
     case STOCK_LIST_GRID_COLUMN_NAMES.CORPERATE_NAME:
       window.open(`/corp/${responseData[rowKey].stockCode}`, '_blank');

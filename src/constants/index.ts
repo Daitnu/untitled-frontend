@@ -1,4 +1,4 @@
-export * from './url';
+export * from './path';
 export * from './color';
 
 export const TOAST_GRID = {

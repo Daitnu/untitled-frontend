@@ -1,7 +1,7 @@
 import { IRequestAccountRegister } from '~/@types/request';
 import { BusinessErrorResponse, HTTPResponse, IResponseAccountRegister } from '~/@types/response';
-import Api from '~/libraries/api/index';
-import API_URL from '~/libraries/api/apiUrl';
+import Api from '~/libraries/api';
+import API_PATH from '~/constants/path';
 
 export default class AccountApi extends Api {
   constructor() {
@@ -12,7 +12,7 @@ export default class AccountApi extends Api {
     data: IRequestAccountRegister,
   ): Promise<HTTPResponse<IResponseAccountRegister> | BusinessErrorResponse> {
     return this.post<IResponseAccountRegister, IRequestAccountRegister>({
-      url: API_URL.ACCOUNT.REGISTER,
+      url: API_PATH.ACCOUNT.REGISTER,
       data,
     });
   }
