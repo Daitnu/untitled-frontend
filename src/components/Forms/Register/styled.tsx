@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as LS from '../Login/styled';
 import * as GS from '~/globalStyles';
-import nameIcon from 'Assets/name.png';
+import nameIcon from 'Assets/images/accounts/name.png';
 
 export const RegisterButton = styled(LS.LoginButton)`
   margin-top: 10px;
