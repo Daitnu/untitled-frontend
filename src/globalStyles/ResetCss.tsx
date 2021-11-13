@@ -3,6 +3,7 @@ import { BREAK_POINT_MOBILE } from '~/constants';
 import 'antd/dist/antd.css';
 
 export const ResetCss = createGlobalStyle`
+  * { font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important; }
   body {
     margin: 0;
     padding: 0;
@@ -23,8 +24,6 @@ export const ResetCss = createGlobalStyle`
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
   text-decoration: none;
   color : inherit;
