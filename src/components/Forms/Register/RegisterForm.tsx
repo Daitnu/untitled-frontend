@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as LS from '../Login/styled';
+import { useDispatch } from 'react-redux';
+import { accountRegisterPostRequest } from '~/store/account';
 
 interface IRegisterForm {
   id: string;
@@ -54,6 +56,7 @@ const registerValidate = ({ id, pw, email, pwConfirm, name }: IRegisterForm, set
 export const RegisterForm: React.FC = () => {
   const [userValues, setUserValues] = useState<IRegisterForm>(initialState);
   const [errorMsg, setErrorMsg] = useState<IRegisterForm>(initialState);
+  const dispatch = useDispatch();
 
   const handleInputChange = ({ target: { id, value } }): void => {
     setUserValues({
@@ -66,6 +69,7 @@ export const RegisterForm: React.FC = () => {
     const { id, name, email, pw, pwConfirm }: IRegisterForm = userValues;
     // if (!registerValidate({ id, pw, pwConfirm, name }, setErrorMsg)) return;
     // TODO: api call
+    dispatch(accountRegisterPostRequest({ id, name, email, password: pw, passwordConfirm: pwConfirm }));
   };
 
   return (

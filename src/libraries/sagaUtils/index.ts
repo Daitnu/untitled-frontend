@@ -60,7 +60,6 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
   type Action = Request | Success | Failure | Clear;
 
   return (state: ApiState<T> = initialState, action: Action): ApiState<T> => {
-    console.log('state', state);
     switch (action.type) {
       case REQUEST:
         return {
