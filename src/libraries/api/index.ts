@@ -36,7 +36,7 @@ export default class Api {
           };
           throw errResponse;
         }
-        const { status, message, code } = error.response.data.errorCode;
+        const { status, message, code } = error.response.data;
         errResponse = { status, message, code, errors: error.response.data.fieldErrors, isError: true };
         return Promise.reject(errResponse);
       },

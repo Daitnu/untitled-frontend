@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as GS from '~/globalStyles';
-import userIcon from 'Assets/user.png';
-import passwordIcon from 'Assets/key.png';
+import userIcon from 'Assets/images/accounts/user.svg';
+import passwordIcon from 'Assets/images/accounts/password.svg';
 import facebookIcon from 'Assets/facebook.png';
 import twitterIcon from 'Assets/twitter.png';
 import googleIcon from 'Assets/google.png';
