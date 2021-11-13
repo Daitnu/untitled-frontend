@@ -2,10 +2,10 @@ export const form = ({ validations, values, returnAllError = false }) => {
   const allError = [];
 
   for (const [key, value] of Object.entries(validations)) {
-    const formValue = values[key];
+    const fieldValue = values[key];
     const validationResult = validate({
       validation: value,
-      value: formValue,
+      value: fieldValue,
       returnAllError,
     });
 
@@ -16,13 +16,12 @@ export const form = ({ validations, values, returnAllError = false }) => {
   }
   return {
     isError: allError.length > 0,
-    erros: allError,
+    errors: allError,
   };
 };
 
 export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }) => {
   if (!value || typeof value !== 'string') return;
-  if (typeof value === '') return;
   if (ignoreWhitespace) {
     value = value.trim();
   }
