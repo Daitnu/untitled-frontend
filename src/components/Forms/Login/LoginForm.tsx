@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as GS from '~/globalStyles';
 import { KEY_CODE } from '~/constants';
+import validation from '~/libraries/validation';
 
 interface IUser {
   id: string;
@@ -13,6 +14,17 @@ interface IError {
   message: string;
 }
 
+const formValidation = {
+  id: {
+    fieldName: '아이디',
+    rules: [validation.rules.number, validation.rules.required],
+  },
+  pw: {
+    fieldName: '비밀번호',
+    rules: [validation.rules.number, validation.rules.required],
+  },
+};
+
 const LoginForm: React.FC = () => {
   const [user, setUser] = useState<IUser>({ id: '', pw: '' });
   const [errorMessage] = useState<IError>({ message: '' });
@@ -20,6 +32,7 @@ const LoginForm: React.FC = () => {
   const handleInputChange = ({ target: { id, value } }): void => {
     const changedField: string = id;
     const changedValue: string = value;
+
     setUser({
       ...user,
       [changedField]: changedValue,
@@ -33,9 +46,15 @@ const LoginForm: React.FC = () => {
 
   const handleSubmitClick = async (): Promise<void> => {
     const { id, pw } = user;
-    console.log(user);
-    console.log('submit click');
     // TODO: api call
+  };
+
+  const onBlurValidation = ({ target }) => {
+    const { id: key } = target;
+    const value = user[key];
+    const fieldValidation = formValidation[key];
+    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    console.log('onblur', validationResult);
   };
 
   return (
@@ -51,6 +70,7 @@ const LoginForm: React.FC = () => {
           maxLength={20}
           autoComplete="off"
           onChange={handleInputChange}
+          onBlur={onBlurValidation}
         />
       </S.FormItemWithIcon>
       <S.FormItemWithIcon>
@@ -65,6 +85,7 @@ const LoginForm: React.FC = () => {
           maxLength={20}
           onChange={handleInputChange}
           onKeyDown={handlePasswordKeyDown}
+          onBlur={onBlurValidation}
         />
       </S.FormItemWithIcon>
       <S.FormItem isDisplay="inline">
