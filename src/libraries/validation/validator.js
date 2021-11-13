@@ -1,5 +1,23 @@
-export const form = ({ validations, values }) => {
-  return 0;
+export const form = ({ validations, values, returnAllError = false }) => {
+  const allError = [];
+
+  for (const [key, value] of Object.entries(validations)) {
+    const formValue = values[key];
+    const validationResult = validate({
+      validation: value,
+      value: formValue,
+      returnAllError,
+    });
+
+    if (validationResult.isError) {
+      allError.push(...validationResult.errors);
+      if (returnAllError === true) break;
+    }
+  }
+  return {
+    isError: allError.length > 0,
+    erros: allError,
+  };
 };
 
 export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }) => {

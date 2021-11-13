@@ -46,7 +46,11 @@ const LoginForm: React.FC = () => {
 
   const handleSubmitClick = async (): Promise<void> => {
     const { id, pw } = user;
-    // TODO: api call
+
+    const validationResult = validation.validator.form({ validations: formValidation, values: user });
+    console.log(validationResult);
+    if (validationResult.isError) {
+    }
   };
 
   const onBlurValidation = ({ target }) => {
