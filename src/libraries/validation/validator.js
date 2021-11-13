@@ -38,7 +38,7 @@ const validate = ({ validation, value, returnAllError }) => {
   for (const rule of rules) {
     const result = rule(value);
     if (result !== true) {
-      const error = getErrorByRuleResult(fieldName, result);
+      const error = { fieldName, reason: result };
       if (returnAllError === false) {
         return {
           isError: true,
@@ -52,12 +52,5 @@ const validate = ({ validation, value, returnAllError }) => {
   return {
     isError: allError.length > 0,
     erros: allError,
-  };
-};
-
-const getErrorByRuleResult = (fieldName, result) => {
-  return {
-    fieldName,
-    reason: result,
   };
 };
