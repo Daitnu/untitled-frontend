@@ -24,9 +24,11 @@ export interface IValidate {
   validation: IValidation;
   value: string | number;
   returnAllError: boolean;
+  key?: string;
 }
 
 export interface IError {
   fieldName: string;
   reason: string;
+  key?: string;
 }

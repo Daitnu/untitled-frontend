@@ -9,6 +9,7 @@ export const form = ({ validations, values, returnAllError = false }: IForm) => 
       validation: value,
       value: fieldValue,
       returnAllError,
+      key,
     });
 
     if (validationResult.isError) {
@@ -29,17 +30,23 @@ export const blur = ({ validation, value, returnAllError = false, ignoreWhitespa
   }
   if (value === '') return;
 
+  const validationResult = validate({ validation, value, returnAllError });
+
+  for (const error of validationResult.errors) {
+    delete error.key;
+  }
+
   return validate({ validation, value, returnAllError });
 };
 
-const validate = ({ validation, value, returnAllError }: IValidate) => {
+const validate = ({ validation, value, returnAllError, key }: IValidate) => {
   const allError: IError[] = [];
   const { fieldName, rules } = validation;
 
   for (const rule of rules) {
     const result = rule(value);
     if (result !== true) {
-      const error = { fieldName, reason: result };
+      const error = { fieldName, reason: result, key };
       if (!returnAllError) {
         return {
           isError: true,
