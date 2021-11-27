@@ -14,12 +14,7 @@ interface IRegisterForm {
   pwConfirm: string;
 }
 
-interface IUser {
-  id: string;
-  name: string;
-}
-
-const initialState: IRegisterForm = {
+const INITIAL_STATE: IRegisterForm = {
   id: '',
   name: '',
   email: '',
@@ -27,65 +22,14 @@ const initialState: IRegisterForm = {
   pwConfirm: '',
 };
 
-const checkPwConfirmCondition = ({ pw, pwConfirm }): boolean => {
-  if (pwConfirm === '') return false;
-  return pw === pwConfirm;
-};
-
-const registerValidate = ({ id, pw, email, pwConfirm, name }: IRegisterForm, setErrorMsg) => {
-  // const vals: ICheckParams[] = [];
-  // const { ID, PW, NAME, PW_CONFIRM } = REGISTER_FIELDS;
-  // vals.push({ fieldName: ID, val: id });
-  // vals.push({ fieldName: PW, val: pw });
-  // vals.push({ fieldName: NAME, val: name });
-  // const validationResult = inputValidation(vals).filter(({ error }) => error !== null);
-  // if (!checkPwConfirmCondition({ pw, pwConfirm })) {
-  //   validationResult.push({
-  //     error: new ErrorField(PW_CONFIRM, pwConfirm, ERROR.REGISTER.EQUAL[PW_CONFIRM]),
-  //   });
-  // }
-  // if (validationResult.length) {
-  //   const resultObj = {};
-  //   validationResult.forEach(({ error }) => (resultObj[error.field] = error.reason));
-  //   setErrorMsg({ ...resultObj });
-  //   return false;
-  // }
-  // setErrorMsg({ ...initialState });
-  // return true;
-};
-
-const formValidation = {
-  id: {
-    fieldName: '아이디',
-    rules: [validation.rules.required, validation.rules.lengthMax(2)],
-  },
-  pw: {
-    fieldName: '비밀번호',
-    rules: [validation.rules.required],
-  },
-  pwConfirm: {
-    fieldName: '비밀번호확인',
-    rules: [validation.rules.required],
-  },
-  email: {
-    fieldName: '이메일',
-    rules: [validation.rules.required, validation.rules.email],
-  },
-  name: {
-    fieldName: '이름',
-    rules: [validation.rules.required],
-  },
-};
-
 export const RegisterForm: React.FC = () => {
-  const [userValues, setUserValues] = useState<IRegisterForm>(initialState);
-  const [errorMsg, setErrorMsg] = useState<IRegisterForm>(initialState);
+  const [userValues, setUserValues] = useState<IRegisterForm>(INITIAL_STATE);
+  const [errorMsg, setErrorMsg] = useState<IRegisterForm>(INITIAL_STATE);
   const dispatch = useDispatch();
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
     const validationResult = validation.validator.blur({ value, validation: fieldValidation });
-
     setErrorMsg({
       ...errorMsg,
       [id]: validationResult.isError ? validationResult.errors[0].reason : '',
@@ -101,6 +45,30 @@ export const RegisterForm: React.FC = () => {
     // if (!registerValidate({ id, pw, pwConfirm, name }, setErrorMsg)) return;
     // TODO: api call
     dispatch(accountRegisterPostRequest({ id, name, email, password: pw, passwordConfirm: pwConfirm }));
+  };
+
+  const formValidation = {
+    id: {
+      fieldName: '아이디',
+      rules: [validation.rules.required, validation.rules.lengthMax(20), validation.rules.alphanumeric],
+    },
+    pw: {
+      fieldName: '비밀번호',
+      rules: [validation.rules.required],
+    },
+    pwConfirm: {
+      fieldName: '비밀번호확인',
+      rules: [validation.rules.required, validation.rules.equalsTwoField('비밀번호')],
+      comparison: userValues.pw,
+    },
+    email: {
+      fieldName: '이메일',
+      rules: [validation.rules.required, validation.rules.email],
+    },
+    name: {
+      fieldName: '이름',
+      rules: [validation.rules.required],
+    },
   };
 
   return (
@@ -165,6 +133,7 @@ export const RegisterForm: React.FC = () => {
         <LS.IconWrapper>
           <LS.PasswordIcon />
         </LS.IconWrapper>
+
         <LS.FormInput
           type="password"
           id="pwConfirm"
@@ -172,6 +141,7 @@ export const RegisterForm: React.FC = () => {
           autoComplete="off"
           maxLength={20}
           onChange={handleInputChange}
+          // disabled={!userValues.pw || errorMsg.pw}
         />
       </LS.FormItemWithIcon>
       <S.ErrorMsg>{errorMsg.pwConfirm}</S.ErrorMsg>
