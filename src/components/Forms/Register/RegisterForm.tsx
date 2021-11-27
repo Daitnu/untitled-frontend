@@ -5,6 +5,7 @@ import * as LS from '../Login/styled';
 import { useDispatch } from 'react-redux';
 import { accountRegisterPostRequest } from '~/store/account';
 import validation from '~/libraries/validation';
+import { PATH_URL } from '~/constants';
 
 interface IRegisterForm {
   id: string;
@@ -172,7 +173,7 @@ export const RegisterForm: React.FC = () => {
       </LS.FormItemWithIcon>
       <S.ErrorMsg>{errorMsg.pwConfirm}</S.ErrorMsg>
       <S.RegisterButton onClick={handleSubmit}>회원가입</S.RegisterButton>
-      <Link to="login">
+      <Link to={PATH_URL.LOGIN}>
         <S.RegisterButton>로그인하러 가기</S.RegisterButton>
       </Link>
     </div>

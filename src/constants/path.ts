@@ -2,6 +2,8 @@ export const PATH_URL = {
   NAVER_FINANCE: 'https://finance.naver.com' as const,
   HOME: '/' as const,
   LOGIN: '/login' as const,
+  REGISTER: '/register' as const,
+  FORGOT_PASSWORD: '/forgot-password' as const,
 };
 
 const API_PATH = {

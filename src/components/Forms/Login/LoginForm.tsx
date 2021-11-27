@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as GS from '~/globalStyles';
-import { KEY_CODE } from '~/constants';
+import { KEY_CODE, PATH_URL } from '~/constants';
 import validation from '~/libraries/validation';
 
 interface IUser {
@@ -106,8 +106,8 @@ const LoginForm: React.FC = () => {
       <S.FormItem>{errorMessage.message}</S.FormItem>
       <S.FormItem>
         <GS.SpaceBetweenWithFullWidth>
-          <Link to="/register">Register now</Link>
-          <div>Forgot password?</div>
+          <Link to={PATH_URL.REGISTER}>Register now</Link>
+          <Link to={PATH_URL.FORGOT_PASSWORD}>Forgot password?</Link>
         </GS.SpaceBetweenWithFullWidth>
       </S.FormItem>
       <S.DivideLineContainer>

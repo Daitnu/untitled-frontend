@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PATH_URL } from '~/constants';
 import * as S from './styled';
 
 const Header = () => {
@@ -7,7 +8,7 @@ const Header = () => {
     <S.Header>
       <S.Container>
         <S.flexItem>
-          <Link to="/">Untitled Project</Link>
+          <Link to={PATH_URL.HOME}>Untitled Project</Link>
         </S.flexItem>
         {/* <S.flexItem>
           <Link to="/news">News</Link>
@@ -22,7 +23,7 @@ const Header = () => {
           <Link to="/mypage">Mypage</Link>
         </S.flexItem> */}
         <S.flexItem>
-          <Link to="/login">Login</Link>
+          <Link to={PATH_URL.LOGIN}>Login</Link>
         </S.flexItem>
       </S.Container>
     </S.Header>
