@@ -4,6 +4,7 @@ import * as S from './styled';
 import * as LS from '../Login/styled';
 import { useDispatch } from 'react-redux';
 import { accountRegisterPostRequest } from '~/store/account';
+import validation from '~/libraries/validation';
 
 interface IRegisterForm {
   id: string;
@@ -53,12 +54,38 @@ const registerValidate = ({ id, pw, email, pwConfirm, name }: IRegisterForm, set
   // return true;
 };
 
+const formValidation = {
+  id: {
+    fieldName: '아이디',
+    rules: [validation.rules.required, validation.rules.lengthMax(20)],
+  },
+  pw: {
+    fieldName: '비밀번호',
+    rules: [validation.rules.required],
+  },
+  pwConfirm: {
+    fieldName: '비밀번호확인',
+    rules: [validation.rules.required],
+  },
+  email: {
+    fieldName: '이메일',
+    rules: [validation.rules.required, validation.rules.email],
+  },
+  name: {
+    fieldName: '이름',
+    rules: [validation.rules.required],
+  },
+};
+
 export const RegisterForm: React.FC = () => {
   const [userValues, setUserValues] = useState<IRegisterForm>(initialState);
   const [errorMsg, setErrorMsg] = useState<IRegisterForm>(initialState);
   const dispatch = useDispatch();
 
   const handleInputChange = ({ target: { id, value } }): void => {
+    const fieldValidation = formValidation[id];
+    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    console.log('validationResult', validationResult);
     setUserValues({
       ...userValues,
       [id]: value,
