@@ -1,5 +1,7 @@
-export const form = ({ validations, values, returnAllError = false }) => {
-  const allError = [];
+import { IBlur, IError, IForm, IValidate } from '@t/libraries';
+
+export const form = ({ validations, values, returnAllError = false }: IForm) => {
+  const allError: IError[] = [];
 
   for (const [key, value] of Object.entries(validations)) {
     const fieldValue = values[key];
@@ -10,8 +12,8 @@ export const form = ({ validations, values, returnAllError = false }) => {
     });
 
     if (validationResult.isError) {
-      allError.push(validationResult.errors);
-      if (returnAllError === false) break;
+      allError.push(...validationResult.errors);
+      if (!returnAllError) break;
     }
   }
   return {
@@ -20,36 +22,36 @@ export const form = ({ validations, values, returnAllError = false }) => {
   };
 };
 
-export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }) => {
+export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }: IBlur) => {
   if (!value || typeof value !== 'string') return;
   if (ignoreWhitespace) {
     value = value.trim();
   }
-  if (typeof value === '') return;
+  if (value === '') return;
 
   return validate({ validation, value, returnAllError });
 };
 
-const validate = ({ validation, value, returnAllError }) => {
-  const allError = [];
+const validate = ({ validation, value, returnAllError }: IValidate) => {
+  const allError: IError[] = [];
   const { fieldName, rules } = validation;
 
   for (const rule of rules) {
     const result = rule(value);
     if (result !== true) {
       const error = { fieldName, reason: result };
-      if (returnAllError === false) {
+      if (!returnAllError) {
         return {
           isError: true,
           errors: [error],
         };
       }
-      allError.errors.push(error);
+      allError.push(error);
     }
   }
 
   return {
     isError: allError.length > 0,
-    erros: allError,
+    errors: allError,
   };
 };
