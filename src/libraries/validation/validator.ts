@@ -41,15 +41,15 @@ export const blur = ({ validation, value, returnAllError = false, ignoreWhitespa
     delete error.key;
   }
 
-  return validate({ validation, value, returnAllError });
+  return validationResult;
 };
 
 const validate = ({ validation, value, returnAllError, key }: IValidate) => {
   const allError: IError[] = [];
-  const { fieldName, rules } = validation;
+  const { fieldName, rules, comparison } = validation;
 
   for (const rule of rules) {
-    const result = rule(value);
+    const result = rule.name === 'compareTwoField' && comparison ? rule(value, comparison) : rule(value);
     if (result !== true) {
       const error = { fieldName, reason: result, key };
       if (!returnAllError) {
