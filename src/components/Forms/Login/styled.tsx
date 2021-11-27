@@ -37,7 +37,7 @@ interface IFormItemWithIcon {
 }
 
 export const FormItem = styled(GS.FlexRow)<IFormItem>`
-  margin: 10px 0 10px 0;
+  margin-top: 10px;
   width: 300px;
   & > label {
     display: ${(props: IFormItem) => props.isDisplay || 'none'};
@@ -45,7 +45,7 @@ export const FormItem = styled(GS.FlexRow)<IFormItem>`
 `;
 
 export const FormItemWithIcon = styled(GS.FlexJustifyAlignCenter)<IFormItemWithIcon>`
-  margin: 10px 0 10px 0;
+  margin-top: 10px;
   width: 300px;
   height: 50px;
   border: 2px solid ${(props) => (props.isError ? 'red' : color.border.common)};
@@ -59,7 +59,7 @@ export const FormInput = styled.input`
   height: 50px;
   border: none;
   outline: none;
-  padding: 0 10px 0 10px;
+  padding: 0 10px;
 `;
 
 export const DivideLineContainer = styled.div`
@@ -83,6 +83,20 @@ export const DivideLineContent = styled.div`
   text-align: center;
   color: ${color.font.divideContent};
   background-color: white;
+`;
+
+export const AutoLoginCheckInput = styled.input`
+  margin-right: 4px;
+`;
+
+export const AutoLoginCheckInputLabel = styled(GS.AlignCenter.withComponent('label'))``;
+
+export const ErrorMsg = styled.div`
+  margin-top: 4px;
+  height: 16px;
+  font-size: 12px;
+  line-height: 16px;
+  color: red;
 `;
 
 export const LoginButton = styled.button`
@@ -138,12 +152,18 @@ export const GoogleIcon = styled(GS.IconStyle)`
 
 export const FacebookButton = styled(SNSLoginButton)`
   color: ${color.font.facebook};
+  font-size: 16px;
+  line-height: 24px;
 `;
 
 export const TwitterButton = styled(SNSLoginButton)`
   color: ${color.font.twitter};
+  font-size: 16px;
+  line-height: 24px;
 `;
 
 export const GoogleButton = styled(SNSLoginButton)`
   color: ${color.font.google};
+  font-size: 16px;
+  line-height: 24px;
 `;

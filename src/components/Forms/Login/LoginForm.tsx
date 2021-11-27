@@ -11,23 +11,24 @@ interface IUser {
 }
 
 interface IError {
-  message: string;
+  id: string;
+  pw: string;
 }
 
 const formValidation = {
   id: {
     fieldName: '아이디',
-    rules: [validation.rules.number, validation.rules.required],
+    rules: [validation.rules.required, validation.rules.lengthMin(2), validation.rules.lengthMax(20)],
   },
   pw: {
     fieldName: '비밀번호',
-    rules: [validation.rules.number, validation.rules.required],
+    rules: [validation.rules.required, validation.rules.lengthMin(2), validation.rules.lengthMax(20)],
   },
 };
 
 const LoginForm: React.FC = () => {
   const [user, setUser] = useState<IUser>({ id: '', pw: '' });
-  const [errorMessage] = useState<IError>({ message: '' });
+  const [errorMsg, setErrorMsg] = useState<IError>({ id: '', pw: '' });
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const changedField: string = id;
@@ -45,11 +46,12 @@ const LoginForm: React.FC = () => {
   };
 
   const handleSubmitClick = async (): Promise<void> => {
-    const { id, pw } = user;
-
-    const validationResult = validation.validator.form({ validations: formValidation, values: user });
-    console.log(validationResult);
+    const validationResult = validation.validator.form({
+      validations: formValidation,
+      values: user,
+    });
     if (validationResult.isError) {
+      setErrorMsg({ ...errorMsg, [validationResult.errors[0].key!]: validationResult.errors[0].reason });
     }
   };
 
@@ -77,6 +79,7 @@ const LoginForm: React.FC = () => {
           onBlur={onBlurValidation}
         />
       </S.FormItemWithIcon>
+      <S.ErrorMsg>{errorMsg.id}</S.ErrorMsg>
       <S.FormItemWithIcon>
         <S.IconWrapper>
           <S.PasswordIcon />
@@ -92,18 +95,20 @@ const LoginForm: React.FC = () => {
           onBlur={onBlurValidation}
         />
       </S.FormItemWithIcon>
+      <S.ErrorMsg>{errorMsg.pw}</S.ErrorMsg>
       <S.FormItem isDisplay="inline">
         <GS.SpaceBetweenWithFullWidth>
           <GS.AlignCenter>
-            <input type="checkbox" id="autoLogin" />
-            <label htmlFor="autoLogin">자동 로그인</label>
+            <S.AutoLoginCheckInputLabel htmlFor="autoLogin">
+              <S.AutoLoginCheckInput type="checkbox" id="autoLogin" />
+              자동 로그인
+            </S.AutoLoginCheckInputLabel>
           </GS.AlignCenter>
           <S.LoginButton type="submit" onClick={handleSubmitClick}>
             로그인
           </S.LoginButton>
         </GS.SpaceBetweenWithFullWidth>
       </S.FormItem>
-      <S.FormItem>{errorMessage.message}</S.FormItem>
       <S.FormItem>
         <GS.SpaceBetweenWithFullWidth>
           <Link to={PATH_URL.REGISTER}>Register now</Link>
