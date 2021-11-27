@@ -57,7 +57,7 @@ const registerValidate = ({ id, pw, email, pwConfirm, name }: IRegisterForm, set
 const formValidation = {
   id: {
     fieldName: '아이디',
-    rules: [validation.rules.required, validation.rules.lengthMax(20)],
+    rules: [validation.rules.required, validation.rules.lengthMax(2)],
   },
   pw: {
     fieldName: '비밀번호',
@@ -85,7 +85,12 @@ export const RegisterForm: React.FC = () => {
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
     const validationResult = validation.validator.blur({ value, validation: fieldValidation });
-    console.log('validationResult', validationResult);
+    if (validationResult.isError) {
+    }
+    setErrorMsg({
+      ...errorMsg,
+      [id]: validationResult.isError ? validationResult.errors[0].reason : '',
+    });
     setUserValues({
       ...userValues,
       [id]: value,
