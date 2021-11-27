@@ -1,6 +1,6 @@
 export interface IValidation {
   fieldName: string;
-  rules: ((v: any) => true | string)[];
+  rules: ((v: string | number) => true | string)[];
 }
 
 export interface IValidations {
@@ -15,18 +15,18 @@ export interface IForm {
 
 export interface IBlur {
   validation: IValidation;
-  value: any;
+  value: string | number;
   returnAllError?: boolean;
   ignoreWhitespace?: boolean;
 }
 
 export interface IValidate {
   validation: IValidation;
-  value: any;
+  value: string | number;
   returnAllError: boolean;
 }
 
 export interface IError {
-  fieldName: any;
-  reason: any;
+  fieldName: string;
+  reason: string;
 }
