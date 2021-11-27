@@ -12,3 +12,10 @@ export const length = (min, max) => (value) =>
 export const lengthMin = (min) => (value) => validator.isLength(value, { min }) || `최소길이는 ${min}입니다.`;
 
 export const lengthMax = (max) => (value) => validator.isLength(value, { max }) || `최대길이 ${max}입니다.`;
+
+export const alphanumeric = (value) => validator.isAlphanumeric(value) || '영어와 숫자만 입력가능합니다.';
+
+export const equalsTwoField = (equlasFieldName) =>
+  function compareTwoField(str, comparison) {
+    return validator.equals(str, comparison) || `${equlasFieldName}와 값이 다릅니다.`;
+  };
