@@ -1,5 +1,10 @@
 import { IBlur, IError, IForm, IValidate } from '@t/libraries';
 
+const RETURN_INIT_VALUE = {
+  isError: false,
+  errors: [],
+};
+
 export const form = ({ validations, values, returnAllError = false }: IForm) => {
   const allError: IError[] = [];
 
@@ -24,11 +29,11 @@ export const form = ({ validations, values, returnAllError = false }: IForm) => 
 };
 
 export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }: IBlur) => {
-  if (!value || typeof value !== 'string') return;
+  if (!value || typeof value !== 'string') return { ...RETURN_INIT_VALUE };
   if (ignoreWhitespace) {
     value = value.trim();
   }
-  if (value === '') return;
+  if (value === '') return { ...RETURN_INIT_VALUE };
 
   const validationResult = validate({ validation, value, returnAllError });
 
