@@ -85,8 +85,7 @@ export const RegisterForm: React.FC = () => {
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
     const validationResult = validation.validator.blur({ value, validation: fieldValidation });
-    if (validationResult.isError) {
-    }
+
     setErrorMsg({
       ...errorMsg,
       [id]: validationResult.isError ? validationResult.errors[0].reason : '',
