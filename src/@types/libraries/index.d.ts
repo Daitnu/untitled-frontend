@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 export interface IValidation {
   fieldName: string;
-  rules: ((v: string | number) => true | string)[];
+  rules: ((v: string) => true | string)[];
 }
 
 export interface IValidations {
@@ -15,14 +16,14 @@ export interface IForm {
 
 export interface IBlur {
   validation: IValidation;
-  value: string | number;
+  value: string;
   returnAllError?: boolean;
   ignoreWhitespace?: boolean;
 }
 
 export interface IValidate {
   validation: IValidation;
-  value: string | number;
+  value: string;
   returnAllError: boolean;
   key?: string;
 }
