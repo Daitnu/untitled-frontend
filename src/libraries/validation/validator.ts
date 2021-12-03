@@ -48,6 +48,10 @@ const validate = ({ validation, value, returnAllError, key }: IValidate) => {
   const allError: IError[] = [];
   const { fieldName, rules, comparison } = validation;
 
+  if(typeof value) {
+    value = Number.isNaN(value) ? '' : String(value)
+  }
+
   for (const rule of rules) {
     const result = rule.name === 'compareTwoField' && comparison ? rule(value, comparison) : rule(value);
     if (result !== true) {
