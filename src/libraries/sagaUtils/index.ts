@@ -9,8 +9,8 @@ import { historyPush } from '../api';
  * @param successCb payload(HTTPResponse)를 인자로 받는 cb
  * @param failCb err(BusinessErrorResponse)를 인자로 받는 cb
  */
-export const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFunc) =>
-  function* (action) {
+export const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFunc) => {
+  return function* (action) {
     const [SUCCESS, FAILURE] = [`${type}_SUCCESS`, `${type}_FAILURE`];
     try {
       const payload = yield call(apiFunc, action.payload);
@@ -20,15 +20,15 @@ export const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCal
       }
     } catch (error: any) {
       yield put({ type: FAILURE, payload: error });
-      if (error.status === 401) {
-        yield call(historyPush, '/');
-      }
+      // if (error.status === 401) {
+      //   yield call(historyPush, '/');
+      // }
       if (failCb !== undefined) {
         yield call(failCb, error);
       }
     }
   };
-
+};
 const initialState = { loading: false, response: null, errors: null };
 
 /**
@@ -42,21 +42,26 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
   const SUCCESS = `${type}_SUCCESS` as 'SUCCESS';
   const FAILURE = `${type}_FAILURE` as 'FAILURE';
   const CLEAR = `${type}_CLEAR` as 'CLEAR';
+
   type Request = {
     type: typeof REQUEST;
     payload: R;
   };
+
   type Success = {
     type: typeof SUCCESS;
     payload: T;
   };
+
   type Failure = {
     type: typeof FAILURE;
     payload: BusinessErrorResponse;
   };
+
   type Clear = {
     type: typeof CLEAR;
   };
+
   type Action = Request | Success | Failure | Clear;
 
   return (state: ApiState<T> = initialState, action: Action): ApiState<T> => {
