@@ -42,6 +42,12 @@ const LoginForm: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (loginApiState.response) {
+      console.log('login 성공 :)');
+    }
+  }, [loginApiState.response]);
+
+  useEffect(() => {
     console.log(loginApiState.errors);
   }, [loginApiState.errors]);
 
