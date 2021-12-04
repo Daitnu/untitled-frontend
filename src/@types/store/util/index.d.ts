@@ -13,4 +13,5 @@ export interface IActionTypes {
   REQUEST: string;
   SUCCESS: string;
   FAILURE: string;
+  CLEAR: string;
 }
