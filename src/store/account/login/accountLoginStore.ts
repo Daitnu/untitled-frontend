@@ -1,8 +1,8 @@
 import { IRequestAccountLogin } from '~/@types/request';
 import { BusinessErrorResponse, HTTPResponse, IResponseAccountLogin } from '~/@types/response';
-import { createActionTypes, makeApiReducer } from '~/libraries/sagaUtils';
+import sagaUtils from '~/libraries/sagaUtils';
 
-export const ACCOUNT_LOGIN_POST_ACTION_TYPES = createActionTypes('ACCOUNT_LOGIN_POST');
+export const ACCOUNT_LOGIN_POST_ACTION_TYPES = sagaUtils.createActionTypes('ACCOUNT_LOGIN_POST');
 
 export const accountLoginPostRequest = (payload: IRequestAccountLogin) => ({
   type: ACCOUNT_LOGIN_POST_ACTION_TYPES.REQUEST,
@@ -23,7 +23,7 @@ export const accountLoginPostClear = () => ({
   type: ACCOUNT_LOGIN_POST_ACTION_TYPES.CLEAR,
 });
 
-const accountLoginPostReducer = makeApiReducer<IResponseAccountLogin, IRequestAccountLogin>(
+const accountLoginPostReducer = sagaUtils.makeApiReducer<IResponseAccountLogin, IRequestAccountLogin>(
   ACCOUNT_LOGIN_POST_ACTION_TYPES.DEFAULT,
 );
 

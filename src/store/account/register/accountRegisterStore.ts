@@ -1,8 +1,8 @@
 import { IRequestAccountRegister } from '~/@types/request';
 import { BusinessErrorResponse, HTTPResponse, IResponseAccountRegister } from '~/@types/response';
-import { createActionTypes, makeApiReducer } from '~/libraries/sagaUtils';
+import sagaUtils from '~/libraries/sagaUtils';
 
-export const ACCOUNT_REGISTER_POST_ACTION_TYPES = createActionTypes('ACCOUNT_REGISTER_POST');
+export const ACCOUNT_REGISTER_POST_ACTION_TYPES = sagaUtils.createActionTypes('ACCOUNT_REGISTER_POST');
 
 export const accountRegisterPostRequest = (payload: IRequestAccountRegister) => ({
   type: ACCOUNT_REGISTER_POST_ACTION_TYPES.REQUEST,
@@ -23,7 +23,7 @@ export const accountRegisterPostClear = () => ({
   type: ACCOUNT_REGISTER_POST_ACTION_TYPES.CLEAR,
 });
 
-const accountRegisterPostReducer = makeApiReducer<IResponseAccountRegister, IRequestAccountRegister>(
+const accountRegisterPostReducer = sagaUtils.makeApiReducer<IResponseAccountRegister, IRequestAccountRegister>(
   ACCOUNT_REGISTER_POST_ACTION_TYPES.DEFAULT,
 );
 

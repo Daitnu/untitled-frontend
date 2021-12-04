@@ -1,9 +1,9 @@
 import { all, takeEvery } from 'redux-saga/effects';
-import { makeApiCallSagaFunc } from '~/libraries/sagaUtils';
+import sagaUtils from '~/libraries/sagaUtils';
 import { CORPERATION_PROFIT21_ACTION_TYPES } from './corperationStore';
 import corperationApi from './CorperationApi';
 
-const corperationProfitPut$ = makeApiCallSagaFunc({
+const corperationProfitPut$ = sagaUtils.makeApiCallSagaFunc({
   type: CORPERATION_PROFIT21_ACTION_TYPES.DEFAULT,
   apiFunc: corperationApi.updateCoperationProfit,
 });

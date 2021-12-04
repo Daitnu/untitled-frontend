@@ -9,7 +9,7 @@ import { historyPush } from '../api';
  * @param successCb payload(HTTPResponse)를 인자로 받는 cb
  * @param failCb err(BusinessErrorResponse)를 인자로 받는 cb
  */
-export const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFunc) => {
+const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFunc) => {
   return function* (action) {
     const [SUCCESS, FAILURE] = [`${type}_SUCCESS`, `${type}_FAILURE`];
     try {
@@ -37,7 +37,7 @@ const initialState = { loading: false, response: null, errors: null };
  * @param R API Request type
  * @param type Action type
  */
-export const makeApiReducer = <T, R = undefined>(type: string) => {
+const makeApiReducer = <T, R = undefined>(type: string) => {
   const REQUEST = `${type}_REQUEST` as 'REQUEST';
   const SUCCESS = `${type}_SUCCESS` as 'SUCCESS';
   const FAILURE = `${type}_FAILURE` as 'FAILURE';
@@ -95,7 +95,7 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
   };
 };
 
-export const createActionTypes = (action: string): IActionTypes => {
+const createActionTypes = (action: string): IActionTypes => {
   return {
     DEFAULT: action,
     REQUEST: action + '_REQUEST',
@@ -103,4 +103,10 @@ export const createActionTypes = (action: string): IActionTypes => {
     FAILURE: action + '_FAILURE ',
     CLEAR: action + '_CLEAR ',
   };
+};
+
+export default {
+  makeApiCallSagaFunc,
+  makeApiReducer,
+  createActionTypes,
 };

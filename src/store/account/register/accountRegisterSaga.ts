@@ -1,5 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { makeApiCallSagaFunc } from '~/libraries/sagaUtils';
+import sagaUtils from '~/libraries/sagaUtils';
 import { ACCOUNT_REGISTER_POST_ACTION_TYPES, accountRegisterPostClear } from './accountRegisterStore';
 import AccountApi from '~/store/account/AccountApi';
 import { HTTPResponse, IResponseAccountRegister } from '@t/response';
@@ -15,7 +15,7 @@ const successCb = function* ({ status }: HTTPResponse<IResponseAccountRegister>)
   }
 };
 
-const accountRegisterPost$ = makeApiCallSagaFunc({
+const accountRegisterPost$ = sagaUtils.makeApiCallSagaFunc({
   type: ACCOUNT_REGISTER_POST_ACTION_TYPES.DEFAULT,
   apiFunc: api.postAccountRegister.bind(api),
   successCb,

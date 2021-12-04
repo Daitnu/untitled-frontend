@@ -1,8 +1,8 @@
-import { createActionTypes, makeApiReducer } from '~/libraries/sagaUtils';
+import sagaUtils from '~/libraries/sagaUtils';
 import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 import { IResponseDailyStockPrices } from '@t/data';
 
-export const DAILY_STOCK_PRICES_GET_ACTION_TYPES = createActionTypes('DAILY_STOCK_PRICES_GET');
+export const DAILY_STOCK_PRICES_GET_ACTION_TYPES = sagaUtils.createActionTypes('DAILY_STOCK_PRICES_GET');
 
 export const dailyStockPricesGetRequest = () => ({
   type: DAILY_STOCK_PRICES_GET_ACTION_TYPES.REQUEST,
@@ -18,7 +18,7 @@ export const dailyStockPricesGetFailure = (payload: BusinessErrorResponse) => ({
   payload,
 });
 
-const dailyStockPricesGetReducer = makeApiReducer<HTTPResponse<IResponseDailyStockPrices>>(
+const dailyStockPricesGetReducer = sagaUtils.makeApiReducer<HTTPResponse<IResponseDailyStockPrices>>(
   DAILY_STOCK_PRICES_GET_ACTION_TYPES.DEFAULT,
 );
 
