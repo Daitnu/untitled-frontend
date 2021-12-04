@@ -34,10 +34,10 @@ export default class Api {
             errors: null,
             isError: error.isAxiosError,
           };
-          return Promise.reject(errResponse);
+        } else {
+          const { status, message, code } = error.response.data;
+          errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
         }
-        const { status, message, code } = error.response.data;
-        errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
         return Promise.reject(errResponse);
       },
     );
