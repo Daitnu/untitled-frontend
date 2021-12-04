@@ -43,3 +43,8 @@ export const BREAK_POINT_MOBILE = '768px';
 export const KEY_CODE = {
   ENTER: 13,
 };
+
+export const PAGING = {
+  DEFAULT_PAGE_SIZE: 10,
+  DEFAULT_MAX_PAGE_COUNT_IN_ONE_LINE: 5,
+};
