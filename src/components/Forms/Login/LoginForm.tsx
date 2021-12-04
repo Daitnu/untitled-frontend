@@ -6,6 +6,7 @@ import { KEY_CODE, PATH_URL } from '~/constants';
 import validation from '~/libraries/validation';
 import { useDispatch } from 'react-redux';
 import { accountLoginPostRequest } from '~/store/account/login';
+import { IValidations } from '~/@types/libraries';
 
 interface IUser {
   id: string;
@@ -17,7 +18,7 @@ interface IError {
   pw: string;
 }
 
-const formValidation = {
+const formValidation: IValidations = {
   id: {
     fieldName: '아이디',
     rules: [
@@ -40,7 +41,7 @@ const LoginForm: React.FC = () => {
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
-    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    const validationResult = validation.validator.field({ value, validation: fieldValidation });
 
     setErrorMsg({
       ...errorMsg,

@@ -15,7 +15,7 @@ export interface IForm {
   returnAllError?: boolean;
 }
 
-export interface IBlur {
+export interface IField {
   validation: IValidation;
   value: string;
   returnAllError?: boolean;
@@ -33,4 +33,9 @@ export interface IError {
   fieldName: string;
   reason: string;
   key?: string;
+}
+
+export interface IValidationResult {
+  isError: boolean;
+  errors: IError[];
 }
