@@ -3,8 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const RobotstxtPlugin = require('robotstxt-webpack-plugin');
-
 const robotsOptions = require('./robots-txt.config');
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -83,5 +84,8 @@ module.exports = {
       },
     }),
     new RobotstxtPlugin(robotsOptions),
+    new Dotenv({
+      path: './.env.development',
+    }),
   ],
 };
