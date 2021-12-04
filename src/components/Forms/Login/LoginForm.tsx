@@ -65,7 +65,7 @@ const LoginForm: React.FC = () => {
     if (validationResult.isError) {
       setErrorMsg({ ...errorMsg, [validationResult.errors[0].key!]: validationResult.errors[0].reason });
     } else {
-      const { id, pw } = user;
+      const { id, pw } = userValues;
       dispatch(accountLoginPostRequest({ id, password: pw }));
     }
   };
