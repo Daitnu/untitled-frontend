@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as GS from '~/globalStyles';
 import { KEY_CODE, PATH_URL } from '~/constants';
 import validation from '~/libraries/validation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { accountLoginPostRequest } from '~/store/account/login';
 import { IValidations } from '~/@types/libraries';
+import { RootState } from '~/store';
 
 interface IUser {
   id: string;
@@ -37,7 +38,12 @@ const formValidation: IValidations = {
 const LoginForm: React.FC = () => {
   const [userValues, setUserValues] = useState<IUser>({ id: '', pw: '' });
   const [errorMsg, setErrorMsg] = useState<IError>({ id: '', pw: '' });
+  const loginApiState = useSelector((state: RootState) => state.accountLogin);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(loginApiState.errors);
+  }, [loginApiState.errors]);
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
