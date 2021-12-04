@@ -3,7 +3,8 @@ import { HTTPResponse, BusinessErrorResponse } from '@t/response';
 import { RequestParam } from '@t/request';
 export * from './history';
 
-const API_SERVER = 'http://localhost:8080';
+const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';
+const API_TIME_OUT: number = Number(process.env.REACT_APP_API_TIME_OUT) || 0;
 const MEDIA_TYPE = {
   JSON: 'application/json' as const,
 };
@@ -18,7 +19,7 @@ export default class Api {
         'Content-Type': MEDIA_TYPE.JSON,
         Accept: MEDIA_TYPE.JSON,
       },
-      timeout: 5000,
+      timeout: API_TIME_OUT,
       withCredentials: false,
     });
 
