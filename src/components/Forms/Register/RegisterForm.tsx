@@ -31,7 +31,7 @@ export const RegisterForm: React.FC = () => {
 
   const validateBlur = (id, value) => {
     const fieldValidation: IValidation = formValidation[id];
-    return validation.validator.blur({ value, validation: fieldValidation });
+    return validation.validator.field({ value, validation: fieldValidation });
   };
 
   useEffect(() => {

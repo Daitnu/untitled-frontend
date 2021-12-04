@@ -1,4 +1,4 @@
-import { IBlur, IError, IForm, IValidate, IValidation, IValidationResult } from '@t/libraries';
+import { IField, IError, IForm, IValidate, IValidation, IValidationResult } from '@t/libraries';
 import Utils from '@lib/utils';
 
 const RETURN_INIT_VALUE: IValidationResult = {
@@ -29,12 +29,12 @@ export const form = ({ validations, values, returnAllError = false }: IForm) => 
   };
 };
 
-export const blur = ({
+export const field = ({
   validation,
   value,
   returnAllError = false,
   ignoreWhitespace = true,
-}: IBlur): IValidationResult => {
+}: IField): IValidationResult => {
   if (!value || typeof value !== 'string') return Utils.deepCopy(RETURN_INIT_VALUE);
   if (ignoreWhitespace) {
     value = value.trim();

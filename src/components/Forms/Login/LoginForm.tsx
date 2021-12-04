@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
-    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    const validationResult = validation.validator.field({ value, validation: fieldValidation });
 
     setErrorMsg({
       ...errorMsg,
