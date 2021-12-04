@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 export interface IValidation {
   fieldName: string;
-  rules: ((v: string) => true | string)[];
+  rules: ((v: string, v2?: string) => true | string)[];
+  comparison?: string;
 }
 
 export interface IValidations {
