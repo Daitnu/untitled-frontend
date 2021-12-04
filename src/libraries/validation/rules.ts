@@ -18,8 +18,8 @@ export const lengthMax = (max: number) => (value: string) =>
 
 export const alphanumeric = (value: string) => validator.isAlphanumeric(value) || '영어와 숫자만 입력가능합니다.';
 
-export const equalsTwoField = (equlasFieldName: string) => {
+export const equalsTwoField = (comparisonFieldName: string) => {
   return function compareTwoField(str, comparison) {
-    return validator.equals(str, comparison) || `${equlasFieldName}와 값이 다릅니다.`;
+    return validator.equals(str, comparison) || `${comparisonFieldName}와 값이 다릅니다.`;
   };
 };
