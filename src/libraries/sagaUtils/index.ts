@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { BusinessErrorResponse } from '@t/response';
+import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 import { ApiState, ApiCallSagaFunc, IActionAndTypes } from '@t/store';
 import { historyPush } from '../api';
 
@@ -108,7 +108,7 @@ const makeApiReducer = <T, R = undefined>(type: string) => {
 //   return camels.join('');
 // };
 
-const createActionAndTypes = (action: string): IActionAndTypes => {
+const createActionAndTypes = <A = undefined, B = undefined>(action: string): IActionAndTypes<A, B> => {
   const types = {
     DEFAULT: action,
     REQUEST: action + '_REQUEST',
@@ -118,25 +118,19 @@ const createActionAndTypes = (action: string): IActionAndTypes => {
   };
 
   const actions = {
-    DEFAULT: (payload) => {
-      return {
-        type: types.DEFAULT,
-        payload,
-      };
-    },
-    REQUEST: (payload) => {
+    REQUEST: (payload?: A) => {
       return {
         type: types.REQUEST,
         payload,
       };
     },
-    SUCCESS: (payload) => {
+    SUCCESS: (payload?: HTTPResponse<B>) => {
       return {
         type: types.SUCCESS,
         payload,
       };
     },
-    FAILURE: (payload) => {
+    FAILURE: (payload: BusinessErrorResponse) => {
       return {
         type: types.FAILURE,
         payload,

@@ -4,7 +4,7 @@ import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 export const {
   ACTIONS: CORPERATION_PROFIT21_ACTIONS,
   TYPES: CORPERATION_PROFIT21_TYPES,
-} = sagaUtils.createActionAndTypes('CORPERATION_PROFIT21');
+} = sagaUtils.createActionAndTypes<null, null>('CORPERATION_PROFIT21');
 
 export const corperationProfitPatchRequest = CORPERATION_PROFIT21_ACTIONS.REQUEST;
 

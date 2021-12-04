@@ -1,5 +1,6 @@
 import { BusinessErrorResponse } from '~/@types/response';
 import { HTTPResponse } from '~/@types/response';
+import { ApiState } from '..';
 
 export interface ApiCallSagaFunc {
   type: string;
@@ -16,15 +17,14 @@ export interface ITypes {
   CLEAR: string;
 }
 
-export interface IActions {
-  DEFAULT: Function;
-  REQUEST: Function;
-  SUCCESS: Function;
+export interface IActions<A, B> {
+  REQUEST: (playload?: A) => void;
+  SUCCESS: Function<B>;
   FAILURE: Function;
   CLEAR: Function;
 }
 
-export interface IActionAndTypes {
-  ACTIONS: IActions;
+export interface IActionAndTypes<A, B> {
+  ACTIONS: IActions<A, B>;
   TYPES: ITypes;
 }

@@ -1,10 +1,11 @@
 import { IRequestAccountLogin } from '~/@types/request';
-import { BusinessErrorResponse, HTTPResponse, IResponseAccountLogin } from '~/@types/response';
+import { IResponseAccountLogin } from '~/@types/response';
 import sagaUtils from '~/libraries/sagaUtils';
 
-export const { ACTIONS: ACCOUNT_LOGIN_POST_ACTIONS, TYPES: ACCOUNT_LOGIN_POST_TYPES } = sagaUtils.createActionAndTypes(
-  'ACCOUNT_LOGIN_POST',
-);
+export const { ACTIONS: ACCOUNT_LOGIN_POST_ACTIONS, TYPES: ACCOUNT_LOGIN_POST_TYPES } = sagaUtils.createActionAndTypes<
+  IRequestAccountLogin,
+  IResponseAccountLogin
+>('ACCOUNT_LOGIN_POST');
 
 export const accountLoginPostRequest = ACCOUNT_LOGIN_POST_ACTIONS.REQUEST;
 
@@ -12,9 +13,7 @@ export const accountLoginPostSuccess = ACCOUNT_LOGIN_POST_ACTIONS.SUCCESS;
 
 export const accountLoginPostFailure = ACCOUNT_LOGIN_POST_ACTIONS.FAILURE;
 
-export const accountLoginPostClear = () => ({
-  type: ACCOUNT_LOGIN_POST_TYPES.CLEAR,
-});
+export const accountLoginPostClear = ACCOUNT_LOGIN_POST_ACTIONS.CLEAR;
 
 // export const accountLoginPostRequest = (payload: IRequestAccountLogin) => ({
 //   type: ACCOUNT_LOGIN_POST_TYPES.REQUEST,

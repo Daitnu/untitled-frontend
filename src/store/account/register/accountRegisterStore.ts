@@ -5,7 +5,7 @@ import sagaUtils from '~/libraries/sagaUtils';
 export const {
   TYPES: ACCOUNT_REGISTER_POST_TYPES,
   ACTIONS: ACCOUNT_REGISTER_POST_ACTIONS,
-} = sagaUtils.createActionAndTypes('ACCOUNT_REGISTER_POST');
+} = sagaUtils.createActionAndTypes<IRequestAccountRegister, IResponseAccountRegister>('ACCOUNT_REGISTER_POST');
 
 export const accountRegisterPostRequest = ACCOUNT_REGISTER_POST_ACTIONS.REQUEST;
 
