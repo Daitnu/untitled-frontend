@@ -7,3 +7,10 @@ export interface ApiCallSagaFunc {
   successCb?: (arg: HTTPResponse<any>) => Generator | Function;
   failCb?: (arg: BusinessErrorResponse) => Generator | Function;
 }
+
+export interface IActionTypes {
+  DEFAULT: string;
+  REQUEST: string;
+  SUCCESS: string;
+  FAILURE: string;
+}

@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { BusinessErrorResponse } from '@t/response';
-import { ApiState, ApiCallSagaFunc } from '@t/store';
+import { ApiState, ApiCallSagaFunc, IActionTypes } from '@t/store';
 import { historyPush } from '../api';
 
 /**
@@ -92,5 +92,14 @@ export const makeApiReducer = <T, R = undefined>(type: string) => {
       default:
         return state;
     }
+  };
+};
+
+export const createActionTypes = (action: string): IActionTypes => {
+  return {
+    DEFAULT: action,
+    REQUEST: action + '_REQUEST',
+    SUCCESS: action + '_SUCCESS',
+    FAILURE: action + '_FAILURE ',
   };
 };
