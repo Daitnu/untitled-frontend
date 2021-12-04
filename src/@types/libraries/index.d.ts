@@ -1,6 +1,7 @@
 export interface IValidation {
   fieldName: string;
-  rules: ((v: string | number) => true | string)[];
+  rules: ((v: string, v2?: string) => true | string)[];
+  comparison?: string;
 }
 
 export interface IValidations {
@@ -22,7 +23,7 @@ export interface IBlur {
 
 export interface IValidate {
   validation: IValidation;
-  value: string | number;
+  value: string;
   returnAllError: boolean;
   key?: string;
 }
