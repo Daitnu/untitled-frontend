@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosError } from 'axios';
 import { HTTPResponse, BusinessErrorResponse } from '@t/response';
 import { RequestParam } from '@t/request';
 export * from './history';
@@ -34,7 +34,7 @@ export default class Api {
             errors: null,
             isError: error.isAxiosError,
           };
-          throw errResponse;
+          return Promise.reject(errResponse);
         }
         const { status, message, code } = error.response.data;
         errResponse = { status, message, code, errors: error.response.data.fieldErrors, isError: true };
