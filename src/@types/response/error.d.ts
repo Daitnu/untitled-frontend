@@ -1,13 +1,13 @@
 export interface BusinessErrorResponse {
-  status: number;
-  message: string;
-  code: string | null;
-  errors: Array<FieldError> | null;
-  isError: boolean;
+  readonly status: number;
+  readonly message: string;
+  readonly code: string | null;
+  readonly errors: Array<FieldError> | null;
+  readonly isError: boolean;
 }
 
 interface FieldError {
-  field: string;
-  value: string;
-  reason: string;
+  readonly field: string;
+  readonly value: string;
+  readonly reason: string;
 }
