@@ -1,32 +1,30 @@
 import { IRequestAccountLogin } from '~/@types/request';
 import { BusinessErrorResponse, HTTPResponse, IResponseAccountLogin } from '~/@types/response';
-import { makeApiReducer } from '~/libraries/sagaUtils';
+import { createActionTypes, makeApiReducer } from '~/libraries/sagaUtils';
 
-export const ACCOUNT_LOGIN_POST = 'ACCOUNT_LOGIN_POST' as const;
-export const ACCOUNT_LOGIN_POST_REQUEST = 'ACCOUNT_LOGIN_POST_REQUEST' as const;
-export const ACCOUNT_LOGIN_POST_SUCCESS = 'ACCOUNT_LOGIN_POST_SUCCESS' as const;
-export const ACCOUNT_LOGIN_POST_FAILURE = 'ACCOUNT_LOGIN_POST_FAILURE' as const;
-export const ACCOUNT_LOGIN_POST_CLEAR = 'ACCOUNT_LOGIN_POST_CLEAR' as const;
+export const ACCOUNT_LOGIN_POST_ACTION_TYPES = createActionTypes('ACCOUNT_LOGIN_POST');
 
 export const accountLoginPostRequest = (payload: IRequestAccountLogin) => ({
-  type: ACCOUNT_LOGIN_POST_REQUEST,
+  type: ACCOUNT_LOGIN_POST_ACTION_TYPES.REQUEST,
   payload,
 });
 
 export const accountLoginPostSuccess = (payload: HTTPResponse<IResponseAccountLogin>) => ({
-  type: ACCOUNT_LOGIN_POST_SUCCESS,
+  type: ACCOUNT_LOGIN_POST_ACTION_TYPES.SUCCESS,
   payload,
 });
 
 export const accountLoginPostFailure = (payload: BusinessErrorResponse) => ({
-  type: ACCOUNT_LOGIN_POST_FAILURE,
+  type: ACCOUNT_LOGIN_POST_ACTION_TYPES.FAILURE,
   payload,
 });
 
 export const accountLoginPostClear = () => ({
-  type: ACCOUNT_LOGIN_POST_CLEAR,
+  type: ACCOUNT_LOGIN_POST_ACTION_TYPES.CLEAR,
 });
 
-const accountLoginPostReducer = makeApiReducer<IResponseAccountLogin, IRequestAccountLogin>(ACCOUNT_LOGIN_POST);
+const accountLoginPostReducer = makeApiReducer<IResponseAccountLogin, IRequestAccountLogin>(
+  ACCOUNT_LOGIN_POST_ACTION_TYPES.DEFAULT,
+);
 
 export default accountLoginPostReducer;
