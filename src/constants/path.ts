@@ -9,6 +9,7 @@ export const PATH_URL = {
 const API_PATH = {
   ACCOUNT: {
     REGISTER: '/register' as const,
+    LOGIN: '/login' as const,
   },
   STOCK: '/stock' as const,
   CORPERATION_CONSENSUS: '/corperation/consensus' as const,

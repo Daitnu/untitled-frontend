@@ -4,6 +4,8 @@ import * as S from './styled';
 import * as GS from '~/globalStyles';
 import { KEY_CODE, PATH_URL } from '~/constants';
 import validation from '~/libraries/validation';
+import { useDispatch } from 'react-redux';
+import { accountLoginPostRequest } from '~/store/account/login';
 
 interface IUser {
   id: string;
@@ -29,6 +31,7 @@ const formValidation = {
 const LoginForm: React.FC = () => {
   const [user, setUser] = useState<IUser>({ id: '', pw: '' });
   const [errorMsg, setErrorMsg] = useState<IError>({ id: '', pw: '' });
+  const dispatch = useDispatch();
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const changedField: string = id;
@@ -52,6 +55,9 @@ const LoginForm: React.FC = () => {
     });
     if (validationResult.isError) {
       setErrorMsg({ ...errorMsg, [validationResult.errors[0].key!]: validationResult.errors[0].reason });
+    } else {
+      const { id, pw } = user;
+      dispatch(accountLoginPostRequest({ id, password: pw }));
     }
   };
 
