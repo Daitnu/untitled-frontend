@@ -2,7 +2,7 @@
 export interface IValidation {
   fieldName: string;
   rules: ((v: string, v2?: string) => true | string)[];
-  comparison?: string;
+  comparisonValue?: string;
 }
 
 export interface IValidations {

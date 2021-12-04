@@ -47,14 +47,14 @@ export const blur = ({ validation, value, returnAllError = false, ignoreWhitespa
 
 const validate = ({ validation, value, returnAllError, key }: IValidate) => {
   const allError: IError[] = [];
-  const { fieldName, rules, comparison } = validation;
+  const { fieldName, rules, comparisonValue } = validation;
 
   if (typeof value === 'number') {
     value = Number.isNaN(value) ? '' : String(value);
   }
 
   for (const rule of rules) {
-    const result = rule.name === 'compareTwoField' && comparison ? rule(value, comparison) : rule(value);
+    const result = rule.name === 'compareTwoField' && comparisonValue ? rule(value, comparisonValue) : rule(value);
     if (result !== true) {
       const error = { fieldName, reason: result, key };
       if (!returnAllError) {

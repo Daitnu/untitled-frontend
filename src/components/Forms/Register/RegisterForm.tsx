@@ -61,7 +61,7 @@ export const RegisterForm: React.FC = () => {
     pwConfirm: {
       fieldName: '비밀번호확인',
       rules: [validation.rules.required, validation.rules.equalsTwoField('비밀번호')],
-      comparison: userValues.pw,
+      comparisonValue: userValues.pw,
     },
     email: {
       fieldName: '이메일',
