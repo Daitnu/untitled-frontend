@@ -28,11 +28,16 @@ export const RegisterForm: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState<IRegisterForm>(INITIAL_STATE);
   const dispatch = useDispatch();
 
+  const validateBlur = (id, value) => {
+    const fieldValidation = formValidation[id];
+    return validation.validator.blur({ value, validation: fieldValidation });
+  };
+
   useEffect(() => {
     const id = 'pwConfirm';
     const value = userValues.pwConfirm;
-    const fieldValidation = formValidation[id];
-    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    const validationResult = validateBlur(id, value);
+
     setErrorMsg({
       ...errorMsg,
       [id]: validationResult.isError ? validationResult.errors[0].reason : '',
@@ -40,8 +45,7 @@ export const RegisterForm: React.FC = () => {
   }, [userValues.pw]);
 
   const handleInputChange = ({ target: { id, value } }): void => {
-    const fieldValidation = formValidation[id];
-    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    const validationResult = validateBlur(id, value);
 
     setErrorMsg({
       ...errorMsg,
