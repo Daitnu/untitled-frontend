@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { makeApiCallSagaFunc } from '~/libraries/sagaUtils';
 import { ACCOUNT_REGISTER_POST, ACCOUNT_REGISTER_POST_REQUEST, accountRegisterPostClear } from './accountRegisterStore';
-import AccountApi from '~/store/account/register/AccountApi';
+import AccountApi from '~/store/account/AccountApi';
 import { HTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants/path';
