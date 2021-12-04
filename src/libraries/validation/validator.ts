@@ -1,4 +1,5 @@
 import { IBlur, IError, IForm, IValidate } from '@t/libraries';
+import Utils from '@lib/utils';
 
 const RETURN_INIT_VALUE = {
   isError: false,
@@ -29,11 +30,11 @@ export const form = ({ validations, values, returnAllError = false }: IForm) => 
 };
 
 export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }: IBlur) => {
-  if (!value || typeof value !== 'string') return { ...RETURN_INIT_VALUE };
+  if (!value || typeof value !== 'string') return Utils.deepCopy(RETURN_INIT_VALUE);
   if (ignoreWhitespace) {
     value = value.trim();
   }
-  if (value === '') return { ...RETURN_INIT_VALUE };
+  if (value === '') return Utils.deepCopy(RETURN_INIT_VALUE);
 
   const validationResult = validate({ validation, value, returnAllError });
 
