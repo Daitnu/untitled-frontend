@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { accountRegisterPostRequest } from '~/store/account';
 import validation from '~/libraries/validation';
 import { PATH_URL } from '~/constants';
+import { IValidation, IValidations } from '~/@types/libraries';
 
 interface IRegisterForm {
   id: string;
@@ -29,7 +30,7 @@ export const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const validateBlur = (id, value) => {
-    const fieldValidation = formValidation[id];
+    const fieldValidation: IValidation = formValidation[id];
     return validation.validator.blur({ value, validation: fieldValidation });
   };
 
@@ -64,7 +65,7 @@ export const RegisterForm: React.FC = () => {
     dispatch(accountRegisterPostRequest({ id, name, email, password: pw, passwordConfirm: pwConfirm }));
   };
 
-  const formValidation = {
+  const formValidation: IValidations = {
     id: {
       fieldName: '아이디',
       rules: [validation.rules.required, validation.rules.lengthMax(20), validation.rules.alphanumeric],

@@ -34,3 +34,8 @@ export interface IError {
   reason: string;
   key?: string;
 }
+
+export interface IValidationResult {
+  isError: boolean;
+  errors: IError[];
+}

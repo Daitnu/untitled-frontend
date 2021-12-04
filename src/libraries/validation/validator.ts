@@ -1,7 +1,7 @@
-import { IBlur, IError, IForm, IValidate } from '@t/libraries';
+import { IBlur, IError, IForm, IValidate, IValidation, IValidationResult } from '@t/libraries';
 import Utils from '@lib/utils';
 
-const RETURN_INIT_VALUE = {
+const RETURN_INIT_VALUE: IValidationResult = {
   isError: false,
   errors: [],
 };
@@ -29,7 +29,12 @@ export const form = ({ validations, values, returnAllError = false }: IForm) => 
   };
 };
 
-export const blur = ({ validation, value, returnAllError = false, ignoreWhitespace = true }: IBlur) => {
+export const blur = ({
+  validation,
+  value,
+  returnAllError = false,
+  ignoreWhitespace = true,
+}: IBlur): IValidationResult => {
   if (!value || typeof value !== 'string') return Utils.deepCopy(RETURN_INIT_VALUE);
   if (ignoreWhitespace) {
     value = value.trim();
@@ -45,9 +50,9 @@ export const blur = ({ validation, value, returnAllError = false, ignoreWhitespa
   return validationResult;
 };
 
-const validate = ({ validation, value, returnAllError, key }: IValidate) => {
+const validate = ({ validation, value, returnAllError, key }: IValidate): IValidationResult => {
   const allError: IError[] = [];
-  const { fieldName, rules, comparisonValue } = validation;
+  const { fieldName, rules, comparisonValue }: IValidation = validation;
 
   if (typeof value === 'number') {
     value = Number.isNaN(value) ? '' : String(value);
