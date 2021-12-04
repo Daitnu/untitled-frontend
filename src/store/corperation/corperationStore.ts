@@ -1,22 +1,22 @@
 import { makeApiReducer, createActionTypes } from '~/libraries/sagaUtils';
 import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 
-const CORPERATION_PROFIT21_ACTIONS = createActionTypes('CORPERATION_PROFIT21');
+export const CORPERATION_PROFIT21_ACTION_TYPES = createActionTypes('CORPERATION_PROFIT21');
 
 export const corperationProfitPatchRequest = () => ({
-  type: CORPERATION_PROFIT21_ACTIONS.REQUEST,
+  type: CORPERATION_PROFIT21_ACTION_TYPES.REQUEST,
 });
 
 export const corperationProfitPatchSuccess = (payload: HTTPResponse<null>) => ({
-  type: CORPERATION_PROFIT21_ACTIONS.SUCCESS,
+  type: CORPERATION_PROFIT21_ACTION_TYPES.SUCCESS,
   payload,
 });
 
 export const corperationProfitPatchFailure = (payload: BusinessErrorResponse) => ({
-  type: CORPERATION_PROFIT21_ACTIONS.FAILURE,
+  type: CORPERATION_PROFIT21_ACTION_TYPES.FAILURE,
   payload,
 });
 
-const corperationPoriftPutReducer = makeApiReducer<HTTPResponse<null>>(CORPERATION_PROFIT21_ACTIONS.DEFAULT);
+const corperationPoriftPutReducer = makeApiReducer<HTTPResponse<null>>(CORPERATION_PROFIT21_ACTION_TYPES.DEFAULT);
 
 export default corperationPoriftPutReducer;
