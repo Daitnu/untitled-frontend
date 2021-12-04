@@ -8,10 +8,23 @@ export interface ApiCallSagaFunc {
   failCb?: (arg: BusinessErrorResponse) => Generator | Function;
 }
 
-export interface IActionTypes {
+export interface ITypes {
   DEFAULT: string;
   REQUEST: string;
   SUCCESS: string;
   FAILURE: string;
   CLEAR: string;
+}
+
+export interface IActions {
+  DEFAULT: Function;
+  REQUEST: Function;
+  SUCCESS: Function;
+  FAILURE: Function;
+  CLEAR: Function;
+}
+
+export interface IActionAndTypes {
+  ACTIONS: IActions;
+  TYPES: ITypes;
 }

@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { BusinessErrorResponse } from '@t/response';
-import { ApiState, ApiCallSagaFunc, IActionTypes } from '@t/store';
+import { ApiState, ApiCallSagaFunc, IActionAndTypes } from '@t/store';
 import { historyPush } from '../api';
 
 /**
@@ -95,18 +95,68 @@ const makeApiReducer = <T, R = undefined>(type: string) => {
   };
 };
 
-const createActionTypes = (action: string): IActionTypes => {
-  return {
+// const convert = (string: string): string => {
+//   const splited = string.split('_');
+
+//   const camels: string[] = [];
+//   for (let i = 0; i < splited.length; i++) {
+//     const firstAlphabet = splited[i].substr(0, 1);
+//     const first = i === 0 ? firstAlphabet.toLowerCase() : firstAlphabet.toUpperCase();
+//     const camel = first + splited[i].substr(1).toLowerCase();
+//     camels.push(camel);
+//   }
+//   return camels.join('');
+// };
+
+const createActionAndTypes = (action: string): IActionAndTypes => {
+  const types = {
     DEFAULT: action,
     REQUEST: action + '_REQUEST',
     SUCCESS: action + '_SUCCESS',
-    FAILURE: action + '_FAILURE ',
-    CLEAR: action + '_CLEAR ',
+    FAILURE: action + '_FAILURE',
+    CLEAR: action + '_CLEAR',
+  };
+
+  const actions = {
+    DEFAULT: (payload) => {
+      return {
+        type: types.DEFAULT,
+        payload,
+      };
+    },
+    REQUEST: (payload) => {
+      return {
+        type: types.REQUEST,
+        payload,
+      };
+    },
+    SUCCESS: (payload) => {
+      return {
+        type: types.SUCCESS,
+        payload,
+      };
+    },
+    FAILURE: (payload) => {
+      return {
+        type: types.FAILURE,
+        payload,
+      };
+    },
+    CLEAR: () => {
+      return {
+        type: types.CLEAR,
+      };
+    },
+  };
+
+  return {
+    TYPES: types,
+    ACTIONS: actions,
   };
 };
 
 export default {
   makeApiCallSagaFunc,
   makeApiReducer,
-  createActionTypes,
+  createActionAndTypes,
 };
