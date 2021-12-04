@@ -25,19 +25,24 @@ export default class Api {
     this.axiosInstance.interceptors.response.use(
       (response) => response,
       (error: AxiosError<BusinessErrorResponse>) => {
-        let errResponse: BusinessErrorResponse = { status: 0, message: '', code: '', errors: [], isError: true };
         if (!error.response) {
-          errResponse = {
+          const errResponse: BusinessErrorResponse = {
             status: 500,
             message: error.message,
             code: null,
-            errors: null,
-            isError: error.isAxiosError,
+            errors: [],
+            isError: true,
           };
           return Promise.reject(errResponse);
         }
         const { status, message, code } = error.response.data;
-        errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
+        const errResponse: BusinessErrorResponse = {
+          status,
+          message,
+          code,
+          errors: error.response.data.errors,
+          isError: true,
+        };
         return Promise.reject(errResponse);
       },
     );
