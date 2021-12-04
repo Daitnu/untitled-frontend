@@ -18,7 +18,12 @@ interface IError {
 const formValidation = {
   id: {
     fieldName: '아이디',
-    rules: [validation.rules.required, validation.rules.lengthMin(2), validation.rules.lengthMax(20)],
+    rules: [
+      validation.rules.required,
+      validation.rules.lengthMin(2),
+      validation.rules.lengthMax(20),
+      validation.rules.alphanumeric,
+    ],
   },
   pw: {
     fieldName: '비밀번호',
@@ -27,16 +32,20 @@ const formValidation = {
 };
 
 const LoginForm: React.FC = () => {
-  const [user, setUser] = useState<IUser>({ id: '', pw: '' });
+  const [userValues, setUserValues] = useState<IUser>({ id: '', pw: '' });
   const [errorMsg, setErrorMsg] = useState<IError>({ id: '', pw: '' });
 
   const handleInputChange = ({ target: { id, value } }): void => {
-    const changedField: string = id;
-    const changedValue: string = value;
+    const fieldValidation = formValidation[id];
+    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
 
-    setUser({
-      ...user,
-      [changedField]: changedValue,
+    setErrorMsg({
+      ...errorMsg,
+      [id]: validationResult.isError ? validationResult.errors[0].reason : '',
+    });
+    setUserValues({
+      ...userValues,
+      [id]: value,
     });
   };
 
@@ -48,19 +57,11 @@ const LoginForm: React.FC = () => {
   const handleSubmitClick = async (): Promise<void> => {
     const validationResult = validation.validator.form({
       validations: formValidation,
-      values: user,
+      values: userValues,
     });
     if (validationResult.isError) {
       setErrorMsg({ ...errorMsg, [validationResult.errors[0].key!]: validationResult.errors[0].reason });
     }
-  };
-
-  const onBlurValidation = ({ target }) => {
-    const { id: key } = target;
-    const value = user[key];
-    const fieldValidation = formValidation[key];
-    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
-    console.log('onblur', validationResult);
   };
 
   return (
@@ -76,7 +77,6 @@ const LoginForm: React.FC = () => {
           maxLength={20}
           autoComplete="off"
           onChange={handleInputChange}
-          onBlur={onBlurValidation}
         />
       </S.FormItemWithIcon>
       <S.ErrorMsg>{errorMsg.id}</S.ErrorMsg>
@@ -92,7 +92,6 @@ const LoginForm: React.FC = () => {
           maxLength={20}
           onChange={handleInputChange}
           onKeyDown={handlePasswordKeyDown}
-          onBlur={onBlurValidation}
         />
       </S.FormItemWithIcon>
       <S.ErrorMsg>{errorMsg.pw}</S.ErrorMsg>
