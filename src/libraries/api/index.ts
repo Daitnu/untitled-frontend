@@ -23,7 +23,11 @@ export default class Api {
     });
 
     this.axiosInstance.interceptors.response.use(
-      (response) => response,
+      ({ data, headers, status }: { data: any; headers: any; status: any }) => ({
+        data,
+        headers,
+        status,
+      }),
       (error: AxiosError<BusinessErrorResponse>) => {
         let errResponse: BusinessErrorResponse;
         if (!error.response) {
