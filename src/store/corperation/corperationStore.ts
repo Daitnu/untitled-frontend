@@ -6,7 +6,7 @@ export const {
   TYPES: CORPERATION_PROFIT21_TYPES,
 } = sagaUtils.createActionAndTypes('CORPERATION_PROFIT21');
 
-export const corperationProfitPatchRequest = () => CORPERATION_PROFIT21_ACTIONS.REQUEST;
+export const corperationProfitPatchRequest = CORPERATION_PROFIT21_ACTIONS.REQUEST;
 
 export const corperationProfitPatchSuccess = CORPERATION_PROFIT21_ACTIONS.SUCCESS;
 

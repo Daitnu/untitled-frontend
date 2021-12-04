@@ -16,6 +16,25 @@ export const accountLoginPostClear = () => ({
   type: ACCOUNT_LOGIN_POST_TYPES.CLEAR,
 });
 
+// export const accountLoginPostRequest = (payload: IRequestAccountLogin) => ({
+//   type: ACCOUNT_LOGIN_POST_TYPES.REQUEST,
+//   payload,
+// });
+
+// export const accountLoginPostSuccess = (payload: HTTPResponse<IResponseAccountLogin>) => ({
+//   type: ACCOUNT_LOGIN_POST_TYPES.SUCCESS,
+//   payload,
+// });
+
+// export const accountLoginPostFailure = (payload: BusinessErrorResponse) => ({
+//   type: ACCOUNT_LOGIN_POST_TYPES.FAILURE,
+//   payload,
+// });
+
+// export const accountLoginPostClear = () => ({
+//   type: ACCOUNT_LOGIN_POST_TYPES.CLEAR,
+// });
+
 const accountLoginPostReducer = sagaUtils.makeApiReducer<IResponseAccountLogin, IRequestAccountLogin>(
   ACCOUNT_LOGIN_POST_TYPES.DEFAULT,
 );
