@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as LS from '../Login/styled';
@@ -27,6 +27,17 @@ export const RegisterForm: React.FC = () => {
   const [userValues, setUserValues] = useState<IRegisterForm>(INITIAL_STATE);
   const [errorMsg, setErrorMsg] = useState<IRegisterForm>(INITIAL_STATE);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const id = 'pwConfirm';
+    const value = userValues.pwConfirm;
+    const fieldValidation = formValidation[id];
+    const validationResult = validation.validator.blur({ value, validation: fieldValidation });
+    setErrorMsg({
+      ...errorMsg,
+      [id]: validationResult.isError ? validationResult.errors[0].reason : '',
+    });
+  }, [userValues.pw]);
 
   const handleInputChange = ({ target: { id, value } }): void => {
     const fieldValidation = formValidation[id];
