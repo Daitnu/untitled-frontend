@@ -60,10 +60,11 @@ const validate = ({ validation, value, returnAllError, key }: IValidate): IValid
   }
 
   for (const rule of rules) {
-    if (rule.name === 'compareTwoField') {
+    const isCompareTwoField = rule.name === 'compareTwoField';
+    if (isCompareTwoField) {
       if (!comparisonValue) comparisonValue = fieldName + value;
     }
-    const result = rule.name === 'compareTwoField' ? rule(value, comparisonValue) : rule(value);
+    const result = isCompareTwoField ? rule(value, comparisonValue) : rule(value);
     if (result !== true) {
       const error = { fieldName, reason: result, key };
       allError.push(error);
