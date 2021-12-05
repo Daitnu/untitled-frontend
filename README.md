@@ -6,8 +6,8 @@
 | --------------------- | ---------------- |
 | UpperCamelCase        | class / React.FC |
 | lowerCamelCase        | everything else  |
-| snake_case            | nerver used      |
-| dash-case(kebab-case) | nerver used      |
+| snake_case            | never used       |
+| dash-case(kebab-case) | never used       |
 
 <br />
 
