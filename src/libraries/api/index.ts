@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { HTTPResponse, BusinessErrorResponse } from '@t/response';
 import { RequestParam } from '@t/request';
-import StatusCodes from '../http-status';
+import StatusCodes from '../httpStatus';
 export * from './history';
 
 const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';

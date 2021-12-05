@@ -5,7 +5,7 @@ import AccountApi from '~/store/account/AccountApi';
 import { HTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants/path';
-import StatusCodes from '~/libraries/http-status';
+import StatusCodes from '~/libraries/httpStatus';
 
 const api = new AccountApi();
 

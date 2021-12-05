@@ -7,7 +7,7 @@ import { HTTPResponse, IResponseAccountLogin } from '~/@types/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants';
 import { accountLoginPostClear } from '.';
-import StatusCodes from '~/libraries/http-status';
+import StatusCodes from '~/libraries/httpStatus';
 
 const api = new AccountApi();
 
