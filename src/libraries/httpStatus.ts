@@ -1,4 +1,4 @@
-enum StatusCodes {
+enum HTTP_STATUS {
   /* 100 */
   CONTINUE = 100,
   SWITCHING_PROTOCOLS = 101,
@@ -66,4 +66,4 @@ enum StatusCodes {
   NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
 
-export default StatusCodes;
+export default HTTP_STATUS;

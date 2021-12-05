@@ -5,7 +5,7 @@ import AccountApi from '~/store/account/AccountApi';
 import { HTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants/path';
-import StatusCodes from '~/libraries/httpStatus';
+import HTTP_STATUS from '~/libraries/httpStatus';
 import { IRequestAccountRegister } from '~/@types/request';
 
 const { TYPES: ACCOUNT_REGISTER_POST_TYPES, ACTIONS: ACCOUNT_REGISTER_POST_ACTIONS } = sagaUtils.createActionAndTypes<
@@ -16,7 +16,7 @@ const { TYPES: ACCOUNT_REGISTER_POST_TYPES, ACTIONS: ACCOUNT_REGISTER_POST_ACTIO
 const api = new AccountApi();
 
 const accountRegisterPostsuccessCb = function* ({ status }: HTTPResponse<IResponseAccountRegister>) {
-  if (status === StatusCodes.CREATED) {
+  if (status === HTTP_STATUS.CREATED) {
     yield call(historyPush, PATH_URL.LOGIN);
     yield put(ACCOUNT_REGISTER_POST_ACTIONS.CLEAR());
   }

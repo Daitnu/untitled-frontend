@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { HTTPResponse, BusinessErrorResponse } from '@t/response';
 import { RequestParam } from '@t/request';
-import StatusCodes from '../httpStatus';
+import HTTP_STATUS from '../httpStatus';
 export * from './history';
 
 const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';
@@ -34,7 +34,7 @@ export default class Api {
         let errResponse: BusinessErrorResponse;
         if (!error.response) {
           errResponse = {
-            status: StatusCodes.INTERNAL_SERVER_ERROR,
+            status: HTTP_STATUS.INTERNAL_SERVER_ERROR,
             message: error.message,
             code: null,
             errors: [],

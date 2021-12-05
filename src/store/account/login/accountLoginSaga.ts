@@ -7,12 +7,12 @@ import { HTTPResponse, IResponseAccountLogin } from '~/@types/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants';
 import { accountLoginPostClear } from '.';
-import StatusCodes from '~/libraries/httpStatus';
+import HTTP_STATUS from '~/libraries/httpStatus';
 
 const api = new AccountApi();
 
 const successCb = function* ({ status, data }: HTTPResponse<IResponseAccountLogin>) {
-  if (status === StatusCodes.OK) {
+  if (status === HTTP_STATUS.OK) {
     const { refreshToken, accessToken, accessTokenExpiresIn, grantType }: IResponseAccountLogin = data;
     storage.local.set('refreshToken', refreshToken);
     yield call(historyPush, PATH_URL.HOME);
