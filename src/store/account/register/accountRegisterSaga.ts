@@ -5,11 +5,12 @@ import AccountApi from '~/store/account/AccountApi';
 import { HTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants/path';
+import StatusCodes from '~/libraries/http-status';
 
 const api = new AccountApi();
 
 const successCb = function* ({ status }: HTTPResponse<IResponseAccountRegister>) {
-  if (status === 200) {
+  if (status === StatusCodes.CREATED) {
     yield call(historyPush, PATH_URL.LOGIN);
     yield put(accountRegisterPostClear());
   }
