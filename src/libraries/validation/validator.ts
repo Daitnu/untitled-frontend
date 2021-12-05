@@ -35,8 +35,8 @@ export const field = ({
   returnAllError = false,
   ignoreWhitespace = true,
 }: IField): IValidationResult => {
-  if (!value || typeof value !== 'string') return Utils.deepCopy(RETURN_INIT_VALUE);
-  if (ignoreWhitespace) {
+  if (!value) return Utils.deepCopy(RETURN_INIT_VALUE);
+  if (ignoreWhitespace && typeof value === 'string') {
     value = value.trim();
   }
   if (value === '') return Utils.deepCopy(RETURN_INIT_VALUE);
@@ -52,23 +52,22 @@ export const field = ({
 
 const validate = ({ validation, value, returnAllError, key }: IValidate): IValidationResult => {
   const allError: IError[] = [];
-  const { fieldName, rules, comparisonValue }: IValidation = validation;
+  const { fieldName, rules }: IValidation = validation;
+  let { comparisonValue } = validation;
 
   if (typeof value === 'number') {
     value = Number.isNaN(value) ? '' : String(value);
   }
 
   for (const rule of rules) {
-    const result = rule.name === 'compareTwoField' && comparisonValue ? rule(value, comparisonValue) : rule(value);
+    if (rule.name === 'compareTwoField') {
+      if (!comparisonValue) comparisonValue = fieldName + value;
+    }
+    const result = rule.name === 'compareTwoField' ? rule(value, comparisonValue) : rule(value);
     if (result !== true) {
       const error = { fieldName, reason: result, key };
-      if (!returnAllError) {
-        return {
-          isError: true,
-          errors: [error],
-        };
-      }
       allError.push(error);
+      if (!returnAllError) break;
     }
   }
 

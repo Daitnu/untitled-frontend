@@ -17,14 +17,14 @@ export interface IForm {
 
 export interface IField {
   validation: IValidation;
-  value: string;
+  value: string | number;
   returnAllError?: boolean;
   ignoreWhitespace?: boolean;
 }
 
 export interface IValidate {
   validation: IValidation;
-  value: string;
+  value: string | number;
   returnAllError: boolean;
   key?: string;
 }
