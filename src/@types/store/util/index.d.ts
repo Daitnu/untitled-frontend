@@ -17,11 +17,23 @@ export interface ITypes {
   CLEAR: string;
 }
 
+interface IActionResponse<T> {
+  type: string;
+  payload: T;
+}
+
+interface IClearActionResponse {
+  type: string;
+}
+
+type IAction = <T>(payload: T) => IActionResponse<T>;
+type INoPayloadAction = () => IClearActionResponse;
+
 export interface IActions<A, B> {
-  REQUEST: (playload?: A) => void;
-  SUCCESS: Function<B>;
-  FAILURE: Function;
-  CLEAR: Function;
+  REQUEST: IAction<A>;
+  SUCCESS: IAction<B>;
+  FAILURE: IAction<BusinessErrorResponse>;
+  CLEAR: INoPayloadAction;
 }
 
 export interface IActionAndTypes<A, B> {

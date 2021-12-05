@@ -1,8 +1,8 @@
-export const localStorageSet = (key: string, value: Object): void => {
+const localStorageSet = (key: string, value: Object): void => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const localStorageGet = (key: string): Object | boolean => {
+const localStorageGet = (key: string): Object | boolean => {
   const values: string = localStorage.getItem(key) || '{}';
 
   try {
@@ -11,6 +11,42 @@ export const localStorageGet = (key: string): Object | boolean => {
   return false;
 };
 
-export const localStorageClear = (): void => localStorage.clear();
+const localStorageClear = (): void => localStorage.clear();
 
-export const localStorageRemove = (key: string) => localStorage.removeItem(key);
+const localStorageRemove = (key: string) => localStorage.removeItem(key);
+
+const sessionStorageSet = (key: string, value: Object): void => {
+  sessionStorage.setItem(key, JSON.stringify(value));
+};
+
+const sessionStorageGet = (key: string): Object | boolean => {
+  const values: string = sessionStorage.getItem(key) || '{}';
+
+  try {
+    return JSON.parse(values);
+  } catch (error) {}
+  return false;
+};
+
+const sessionStorageClear = (): void => sessionStorage.clear();
+
+const sessionStorageRemove = (key: string) => sessionStorage.removeItem(key);
+
+const local = {
+  set: localStorageSet,
+  get: localStorageGet,
+  clear: localStorageClear,
+  remove: localStorageRemove,
+};
+
+const session = {
+  set: sessionStorageSet,
+  get: sessionStorageGet,
+  clear: sessionStorageClear,
+  remove: sessionStorageRemove,
+};
+
+export default {
+  local,
+  session,
+};
