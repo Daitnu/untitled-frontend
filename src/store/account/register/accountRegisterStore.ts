@@ -1,19 +1,19 @@
-import { IRequestAccountRegister } from '~/@types/request';
-import { BusinessErrorResponse, HTTPResponse, IResponseAccountRegister } from '~/@types/response';
-import sagaUtils from '~/libraries/sagaUtils';
+// import { IRequestAccountRegister } from '~/@types/request';
+// import { BusinessErrorResponse, HTTPResponse, IResponseAccountRegister } from '~/@types/response';
+// import sagaUtils from '~/libraries/sagaUtils';
 
-export const {
-  TYPES: ACCOUNT_REGISTER_POST_TYPES,
-  ACTIONS: ACCOUNT_REGISTER_POST_ACTIONS,
-} = sagaUtils.createActionAndTypes<IRequestAccountRegister, IResponseAccountRegister>('ACCOUNT_REGISTER_POST');
+// export const {
+//   TYPES: ACCOUNT_REGISTER_POST_TYPES,
+//   ACTIONS: ACCOUNT_REGISTER_POST_ACTIONS,
+// } = sagaUtils.createActionAndTypes<IRequestAccountRegister, IResponseAccountRegister>('ACCOUNT_REGISTER_POST');
 
-export const accountRegisterPostRequest = ACCOUNT_REGISTER_POST_ACTIONS.REQUEST;
+// export const accountRegisterPostRequest = ACCOUNT_REGISTER_POST_ACTIONS.REQUEST;
 
-export const accountRegisterPostSuccess = ACCOUNT_REGISTER_POST_ACTIONS.SUCCESS;
+// export const accountRegisterPostSuccess = ACCOUNT_REGISTER_POST_ACTIONS.SUCCESS;
 
-export const accountRegisterPostFailure = ACCOUNT_REGISTER_POST_ACTIONS.FAILURE;
+// export const accountRegisterPostFailure = ACCOUNT_REGISTER_POST_ACTIONS.FAILURE;
 
-export const accountRegisterPostClear = ACCOUNT_REGISTER_POST_ACTIONS.CLEAR;
+// export const accountRegisterPostClear = ACCOUNT_REGISTER_POST_ACTIONS.CLEAR;
 
 // export const accountRegisterPostRequest = (payload: IRequestAccountRegister) => ({
 //   type: ACCOUNT_REGISTER_POST_TYPES.REQUEST,
@@ -34,8 +34,10 @@ export const accountRegisterPostClear = ACCOUNT_REGISTER_POST_ACTIONS.CLEAR;
 //   type: ACCOUNT_REGISTER_POST_TYPES.CLEAR,
 // });
 
-const accountRegisterPostReducer = sagaUtils.makeApiReducer<IResponseAccountRegister, IRequestAccountRegister>(
-  ACCOUNT_REGISTER_POST_TYPES.DEFAULT,
-);
+// const accountRegisterPostReducer = sagaUtils.makeApiReducer<IResponseAccountRegister, IRequestAccountRegister>(
+//   ACCOUNT_REGISTER_POST_TYPES.DEFAULT,
+// );
 
-export default accountRegisterPostReducer;
+// export default accountRegisterPostReducer;
+
+export {};
