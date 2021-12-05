@@ -3,11 +3,11 @@ import * as LS from '../Login/styled';
 import * as GS from '~/globalStyles';
 import { RegisterForm } from '~/components/Forms/Register';
 import backgoundImage from 'Assets/back.jpg';
-import { SimplePageTemplate } from '~/components/templates';
+import { ThreeLayerTemplate } from '~/components/templates';
 
 const RegisterPage: React.FC = () => {
   return (
-    <SimplePageTemplate>
+    <ThreeLayerTemplate>
       <GS.FullScreenWrap bg={backgoundImage}>
         <LS.CenterWrap>
           <LS.LoginFormArea>
@@ -16,7 +16,7 @@ const RegisterPage: React.FC = () => {
           <LS.BackgoundImage />
         </LS.CenterWrap>
       </GS.FullScreenWrap>
-    </SimplePageTemplate>
+    </ThreeLayerTemplate>
   );
 };
 

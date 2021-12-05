@@ -1,1 +1,1 @@
-export * from './SimplePageTemplate';
+export * from './ThreeLayerTemplate';

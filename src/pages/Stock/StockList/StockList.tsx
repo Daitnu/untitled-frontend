@@ -9,7 +9,7 @@ import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
 import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
-import { SimplePageTemplate } from '~/components/templates/SimplePageTemplate';
+import { ThreeLayerTemplate } from '~/components/templates';
 import { gridColumns } from './columnOptions';
 import { Col, Row } from 'antd';
 
@@ -139,9 +139,9 @@ const StockList: React.FC = () => {
   }
 
   return (
-    <SimplePageTemplate isLoading={loading} errors={dailyStockpricesResponseError}>
+    <ThreeLayerTemplate isLoading={loading} errors={dailyStockpricesResponseError}>
       <S.Wrap>{content}</S.Wrap>
-    </SimplePageTemplate>
+    </ThreeLayerTemplate>
   );
 };
 

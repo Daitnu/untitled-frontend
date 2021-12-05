@@ -13,7 +13,7 @@ interface ISimplePageTemplate {
   errors?: BusinessErrorResponse | null;
 }
 
-export const SimplePageTemplate = ({ children, isLoading = false, errors }: ISimplePageTemplate) => {
+export const ThreeLayerTemplate = ({ children, isLoading = false, errors }: ISimplePageTemplate) => {
   let content: React.ElementType | JSX.Element = children;
 
   if (isLoading) {
