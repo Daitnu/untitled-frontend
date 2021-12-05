@@ -5,7 +5,7 @@ import { IResponseDailyStockPrices } from '@t/data';
 export const {
   ACTIONS: DAILY_STOCK_PRICES_GET_ACTIONS,
   TYPES: DAILY_STOCK_PRICES_GET_TYPES,
-} = sagaUtils.createActionAndTypes<null, IResponseDailyStockPrices>('DAILY_STOCK_PRICES_GET');
+} = sagaUtils.createActionAndTypes<IResponseDailyStockPrices, null>('DAILY_STOCK_PRICES_GET');
 
 export const dailyStockPricesGetRequest = DAILY_STOCK_PRICES_GET_ACTIONS.REQUEST;
 

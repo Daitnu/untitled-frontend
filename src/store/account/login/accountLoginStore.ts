@@ -3,8 +3,8 @@ import { IResponseAccountLogin } from '~/@types/response';
 import sagaUtils from '~/libraries/sagaUtils';
 
 export const { ACTIONS: ACCOUNT_LOGIN_POST_ACTIONS, TYPES: ACCOUNT_LOGIN_POST_TYPES } = sagaUtils.createActionAndTypes<
-  IRequestAccountLogin,
-  IResponseAccountLogin
+  IResponseAccountLogin,
+  IRequestAccountLogin
 >('ACCOUNT_LOGIN_POST');
 
 export const accountLoginPostRequest = ACCOUNT_LOGIN_POST_ACTIONS.REQUEST;

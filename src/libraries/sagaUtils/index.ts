@@ -110,12 +110,12 @@ const makeApiReducer = <T, R = undefined>(type: string) => {
 
 /**
  *
- * @param A Request Action Payload Type
- * @param B Success Action Payload Type
+ * @param T Response Success Action Payload Type
+ * @param R Request Action Payload Type
  * @param action Action String
  * @returns Action + Types
  */
-const createActionAndTypes = <A = undefined, B = undefined>(action: string): IActionAndTypes<A, B> => {
+const createActionAndTypes = <T = undefined, R = undefined>(action: string): IActionAndTypes<T, R> => {
   const types: ITypes = {
     DEFAULT: action,
     REQUEST: action + '_REQUEST',
@@ -124,14 +124,14 @@ const createActionAndTypes = <A = undefined, B = undefined>(action: string): IAc
     CLEAR: action + '_CLEAR',
   };
 
-  const actions: IActions<A, B> = {
-    REQUEST: (payload?: A) => {
+  const actions: IActions<T, R> = {
+    REQUEST: (payload?: R) => {
       return {
         type: types.REQUEST,
         payload,
       };
     },
-    SUCCESS: (payload?: HTTPResponse<B>) => {
+    SUCCESS: (payload?: HTTPResponse<T>) => {
       return {
         type: types.SUCCESS,
         payload,

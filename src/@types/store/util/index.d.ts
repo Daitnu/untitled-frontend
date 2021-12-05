@@ -17,9 +17,9 @@ export interface ITypes {
   CLEAR: string;
 }
 
-interface IActionResponse<T> {
+interface IActionResponse<R> {
   type: string;
-  payload: T;
+  payload: R;
 }
 
 interface IClearActionResponse {
@@ -29,14 +29,14 @@ interface IClearActionResponse {
 type IAction = <T>(payload: T) => IActionResponse<T>;
 type INoPayloadAction = () => IClearActionResponse;
 
-export interface IActions<A, B> {
-  REQUEST: IAction<A>;
-  SUCCESS: IAction<B>;
+export interface IActions<T, R> {
+  REQUEST: IAction<R>;
+  SUCCESS: IAction<T>;
   FAILURE: IAction<BusinessErrorResponse>;
   CLEAR: INoPayloadAction;
 }
 
-export interface IActionAndTypes<A, B> {
-  ACTIONS: IActions<A, B>;
+export interface IActionAndTypes<T, R> {
+  ACTIONS: IActions<T, R>;
   TYPES: ITypes;
 }

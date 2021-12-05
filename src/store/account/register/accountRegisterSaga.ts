@@ -9,8 +9,8 @@ import StatusCodes from '~/libraries/httpStatus';
 import { IRequestAccountRegister } from '~/@types/request';
 
 const { TYPES: ACCOUNT_REGISTER_POST_TYPES, ACTIONS: ACCOUNT_REGISTER_POST_ACTIONS } = sagaUtils.createActionAndTypes<
-  IRequestAccountRegister,
-  IResponseAccountRegister
+  IResponseAccountRegister,
+  IRequestAccountRegister
 >('ACCOUNT_REGISTER_POST');
 
 const api = new AccountApi();
