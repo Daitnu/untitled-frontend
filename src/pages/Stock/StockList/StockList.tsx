@@ -6,7 +6,7 @@ import { IDailyStockPrice, IResponseDailyStockPrices, IStockListData } from '~/@
 import { TOAST_GRID, PATH_URL, STOCK_LIST_GRID_COLUMN_NAMES, SHILLION, PROJECT_NAME } from '~/constants';
 import { Grid } from '~/components/Grid';
 import { RootState } from '~/store';
-import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPricesStore';
+import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPrices';
 import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
 import { ThreeLayerTemplate } from '~/components/templates';
@@ -105,7 +105,7 @@ const onClickGridCell = (responseData: IResponseDailyStockPrices) => (event) => 
 
 const StockList: React.FC = () => {
   const { loading, response, errors: dailyStockpricesResponseError } = useSelector(
-    (root: RootState) => root.dailyStockPrices,
+    (root: RootState) => root.dailyStockPrices.get,
   );
   const dispatch = useDispatch();
 
