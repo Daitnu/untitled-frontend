@@ -1,7 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 import { ApiState, ApiCallSagaFunc, IActionAndTypes, IActions, ITypes } from '@t/store';
-import { historyPush } from '../api';
 
 /**
  * @param type Action type
@@ -33,11 +32,11 @@ const initialState = { loading: false, response: null, errors: null };
 
 /**
  *
- * @param T API Response type
- * @param R API Request type
+ * @param R API Response type
+ * @param T API Request type
  * @param type Action type
  */
-const makeApiReducer = <T, R = undefined>(type: string) => {
+const makeApiReducer = <R, T = undefined>(type: string) => {
   const REQUEST = (`${type}_REQUEST` as string) as 'REQUEST';
   const SUCCESS = (`${type}_SUCCESS` as string) as 'SUCCESS';
   const FAILURE = (`${type}_FAILURE` as string) as 'FAILURE';
@@ -45,12 +44,12 @@ const makeApiReducer = <T, R = undefined>(type: string) => {
 
   type Request = {
     type: typeof REQUEST;
-    payload: R;
+    payload: T;
   };
 
   type Success = {
     type: typeof SUCCESS;
-    payload: T;
+    payload: R;
   };
 
   type Failure = {
@@ -64,7 +63,7 @@ const makeApiReducer = <T, R = undefined>(type: string) => {
 
   type Action = Request | Success | Failure | Clear;
 
-  return (state: ApiState<T> = initialState, action: Action): ApiState<T> => {
+  return (state: ApiState<R> = initialState, action: Action): ApiState<R> => {
     switch (action.type) {
       case REQUEST:
         return {
@@ -110,12 +109,12 @@ const makeApiReducer = <T, R = undefined>(type: string) => {
 
 /**
  *
- * @param T Response Success Action Payload Type
- * @param R Request Action Payload Type
+ * @param R Response Success Action Payload Type
+ * @param T Request Action Payload Type
  * @param action Action String
  * @returns Action + Types
  */
-const createActionAndTypes = <T = undefined, R = undefined>(action: string): IActionAndTypes<T, R> => {
+const createActionAndTypes = <R = undefined, T = undefined>(action: string): IActionAndTypes<R, T> => {
   const types: ITypes = {
     DEFAULT: action,
     REQUEST: action + '_REQUEST',
@@ -124,14 +123,14 @@ const createActionAndTypes = <T = undefined, R = undefined>(action: string): IAc
     CLEAR: action + '_CLEAR',
   };
 
-  const actions: IActions<T, R> = {
-    REQUEST: (payload?: R) => {
+  const actions: IActions<R, T> = {
+    REQUEST: (payload?: T) => {
       return {
         type: types.REQUEST,
         payload,
       };
     },
-    SUCCESS: (payload?: HTTPResponse<T>) => {
+    SUCCESS: (payload?: HTTPResponse<R>) => {
       return {
         type: types.SUCCESS,
         payload,
