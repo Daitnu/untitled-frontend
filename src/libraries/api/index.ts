@@ -21,7 +21,7 @@ export default class Api {
         Accept: MEDIA_TYPE.JSON,
       },
       timeout: API_TIME_OUT,
-      withCredentials: true,
+      withCredentials: false,
     });
 
     this.axiosInstance.interceptors.response.use(
@@ -33,9 +33,11 @@ export default class Api {
       (error: AxiosError<BusinessErrorResponse>) => {
         let errResponse: BusinessErrorResponse;
         if (!error.response) {
+          const message =
+            error.message === 'Network Error' ? '인터넷 상태가 안좋습니다. 랜선을 확인해주세요.' : error.message;
           errResponse = {
             status: HTTP_STATUS.INTERNAL_SERVER_ERROR,
-            message: error.message,
+            message,
             code: null,
             errors: [],
             isError: true,
