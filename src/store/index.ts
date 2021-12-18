@@ -3,13 +3,14 @@ import { all } from 'redux-saga/effects';
 import { dailyStockPricesGetsGetSaga } from './stock';
 import dailyStockPrices from './stock/dailyStockPricesStore';
 import accountSaga, { account } from './account';
+import corperationSaga, { corperation } from './corperation';
 
-const rootReducer = combineReducers({ dailyStockPrices, account });
+const rootReducer = combineReducers({ dailyStockPrices, account, corperation });
 
 export default rootReducer;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
 export function* rootSaga() {
-  yield all([dailyStockPricesGetsGetSaga(), accountSaga()]);
+  yield all([dailyStockPricesGetsGetSaga(), accountSaga(), corperationSaga()]);
 }
