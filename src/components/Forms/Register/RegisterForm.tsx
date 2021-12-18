@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as LS from '../Login/styled';
@@ -60,34 +60,46 @@ export const RegisterForm: React.FC = () => {
 
   const handleSubmit = async (): Promise<void> => {
     const { id, name, email, pw, pwConfirm }: IRegisterForm = userValues;
-    // if (!registerValidate({ id, pw, pwConfirm, name }, setErrorMsg)) return;
-    // TODO: api call
-    dispatch(accountRegisterPostRequest({ id, name, email, password: pw, passwordConfirm: pwConfirm }));
+    const validationResult = validation.validator.form({
+      validations: formValidation,
+      values: userValues,
+      returnAllError: true,
+    });
+    if (validationResult.isError) {
+      for (let i = 0; i < validationResult.errors.length; i++) {
+        setErrorMsg((prev) => ({ ...prev, [validationResult.errors[i].key!]: validationResult.errors[i].reason }));
+      }
+    } else {
+      dispatch(accountRegisterPostRequest({ id, name, email, password: pw, passwordConfirm: pwConfirm }));
+    }
   };
 
-  const formValidation: IValidations = {
-    id: {
-      fieldName: '아이디',
-      rules: [validation.rules.required, validation.rules.lengthMax(20), validation.rules.alphanumeric],
-    },
-    pw: {
-      fieldName: '비밀번호',
-      rules: [validation.rules.required],
-    },
-    pwConfirm: {
-      fieldName: '비밀번호확인',
-      rules: [validation.rules.required, validation.rules.equalsTwoField('비밀번호')],
-      comparisonValue: userValues.pw,
-    },
-    email: {
-      fieldName: '이메일',
-      rules: [validation.rules.required, validation.rules.email],
-    },
-    name: {
-      fieldName: '이름',
-      rules: [validation.rules.required],
-    },
-  };
+  const formValidation: IValidations = useMemo(
+    () => ({
+      id: {
+        fieldName: 'id',
+        rules: [validation.rules.required, validation.rules.lengthMax(20), validation.rules.alphanumeric],
+      },
+      pw: {
+        fieldName: 'pw',
+        rules: [validation.rules.required],
+      },
+      pwConfirm: {
+        fieldName: 'pwConfirm',
+        rules: [validation.rules.required, validation.rules.equalsTwoField('비밀번호')],
+        comparisonValue: userValues.pw,
+      },
+      email: {
+        fieldName: 'email',
+        rules: [validation.rules.required, validation.rules.email],
+      },
+      name: {
+        fieldName: 'name',
+        rules: [validation.rules.required],
+      },
+    }),
+    [userValues.pw],
+  );
 
   return (
     <div>
