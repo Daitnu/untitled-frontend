@@ -1,6 +1,9 @@
+import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import { accountLoginPostSaga } from './login/accountLoginSaga';
-import { accountRegisterPostSaga } from './register/accountRegisterSaga';
+import { accountLoginPostSaga, accountLoginPostReducer } from './login/accountLogin';
+import { accountRegisterPostSaga, accountRegisterPostReducer } from './register/accountRegisterSaga';
+
+export const account = combineReducers({ login: accountLoginPostReducer, register: accountRegisterPostReducer });
 
 export default function* accountSaga() {
   yield all([accountRegisterPostSaga(), accountLoginPostSaga()]);

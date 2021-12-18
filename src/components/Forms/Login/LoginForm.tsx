@@ -38,7 +38,7 @@ const formValidation: IValidations = {
 const LoginForm: React.FC = () => {
   const [userValues, setUserValues] = useState<IUser>({ id: '', pw: '' });
   const [errorMsg, setErrorMsg] = useState<IError>({ id: '', pw: '' });
-  const loginApiState = useSelector((state: RootState) => state.accountLogin);
+  const loginApiState = useSelector((state: RootState) => state.account.login);
   const dispatch = useDispatch();
 
   useEffect(() => {
