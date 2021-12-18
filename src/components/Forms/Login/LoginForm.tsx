@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { accountLoginPostRequest } from '~/store/account/login';
 import { IValidations } from '~/@types/libraries';
 import { RootState } from '~/store';
+import { message, Button, Space } from 'antd';
 
 interface IUser {
   id: string;
@@ -48,7 +49,9 @@ const LoginForm: React.FC = () => {
   }, [loginApiState.response]);
 
   useEffect(() => {
-    console.log(loginApiState.errors);
+    if (loginApiState.errors?.message) {
+      message.error(loginApiState.errors.message, 10);
+    }
   }, [loginApiState.errors]);
 
   const handleInputChange = ({ target: { id, value } }): void => {

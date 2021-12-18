@@ -2,14 +2,18 @@ import { BusinessErrorResponse, HTTPResponse } from '~/@types/response';
 import { IResponseDailyStockPrices } from '~/@types/data/';
 import Api from '~/libraries/api';
 import API_PATH from '~/constants/path';
+import { IRequestParam } from '~/@types/request';
 
 export default class DailyStockPriceApi extends Api {
   constructor() {
     super();
   }
 
-  public async getdailyStockPrices(): Promise<HTTPResponse<IResponseDailyStockPrices> | BusinessErrorResponse> {
+  public async getdailyStockPrices({
+    token,
+  }: IRequestParam<null>): Promise<HTTPResponse<IResponseDailyStockPrices> | BusinessErrorResponse> {
+    console.log('getdailyStockPrices!!!', token);
     const fullPath = API_PATH.STOCK + '/';
-    return this.get<IResponseDailyStockPrices>({ url: fullPath });
+    return this.get<IResponseDailyStockPrices>({ url: fullPath, token });
   }
 }

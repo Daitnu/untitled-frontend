@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { BusinessErrorResponse, HTTPResponse } from '@t/response';
 import { ApiState, ApiCallSagaFunc, IActionAndTypes, IActions, ITypes } from '@t/store';
 
@@ -12,7 +12,9 @@ const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFu
   return function* (action) {
     const [SUCCESS, FAILURE] = [`${type}_SUCCESS`, `${type}_FAILURE`];
     try {
-      const payload = yield call(apiFunc, action.payload);
+      const token = yield select((state) => state.account.token?.response);
+      const authorizationHeader = token ? `${token.grantType} ${token.accessToken}` : null;
+      const payload = yield call(apiFunc, { data: action.payload, token: authorizationHeader });
       yield put({ type: SUCCESS, payload });
       if (successCb !== undefined) {
         yield call(successCb, payload);

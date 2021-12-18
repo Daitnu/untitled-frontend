@@ -1,4 +1,4 @@
-import { IRequestAccountLogin, IRequestAccountRegister } from '@t/request';
+import { IRequestAccountLogin, IRequestAccountRegister, IRequestParam } from '@t/request';
 import { BusinessErrorResponse, HTTPResponse, IResponseAccountLogin, IResponseAccountRegister } from '@t/response';
 import Api from '~/libraries/api';
 import API_PATH from '~/constants/path';
@@ -8,18 +8,18 @@ export default class AccountApi extends Api {
     super();
   }
 
-  public postAccountLogin(
-    data: IRequestAccountLogin,
-  ): Promise<HTTPResponse<IResponseAccountLogin> | BusinessErrorResponse> {
+  public postAccountLogin({
+    data,
+  }: IRequestParam<IRequestAccountLogin>): Promise<HTTPResponse<IResponseAccountLogin> | BusinessErrorResponse> {
     return this.post<IResponseAccountLogin, IRequestAccountLogin>({
       url: API_PATH.ACCOUNT.LOGIN,
       data,
     });
   }
 
-  public postAccountRegister(
-    data: IRequestAccountRegister,
-  ): Promise<HTTPResponse<IResponseAccountRegister> | BusinessErrorResponse> {
+  public postAccountRegister({
+    data,
+  }: IRequestParam<IRequestAccountRegister>): Promise<HTTPResponse<IResponseAccountRegister> | BusinessErrorResponse> {
     return this.post<IResponseAccountRegister, IRequestAccountRegister>({
       url: API_PATH.ACCOUNT.REGISTER,
       data,
