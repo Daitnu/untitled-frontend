@@ -1,1 +1,1 @@
-export * from './accountRegisterSaga';
+export * from './accountRegister';
