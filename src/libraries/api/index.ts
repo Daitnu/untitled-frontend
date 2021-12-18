@@ -21,7 +21,7 @@ export default class Api {
         Accept: MEDIA_TYPE.JSON,
       },
       timeout: API_TIME_OUT,
-      withCredentials: false,
+      withCredentials: true,
     });
 
     this.axiosInstance.interceptors.response.use(
