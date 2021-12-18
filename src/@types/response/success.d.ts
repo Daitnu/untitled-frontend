@@ -1,5 +1,5 @@
-export interface HTTPResponse<T> {
+export interface HTTPResponse<R> {
   status: number;
-  data: T;
+  data: R;
   headers: any;
 }
