@@ -1,4 +1,4 @@
-export interface RequestParam<T> {
+export interface IRequestParam<T> {
   url: string;
   data?: T;
   token?: string;

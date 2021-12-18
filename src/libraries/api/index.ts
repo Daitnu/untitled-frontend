@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { HTTPResponse, BusinessErrorResponse } from '@t/response';
-import { RequestParam } from '@t/request';
+import { IRequestParam } from '@t/request';
 import HTTP_STATUS from '../httpStatus';
 export * from './history';
 
@@ -58,7 +58,7 @@ export default class Api {
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
    * @returns {Promise<HTTPResponse<T>>}
    */
-  public get<T, D = undefined>({ url, data, token, options }: RequestParam<D>): Promise<HTTPResponse<T>> {
+  public get<T, D = undefined>({ url, data, token, options }: IRequestParam<D>): Promise<HTTPResponse<T>> {
     return this.axiosInstance.get(url, { params: data, headers: { Authorization: token }, ...options });
   }
 
@@ -69,7 +69,7 @@ export default class Api {
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
    * @returns {Promise<HTTPResponse<T>>}
    */
-  public post<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
+  public post<T, D = undefined>({ url, data, token }: IRequestParam<D>): Promise<HTTPResponse<T>> {
     return this.axiosInstance.post(url, data, { headers: { Authorization: token } });
   }
 
@@ -80,7 +80,7 @@ export default class Api {
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
    * @returns {Promise<HTTPResponse<T>>}
    */
-  public patch<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
+  public patch<T, D = undefined>({ url, data, token }: IRequestParam<D>): Promise<HTTPResponse<T>> {
     return this.axiosInstance.patch(url, data, { headers: { Authorization: token } });
   }
 
@@ -91,7 +91,7 @@ export default class Api {
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
    * @returns {Promise<HTTPResponse<T>>}
    */
-  public delete<T, D = undefined>({ url, data, token }: RequestParam<D>): Promise<HTTPResponse<T>> {
+  public delete<T, D = undefined>({ url, data, token }: IRequestParam<D>): Promise<HTTPResponse<T>> {
     return this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
   }
 }
