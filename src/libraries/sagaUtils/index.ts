@@ -38,10 +38,10 @@ const initialState = { loading: false, response: null, errors: null };
  * @param type Action type
  */
 const makeApiReducer = <T, R = undefined>(type: string) => {
-  const REQUEST = `${type}_REQUEST` as 'REQUEST';
-  const SUCCESS = `${type}_SUCCESS` as 'SUCCESS';
-  const FAILURE = `${type}_FAILURE` as 'FAILURE';
-  const CLEAR = `${type}_CLEAR` as 'CLEAR';
+  const REQUEST = (`${type}_REQUEST` as string) as 'REQUEST';
+  const SUCCESS = (`${type}_SUCCESS` as string) as 'SUCCESS';
+  const FAILURE = (`${type}_FAILURE` as string) as 'FAILURE';
+  const CLEAR = (`${type}_CLEAR` as string) as 'CLEAR';
 
   type Request = {
     type: typeof REQUEST;
