@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as LS from '../Login/styled';
 import { useDispatch } from 'react-redux';
-import { accountRegisterPostRequest } from '~/store/account';
+import { accountRegisterPostRequest } from '~/store/account/register';
 import validation from '~/libraries/validation';
 import { PATH_URL } from '~/constants';
 import { IValidation, IValidations } from '~/@types/libraries';
