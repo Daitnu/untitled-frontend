@@ -1,12 +1,15 @@
 import React from 'react';
 import { Button as AntdButton } from 'antd';
+import { ButtonType } from 'antd/lib/button';
 
 interface IButton {
-  type: string;
+  type?: ButtonType;
+  children: React.ReactElement | string;
 }
 
-const Button: React.FC<IButton> = ({ type }) => {
-  return <AntdButton type={type}>Primary Button</AntdButton>;
+const UButton: React.FC<IButton> = ({ type = 'default', children }) => {
+  return <AntdButton type={type}>{children}</AntdButton>;
 };
 
-export default Button;
+export default UButton;
+export type { ButtonType };
