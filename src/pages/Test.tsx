@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import UButton from '~/components/Atoms/UButton';
+import UModal from '~/components/Molecules/UModal';
 
 const download = () => {
   axios
@@ -16,11 +18,13 @@ const download = () => {
     })
     .then((result) => {
       console.log('result', result);
-      const name = result.headers['content-disposition'].split('filename=')[1];
+      const name: string = result.headers['content-disposition'].split('filename=')[1];
+      const newName = decodeURIComponent(name);
+
       const url = window.URL.createObjectURL(new Blob([result.data], { type: result.headers['content-type'] }));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', name);
+      link.setAttribute('download', newName);
       document.body.appendChild(link);
       link.click();
     });
@@ -31,6 +35,9 @@ const Test: React.FC = () => {
     <>
       <div>hello</div>
       <button onClick={download}>파일다운로드</button>
+      <UButton type="primary">가나다라마바사</UButton>
+      <UButton>가나다라마바사</UButton>
+      <UModal>컨텐츠입니다.!!</UModal>
     </>
   );
 };
