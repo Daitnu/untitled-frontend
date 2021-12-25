@@ -140,7 +140,7 @@ export const RegisterForm: React.FC = () => {
           id="email"
           placeholder="이메일"
           autoComplete="off"
-          maxLength={20}
+          maxLength={40}
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
