@@ -5,7 +5,7 @@ import UModal from '~/components/Molecules/UModal';
 
 const download = () => {
   axios
-    .get('http://localhost:8080/cmm/file', {
+    .get('http://localhost:8080/cmm/exportCSV', {
       headers: {
         'Content-Disposition': 'attachment; filename=test.xlxs',
       },
@@ -21,7 +21,9 @@ const download = () => {
       const name: string = result.headers['content-disposition'].split('filename=')[1];
       const newName = decodeURIComponent(name);
 
-      const url = window.URL.createObjectURL(new Blob([result.data], { type: result.headers['content-type'] }));
+      const url = window.URL.createObjectURL(
+        new Blob([new Uint8Array([0xef, 0xbb, 0xbf]), result.data], { type: result.headers['content-type'] }),
+      );
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', newName);
