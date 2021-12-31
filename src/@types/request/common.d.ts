@@ -3,4 +3,5 @@ export interface IRequestParam<T> {
   data?: T;
   token?: string;
   options?: object;
+  headers?: object;
 }
