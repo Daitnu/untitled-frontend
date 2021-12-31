@@ -1,4 +1,4 @@
-import { IBusinessErrorResponse, HTTPResponse } from '~/@types/response';
+import { IBusinessErrorResponse, IHTTPResponse } from '~/@types/response';
 import { IResponseDailyStockPrices } from '~/@types/data/';
 import Api from '~/libraries/api';
 import API_PATH from '~/constants/path';
@@ -11,7 +11,7 @@ export default class DailyStockPriceApi extends Api {
 
   public async getdailyStockPrices({
     token,
-  }: IRequestParam<null>): Promise<HTTPResponse<IResponseDailyStockPrices> | IBusinessErrorResponse> {
+  }: IRequestParam<null>): Promise<IHTTPResponse<IResponseDailyStockPrices> | IBusinessErrorResponse> {
     console.log('getdailyStockPrices!!!', token);
     const fullPath = API_PATH.STOCK + '/';
     return this.get<IResponseDailyStockPrices>({ url: fullPath, token });

@@ -1,6 +1,6 @@
 import { all, takeLatest } from 'redux-saga/effects';
 import { IResponseDailyStockPrices } from '~/@types/data';
-import { HTTPResponse } from '~/@types/response';
+import { IHTTPResponse } from '~/@types/response';
 import sagaUtils from '~/libraries/sagaUtils';
 import DailyStockPricesApi from '../DailyStockPricesApi';
 
@@ -15,7 +15,7 @@ export const dailyStockPricesGetSuccess = DAILY_STOCK_PRICES_GET_ACTIONS.SUCCESS
 
 export const dailyStockPricesGetFailure = DAILY_STOCK_PRICES_GET_ACTIONS.FAILURE;
 
-export const dailyStockPricesGetReducer = sagaUtils.makeApiReducer<HTTPResponse<IResponseDailyStockPrices>>(
+export const dailyStockPricesGetReducer = sagaUtils.makeApiReducer<IHTTPResponse<IResponseDailyStockPrices>>(
   DAILY_STOCK_PRICES_GET_TYPES.DEFAULT,
 );
 

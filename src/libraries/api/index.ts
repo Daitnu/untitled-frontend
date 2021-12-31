@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { HTTPResponse, IBusinessErrorResponse } from '@t/response';
+import { IHTTPResponse, IBusinessErrorResponse } from '@t/response';
 import { IRequestParam } from '@t/request';
 import HTTP_STATUS from '../httpStatus';
 export * from './history';
@@ -56,7 +56,7 @@ export default class Api {
    * @template T Response Type
    * @template D Request Type. default: undefined
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
-   * @returns {Promise<HTTPResponse<T>>}
+   * @returns {Promise<IHTTPResponse<T>>}
    */
   public get<T, D = undefined>({
     url,
@@ -64,7 +64,7 @@ export default class Api {
     token,
     options,
     headers,
-  }: IRequestParam<D>): Promise<HTTPResponse<T> | IBusinessErrorResponse> {
+  }: IRequestParam<D>): Promise<IHTTPResponse<T> | IBusinessErrorResponse> {
     return this.axiosInstance.get(url, { params: data, headers: { Authorization: token, ...headers }, ...options });
   }
 
@@ -73,13 +73,13 @@ export default class Api {
    * @template T Response Type
    * @template D Request Type. default: undefined
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
-   * @returns {Promise<HTTPResponse<T>>}
+   * @returns {Promise<IHTTPResponse<T>>}
    */
   public post<T, D = undefined>({
     url,
     data,
     token,
-  }: IRequestParam<D>): Promise<HTTPResponse<T> | IBusinessErrorResponse> {
+  }: IRequestParam<D>): Promise<IHTTPResponse<T> | IBusinessErrorResponse> {
     return this.axiosInstance.post(url, data, { headers: { Authorization: token } });
   }
 
@@ -88,13 +88,13 @@ export default class Api {
    * @template T Response Type
    * @template D Request Type. default: undefined
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
-   * @returns {Promise<HTTPResponse<T>>}
+   * @returns {Promise<IHTTPResponse<T>>}
    */
   public patch<T, D = undefined>({
     url,
     data,
     token,
-  }: IRequestParam<D>): Promise<HTTPResponse<T> | IBusinessErrorResponse> {
+  }: IRequestParam<D>): Promise<IHTTPResponse<T> | IBusinessErrorResponse> {
     return this.axiosInstance.patch(url, data, { headers: { Authorization: token } });
   }
 
@@ -103,13 +103,13 @@ export default class Api {
    * @template T Response Type
    * @template D Request Type. default: undefined
    * @param {RequestParam<D>} param - { url: string, data: D | undefined, token: string }: RequestParam<D>
-   * @returns {Promise<HTTPResponse<T>>}
+   * @returns {Promise<IHTTPResponse<T>>}
    */
   public delete<T, D = undefined>({
     url,
     data,
     token,
-  }: IRequestParam<D>): Promise<HTTPResponse<T> | IBusinessErrorResponse> {
+  }: IRequestParam<D>): Promise<IHTTPResponse<T> | IBusinessErrorResponse> {
     return this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
   }
 

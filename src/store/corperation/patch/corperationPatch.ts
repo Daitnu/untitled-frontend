@@ -1,5 +1,5 @@
 import { all, takeEvery } from 'redux-saga/effects';
-import { HTTPResponse } from '~/@types/response';
+import { IHTTPResponse } from '~/@types/response';
 import sagaUtils from '~/libraries/sagaUtils';
 import corperationApi from '../CorperationApi';
 
@@ -21,7 +21,7 @@ const corperationProfitPatch$ = sagaUtils.makeApiCallSagaFunc({
   apiFunc: corperationApi.updateCoperationProfit,
 });
 
-export const corperationProfitPatchReducer = sagaUtils.makeApiReducer<HTTPResponse<null>>(
+export const corperationProfitPatchReducer = sagaUtils.makeApiReducer<IHTTPResponse<null>>(
   CORPERATION_PROFIT21_TYPES.DEFAULT,
 );
 

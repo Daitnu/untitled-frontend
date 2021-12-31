@@ -2,7 +2,7 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import sagaUtils from '~/libraries/sagaUtils';
 // import { ACCOUNT_REGISTER_POST_TYPES, ACCOUNT_REGISTER_POST_ACTIONS } from './accountRegisterStore';
 import AccountApi from '~/store/account/AccountApi';
-import { HTTPResponse, IResponseAccountRegister } from '@t/response';
+import { IHTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants/path';
 import HTTP_STATUS from '~/libraries/httpStatus';
@@ -15,7 +15,7 @@ const { TYPES: ACCOUNT_REGISTER_POST_TYPES, ACTIONS: ACCOUNT_REGISTER_POST_ACTIO
 
 const api = new AccountApi();
 
-const accountRegisterPostsuccessCb = function* ({ status }: HTTPResponse<IResponseAccountRegister>) {
+const accountRegisterPostsuccessCb = function* ({ status }: IHTTPResponse<IResponseAccountRegister>) {
   if (status === HTTP_STATUS.CREATED) {
     yield call(historyPush, PATH_URL.LOGIN);
     yield put(ACCOUNT_REGISTER_POST_ACTIONS.CLEAR());

@@ -3,7 +3,7 @@ import sagaUtils from '~/libraries/sagaUtils';
 import storage from '~/libraries/store';
 import AccountApi from '~/store/account/AccountApi';
 import { IRequestAccountLogin } from '~/@types/request';
-import { HTTPResponse, IAccontToken, IResponseAccountLogin } from '~/@types/response';
+import { IHTTPResponse, IAccontToken, IResponseAccountLogin } from '~/@types/response';
 import { historyPush } from '~/libraries/api';
 import { PATH_URL } from '~/constants';
 import HTTP_STATUS from '~/libraries/httpStatus';
@@ -28,7 +28,7 @@ export const accountLoginPostClear = ACCOUNT_LOGIN_POST_ACTIONS.CLEAR;
 
 const api = new AccountApi();
 
-const successCb = function* ({ status, data }: HTTPResponse<IResponseAccountLogin>) {
+const successCb = function* ({ status, data }: IHTTPResponse<IResponseAccountLogin>) {
   if (status === HTTP_STATUS.OK) {
     const { refreshToken, accessToken, accessTokenExpiresIn, grantType }: IResponseAccountLogin = data;
     storage.local.set('refreshToken', refreshToken);

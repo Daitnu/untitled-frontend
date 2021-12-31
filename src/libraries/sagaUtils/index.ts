@@ -1,11 +1,11 @@
 import { call, put, select } from 'redux-saga/effects';
-import { IBusinessErrorResponse, HTTPResponse } from '@t/response';
+import { IBusinessErrorResponse, IHTTPResponse } from '@t/response';
 import { ApiState, ApiCallSagaFunc, IActionAndTypes, IActions, ITypes } from '@t/store';
 
 /**
  * @param type Action type
  * @param apiFunc Api 클래스의 상속을 받는 자식 클래스의 메소드
- * @param successCb payload(HTTPResponse)를 인자로 받는 cb
+ * @param successCb payload(IHTTPResponse)를 인자로 받는 cb
  * @param failCb err(IBusinessErrorResponse)를 인자로 받는 cb
  */
 const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFunc) => {
@@ -130,7 +130,7 @@ const createActionAndTypes = <R = undefined, T = undefined>(action: string): IAc
         payload,
       };
     },
-    SUCCESS: (payload?: HTTPResponse<R>) => {
+    SUCCESS: (payload?: IHTTPResponse<R>) => {
       return {
         type: types.SUCCESS,
         payload,

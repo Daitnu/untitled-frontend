@@ -1,11 +1,11 @@
 import { IBusinessErrorResponse } from '~/@types/response';
-import { HTTPResponse } from '~/@types/response';
+import { IHTTPResponse } from '~/@types/response';
 import { ApiState } from '..';
 
 export interface ApiCallSagaFunc {
   type: string;
-  apiFunc: (...args: any[]) => Promise<HTTPResponse<any> | IBusinessErrorResponse>;
-  successCb?: (arg: HTTPResponse<any>) => Generator | Function;
+  apiFunc: (...args: any[]) => Promise<IHTTPResponse<any> | IBusinessErrorResponse>;
+  successCb?: (arg: IHTTPResponse<any>) => Generator | Function;
   failCb?: (arg: IBusinessErrorResponse) => Generator | Function;
 }
 
