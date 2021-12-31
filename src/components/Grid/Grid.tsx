@@ -32,7 +32,7 @@ const onEditingFinishedHandle = async (event, gridData) => {
     stockCode: gridData[event.rowKey].stockCode,
   };
 
-  const response = await corperationApi.updateCoperationProfit(`/${columnName}`, data);
+  const response = await corperationApi.updateCoperationProfit({ url: `/${columnName}`, data });
 };
 
 const Grid = ({ data, columns, onClick }) => {
