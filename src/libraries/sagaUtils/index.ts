@@ -1,12 +1,12 @@
 import { call, put, select } from 'redux-saga/effects';
-import { BusinessErrorResponse, HTTPResponse } from '@t/response';
+import { IBusinessErrorResponse, HTTPResponse } from '@t/response';
 import { ApiState, ApiCallSagaFunc, IActionAndTypes, IActions, ITypes } from '@t/store';
 
 /**
  * @param type Action type
  * @param apiFunc Api 클래스의 상속을 받는 자식 클래스의 메소드
  * @param successCb payload(HTTPResponse)를 인자로 받는 cb
- * @param failCb err(BusinessErrorResponse)를 인자로 받는 cb
+ * @param failCb err(IBusinessErrorResponse)를 인자로 받는 cb
  */
 const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFunc) => {
   return function* (action) {
@@ -56,7 +56,7 @@ const makeApiReducer = <R, T = undefined>(type: string) => {
 
   type Failure = {
     type: typeof FAILURE;
-    payload: BusinessErrorResponse;
+    payload: IBusinessErrorResponse;
   };
 
   type Clear = {
@@ -98,7 +98,6 @@ const makeApiReducer = <R, T = undefined>(type: string) => {
 
 // const convert = (string: string): string => {
 //   const splited = string.split('_');
-
 //   const camels: string[] = [];
 //   for (let i = 0; i < splited.length; i++) {
 //     const firstAlphabet = splited[i].substr(0, 1);
@@ -110,7 +109,6 @@ const makeApiReducer = <R, T = undefined>(type: string) => {
 // };
 
 /**
- *
  * @param R Response Success Action Payload Type
  * @param T Request Action Payload Type
  * @param action Action String
@@ -138,7 +136,7 @@ const createActionAndTypes = <R = undefined, T = undefined>(action: string): IAc
         payload,
       };
     },
-    FAILURE: (payload: BusinessErrorResponse) => {
+    FAILURE: (payload: IBusinessErrorResponse) => {
       return {
         type: types.FAILURE,
         payload,

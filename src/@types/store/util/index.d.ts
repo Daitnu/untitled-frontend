@@ -1,12 +1,12 @@
-import { BusinessErrorResponse } from '~/@types/response';
+import { IBusinessErrorResponse } from '~/@types/response';
 import { HTTPResponse } from '~/@types/response';
 import { ApiState } from '..';
 
 export interface ApiCallSagaFunc {
   type: string;
-  apiFunc: (...args: any[]) => Promise<HTTPResponse<any> | BusinessErrorResponse>;
+  apiFunc: (...args: any[]) => Promise<HTTPResponse<any> | IBusinessErrorResponse>;
   successCb?: (arg: HTTPResponse<any>) => Generator | Function;
-  failCb?: (arg: BusinessErrorResponse) => Generator | Function;
+  failCb?: (arg: IBusinessErrorResponse) => Generator | Function;
 }
 
 export interface ITypes {
@@ -32,7 +32,7 @@ type INoPayloadAction = () => IClearActionResponse;
 export interface IActions<T, R> {
   REQUEST: IAction<R>;
   SUCCESS: IAction<T>;
-  FAILURE: IAction<BusinessErrorResponse>;
+  FAILURE: IAction<IBusinessErrorResponse>;
   CLEAR: INoPayloadAction;
 }
 

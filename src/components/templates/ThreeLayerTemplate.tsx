@@ -3,14 +3,14 @@ import { Alert, Layout } from 'antd';
 import Header from '~/components/Header';
 import Footer from '~/components/Footer';
 import { Loading } from '~/components/Loading';
-import { BusinessErrorResponse } from '~/@types/response';
+import { IBusinessErrorResponse } from '~/@types/response';
 
 const { Header: HeaderLayout, Footer: FooterLayout, Content: ContentLayout } = Layout;
 
 interface ISimplePageTemplate {
   children: React.ReactElement;
   isLoading?: boolean;
-  errors?: BusinessErrorResponse | null;
+  errors?: IBusinessErrorResponse | null;
 }
 
 export const ThreeLayerTemplate = ({ children, isLoading = false, errors }: ISimplePageTemplate) => {

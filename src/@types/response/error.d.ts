@@ -1,4 +1,4 @@
-export interface BusinessErrorResponse {
+export interface IBusinessErrorResponse {
   readonly status: number;
   readonly message: string;
   readonly code: string | null;
