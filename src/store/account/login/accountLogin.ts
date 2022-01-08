@@ -31,7 +31,7 @@ const api = new AccountApi();
 const successCb = function* ({ status, data }: IHTTPResponse<IResponseAccountLogin>) {
   if (status === HTTP_STATUS.OK) {
     const { refreshToken, accessToken, accessTokenExpiresIn, grantType }: IResponseAccountLogin = data;
-    storage.local.set('refreshToken', refreshToken);
+    storage.local.set('accessToken', accessToken);
     yield put(ACCOUNT_TOKEN_ACTIONS.SUCCESS(data));
     yield call(historyPush, PATH_URL.HOME);
     yield put(accountLoginPostClear());

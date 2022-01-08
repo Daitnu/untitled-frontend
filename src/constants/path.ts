@@ -10,6 +10,7 @@ const API_PATH = {
   ACCOUNT: {
     REGISTER: '/register' as const,
     LOGIN: '/login' as const,
+    REISSUE: '/reissue' as const,
   },
   STOCK: '/stock' as const,
   CORPERATION_CONSENSUS: '/corperation/consensus' as const,

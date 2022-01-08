@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { IHTTPResponse, IBusinessErrorResponse } from '@t/response';
 import { IRequestParam } from '@t/request';
 import HTTP_STATUS from '../httpStatus';
+import API_PATH from '~/constants/path';
 export * from './history';
 
 const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';
@@ -10,20 +11,21 @@ const MEDIA_TYPE = {
   JSON: 'application/json' as const,
   OCTET: 'application/octet-stream' as const,
 };
+const config = {
+  baseURL: API_SERVER,
+  headers: {
+    'Content-Type': `${MEDIA_TYPE.JSON}; charset=utf-8`,
+    Accept: MEDIA_TYPE.JSON,
+  },
+  timeout: API_TIME_OUT,
+  withCredentials: false,
+};
 
 export default class Api {
   private axiosInstance: AxiosInstance;
 
   constructor() {
-    this.axiosInstance = axios.create({
-      baseURL: API_SERVER,
-      headers: {
-        'Content-Type': `${MEDIA_TYPE.JSON}; charset=utf-8`,
-        Accept: MEDIA_TYPE.JSON,
-      },
-      timeout: API_TIME_OUT,
-      withCredentials: false,
-    });
+    this.axiosInstance = axios.create(config);
 
     this.axiosInstance.interceptors.response.use(
       ({ data, headers, status, config }: { data: any; headers: any; status: any; config: any }) => ({
@@ -47,6 +49,11 @@ export default class Api {
         } else {
           const { status, message, code } = error.response.data;
           errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
+          // if (error.response.status === 401) {
+          // TODO: reissue api call
+
+          // return Promise.reject(this.get({ url: API_PATH.ACCOUNT.REISSUE }));
+          // }
         }
         return Promise.reject(errResponse);
       },
