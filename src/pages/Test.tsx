@@ -6,32 +6,6 @@ import { apiInstance } from '~/libraries/api';
 
 const download = async () => {
   const response = await apiInstance.download('cmm/exportCSV', '헤헤.csv');
-
-  // axios
-  //   .get('http://localhost:8080/cmm/exportCSV', {
-  //     headers: {
-  //       'Content-Disposition': 'attachment; filename=test.xlxs',
-  //       'Content-Type': 'application/octet-stream',
-  //     },
-  //     responseType: 'blob',
-  //     onDownloadProgress: (progressEvent) => {
-  //       const { total, loaded } = progressEvent;
-  //       console.log('progressEvent', progressEvent);
-  //       console.log('percent', ((loaded / total) * 100).toFixed(2));
-  //     },
-  //   })
-  //   .then((result) => {
-  //     console.log('result', result);
-  //     const name: string = result.headers['content-disposition'].split('filename=')[1];
-  //     const newName = decodeURIComponent(name);
-
-  //     const url = window.URL.createObjectURL(new Blob([result.data], { type: result.headers['content-type'] }));
-  //     const link = document.createElement('a');
-  //     link.href = url;
-  //     link.setAttribute('download', newName);
-  //     document.body.appendChild(link);
-  //     link.click();
-  //   });
 };
 
 const Test: React.FC = () => {
