@@ -8,6 +8,7 @@ const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';
 const API_TIME_OUT: number = Number(process.env.REACT_APP_API_TIME_OUT) || 0;
 const MEDIA_TYPE = {
   JSON: 'application/json' as const,
+  OCTET: 'application/octet-stream' as const,
 };
 
 export default class Api {
@@ -25,10 +26,11 @@ export default class Api {
     });
 
     this.axiosInstance.interceptors.response.use(
-      ({ data, headers, status }: { data: any; headers: any; status: any }) => ({
+      ({ data, headers, status, config }: { data: any; headers: any; status: any; config: any }) => ({
         data,
         headers,
         status,
+        config,
       }),
       (error: AxiosError<IBusinessErrorResponse>) => {
         let errResponse: IBusinessErrorResponse;
@@ -113,35 +115,38 @@ export default class Api {
     return this.axiosInstance.delete(url, { data, headers: { Authorization: token } });
   }
 
-  public download = async ({ url }: { url: string }) => {
+  public download = async (url: string, fileName?: string) => {
     const headers: object = {
-      'Content-Disposition': 'attachment; filename=test.xlxs',
-      'Content-Type': 'application/octet-stream',
+      'content-disposition': `attachment; filename=${encodeURI(fileName || '')}`,
+      Accept: `${MEDIA_TYPE.OCTET}, ${MEDIA_TYPE.JSON}`,
     };
+
+    if (!fileName) {
+      delete headers['content-disposition'];
+    }
 
     const options: object = {
       responseType: 'blob',
     };
 
-    return this.get({ url, headers, options });
-    // const response = await this.get({ url, headers, options });
+    const response = await this.get<Blob>({ url, headers, options });
+    if ('isError' in response) {
+      return response;
+    }
+    const fileNameHeader = response.config.headers['content-disposition'] ? response.config.headers : response.headers;
+    const name: string = fileNameHeader['content-disposition'].split('filename=')[1];
+    const newName = decodeURIComponent(name);
 
-    // if (response.isError) {
-    //   return response;
+    const fileURL = window.URL.createObjectURL(
+      new Blob([new Uint8Array([0xef, 0xbb, 0xbf]), response.data], { type: response.headers['content-type'] }),
+    );
+    const link = document.createElement('a');
+    link.href = fileURL;
+    link.setAttribute('download', newName);
+    document.body.appendChild(link);
+    link.click();
 
-    // const name: string = response.headers['content-disposition'].split('filename=')[1];
-    // const newName = decodeURIComponent(name);
-
-    // const fileURL = window.URL.createObjectURL(
-    //   new Blob([new Uint8Array([0xef, 0xbb, 0xbf]), response.data], { type: response.headers['content-type'] }),
-    // );
-    // const link = document.createElement('a');
-    // link.href = fileURL;
-    // link.setAttribute('download', newName);
-    // document.body.appendChild(link);
-    // link.click();
-
-    // return response;
+    return response;
   };
 }
 
