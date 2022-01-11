@@ -1,0 +1,29 @@
+{
+  "LOGIN": {
+    "ID": "id",
+    "PW": "pw",
+    "AUTO": "auto login",
+    "LOGIN": "login",
+    "REGISTER": "register now",
+    "FORGOT_PW": "Forgot Password?",
+    "FACEBOOK": "Facebook",
+    "TWITTER": "Twitter",
+    "GOOGLE": "Google"
+  },
+
+  "HEADER": {
+    "LOGIN": "로그인",
+    "STOCK": "주식"
+  },
+
+  "RULE": {
+    "REQUIRED_NUMBER": "Only enter numbers.",
+    "REQUIRED": "Requred",
+    "EMAIL": "Not an email format.",
+    "LENGTH_MIN_MAX": "Only minimum length {{min}} and maximum length {{max}} can be entered.",
+    "LENGTH_MIN": "The minimum length is {{min}}",
+    "LENGTH_MAX": "The maximum length is {{max}}.",
+    "ALLOW_ALPAH_NUMBER": "Only enter English and numbers.",
+    "NOT_EQUALS_TWO_FIELD": "{{comparisonFieldName}} value and value are different."
+  }
+}

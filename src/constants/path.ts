@@ -14,6 +14,11 @@ const API_PATH = {
   },
   STOCK: '/stock' as const,
   CORPERATION_CONSENSUS: '/corperation/consensus' as const,
+
+  LANG: {
+    I18N_KO: '/static/ko.json' as const,
+    I18N_EN: '/static/en.json' as const,
+  },
   I18N_KO: '/static/ko.json' as const,
   I18N_EN: '/static/en.json' as const,
 };

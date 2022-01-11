@@ -1,0 +1,29 @@
+{
+  "LOGIN": {
+    "ID": "아이디",
+    "PW": "비밀번호",
+    "AUTO": "자동로그인",
+    "LOGIN": "로그인",
+    "REGISTER": "회원가입",
+    "FORGOT_PW": "비밀번호찾기",
+    "FACEBOOK": "페이스북으로 로그인하기",
+    "TWITTER": "트위터로 로그인하기",
+    "GOOGLE": "구글로 로그인하기"
+  },
+
+  "HEADER": {
+    "LOGIN": "로그인",
+    "STOCK": "주식"
+  },
+
+  "RULE": {
+    "REQUIRED_NUMBER": "숫자만 입력가능합니다.",
+    "REQUIRED": "필수입력값 입니다.",
+    "EMAIL": "이메일형식이 아닙니다.",
+    "LENGTH_MIN_MAX": "최소길이 {0}, 최고길이 {1}만 입력가능합니다.",
+    "LENGTH_MIN": "최소길이는 {{min}}입니다.",
+    "LENGTH_MAX": "최대길이 {{max}}입니다.",
+    "ALLOW_ALPAH_NUMBER": "영어와 숫자만 입력가능합니다.",
+    "NOT_EQUALS_TWO_FIELD": "{{comparisonFieldName}}와 값이 다릅니다."
+  }
+}

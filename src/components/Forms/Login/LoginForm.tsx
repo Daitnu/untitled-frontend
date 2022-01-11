@@ -9,6 +9,7 @@ import { accountLoginPostRequest } from '~/store/account/login';
 import { IValidations } from '~/@types/libraries';
 import { RootState } from '~/store';
 import { message, Button, Space } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 interface IUser {
   id: string;
@@ -37,6 +38,8 @@ const formValidation: IValidations = {
 };
 
 const LoginForm: React.FC = () => {
+  const { t } = useTranslation();
+
   const [userValues, setUserValues] = useState<IUser>({ id: '', pw: '' });
   const [errorMsg, setErrorMsg] = useState<IError>({ id: '', pw: '' });
   const loginApiState = useSelector((state: RootState) => state.account.login);
@@ -95,7 +98,7 @@ const LoginForm: React.FC = () => {
         <S.FormInput
           type="text"
           id="id"
-          placeholder="아이디"
+          placeholder={t('LOGIN.ID', '아이디')}
           maxLength={20}
           autoComplete="off"
           onChange={handleInputChange}
@@ -109,7 +112,7 @@ const LoginForm: React.FC = () => {
         <S.FormInput
           type="password"
           id="pw"
-          placeholder="비밀번호"
+          placeholder={t('LOGIN.PW', '비밀번호')}
           autoComplete="off"
           maxLength={20}
           onChange={handleInputChange}
@@ -122,18 +125,18 @@ const LoginForm: React.FC = () => {
           <GS.AlignCenter>
             <S.AutoLoginCheckInputLabel htmlFor="autoLogin">
               <S.AutoLoginCheckInput type="checkbox" id="autoLogin" />
-              자동 로그인
+              {t('LOGIN.AUTO', '자동로그인')}
             </S.AutoLoginCheckInputLabel>
           </GS.AlignCenter>
           <S.LoginButton type="submit" onClick={handleSubmitClick}>
-            로그인
+            {t('LOGIN.LOGIN', '로그인')}
           </S.LoginButton>
         </GS.SpaceBetweenWithFullWidth>
       </S.FormItem>
       <S.FormItem>
         <GS.SpaceBetweenWithFullWidth>
-          <Link to={PATH_URL.REGISTER}>Register now</Link>
-          <Link to={PATH_URL.FORGOT_PASSWORD}>Forgot password?</Link>
+          <Link to={PATH_URL.REGISTER}>{t('LOGIN.REGISTER', '회원가입')}</Link>
+          <Link to={PATH_URL.FORGOT_PASSWORD}>{t('LOGIN.FORGOT_PW', '비밀번호찾기')}</Link>
         </GS.SpaceBetweenWithFullWidth>
       </S.FormItem>
       <S.DivideLineContainer>
@@ -144,19 +147,19 @@ const LoginForm: React.FC = () => {
         <S.IconWrapper>
           <S.FacebookIcon />
         </S.IconWrapper>
-        <S.FacebookButton>페이스북으로 로그인하기</S.FacebookButton>
+        <S.FacebookButton>{t('LOGIN.FACEBOOK', '페이스북으로 로그인하기')}</S.FacebookButton>
       </S.FormItemWithIcon>
       <S.FormItemWithIcon>
         <S.IconWrapper>
           <S.TwitterIcon />
         </S.IconWrapper>
-        <S.TwitterButton>트위터로 로그인하기</S.TwitterButton>
+        <S.TwitterButton>{t('LOGIN.TWITTER', '트위터로 로그인하기')}</S.TwitterButton>
       </S.FormItemWithIcon>
       <S.FormItemWithIcon>
         <S.IconWrapper>
           <S.GoogleIcon />
         </S.IconWrapper>
-        <S.GoogleButton>구글로 로그인하기</S.GoogleButton>
+        <S.GoogleButton>{t('LOGIN.GOOGLE', '구글로 로그인하기')}</S.GoogleButton>
       </S.FormItemWithIcon>
     </div>
   );
