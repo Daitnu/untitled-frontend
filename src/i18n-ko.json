@@ -16,6 +16,16 @@
     "STOCK": "주식"
   },
 
+  "REGISTER": {
+    "ID": "아이디",
+    "PW": "비밀번호",
+    "EMAIL": "이메일",
+    "NAME": "이름",
+    "PW_CHECK": "비밀번호 확인",
+    "GO_LOGIN": "로그인하러 가기",
+    "SUBMIT": "회원가입"
+  },
+
   "RULE": {
     "REQUIRED_NUMBER": "숫자만 입력가능합니다.",
     "REQUIRED": "필수입력값 입니다.",

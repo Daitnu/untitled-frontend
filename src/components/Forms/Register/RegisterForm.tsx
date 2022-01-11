@@ -7,6 +7,7 @@ import { accountRegisterPostRequest } from '~/store/account/register';
 import validation from '~/libraries/validation';
 import { PATH_URL } from '~/constants';
 import { IValidation, IValidations } from '~/@types/libraries';
+import { useTranslation } from 'react-i18next';
 
 interface IRegisterForm {
   id: string;
@@ -25,6 +26,8 @@ const INITIAL_STATE: IRegisterForm = {
 };
 
 export const RegisterForm: React.FC = () => {
+  const { t } = useTranslation();
+
   const [userValues, setUserValues] = useState<IRegisterForm>(INITIAL_STATE);
   const [errorMsg, setErrorMsg] = useState<IRegisterForm>(INITIAL_STATE);
   const dispatch = useDispatch();
@@ -86,7 +89,7 @@ export const RegisterForm: React.FC = () => {
       },
       pwConfirm: {
         fieldName: 'pwConfirm',
-        rules: [validation.rules.required, validation.rules.equalsTwoField('비밀번호')],
+        rules: [validation.rules.required, validation.rules.equalsTwoField(t('REGISTER.PW', '비밀번호'))],
         comparisonValue: userValues.pw,
       },
       email: {
@@ -110,7 +113,7 @@ export const RegisterForm: React.FC = () => {
         <LS.FormInput
           type="text"
           id="id"
-          placeholder="아이디"
+          placeholder={t('REGISTER.ID', '아이디')}
           maxLength={20}
           autoComplete="off"
           onChange={handleInputChange}
@@ -124,7 +127,7 @@ export const RegisterForm: React.FC = () => {
         <LS.FormInput
           type="text"
           id="name"
-          placeholder="이름"
+          placeholder={t('REGISTER.NAME', '이름')}
           maxLength={20}
           autoComplete="off"
           onChange={handleInputChange}
@@ -138,7 +141,7 @@ export const RegisterForm: React.FC = () => {
         <LS.FormInput
           type="email"
           id="email"
-          placeholder="이메일"
+          placeholder={t('REGISTER.EMAIL', '이메일')}
           autoComplete="off"
           maxLength={40}
           onChange={handleInputChange}
@@ -152,7 +155,7 @@ export const RegisterForm: React.FC = () => {
         <LS.FormInput
           type="password"
           id="pw"
-          placeholder="비밀번호"
+          placeholder={t('REGISTER.PW', '비밀번호')}
           autoComplete="off"
           maxLength={20}
           onChange={handleInputChange}
@@ -167,7 +170,7 @@ export const RegisterForm: React.FC = () => {
         <LS.FormInput
           type="password"
           id="pwConfirm"
-          placeholder="비밀번호 확인"
+          placeholder={t('REGISTER.PW_CHECK', '비밀번호 확인')}
           autoComplete="off"
           maxLength={20}
           onChange={handleInputChange}
@@ -175,9 +178,9 @@ export const RegisterForm: React.FC = () => {
         />
       </LS.FormItemWithIcon>
       <S.ErrorMsg>{errorMsg.pwConfirm}</S.ErrorMsg>
-      <S.RegisterButton onClick={handleSubmit}>회원가입</S.RegisterButton>
+      <S.RegisterButton onClick={handleSubmit}>{t('REGISTER.SUBMIT', '회원가입')}</S.RegisterButton>
       <Link to={PATH_URL.LOGIN}>
-        <S.RegisterButton>로그인하러 가기</S.RegisterButton>
+        <S.RegisterButton>{t('REGISTER.GO_LOGIN', '로그인하러 가기')}</S.RegisterButton>
       </Link>
     </div>
   );

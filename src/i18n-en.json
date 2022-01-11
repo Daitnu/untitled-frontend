@@ -11,6 +11,16 @@
     "GOOGLE": "Google"
   },
 
+  "REGISTER": {
+    "ID": "id",
+    "PW": "pw",
+    "EMAIL": "email",
+    "NAME": "name",
+    "PW_CHECK": "pw check",
+    "GO_LOGIN": "Go to Login",
+    "SUBMIT": "Submit"
+  },
+
   "HEADER": {
     "LOGIN": "로그인",
     "STOCK": "주식"
