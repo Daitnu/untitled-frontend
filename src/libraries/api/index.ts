@@ -2,7 +2,6 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { IHTTPResponse, IBusinessErrorResponse } from '@t/response';
 import { IRequestParam } from '@t/request';
 import HTTP_STATUS from '../httpStatus';
-import API_PATH from '~/constants/path';
 export * from './history';
 
 const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';
@@ -27,6 +26,13 @@ export default class Api {
   constructor() {
     this.axiosInstance = axios.create(config);
 
+    this.axiosInstance.interceptors.request.use((config) => {
+      if (!window.navigator.onLine) {
+        return Promise.reject({ statue: 400, message: '인터넷 상태가 안좋습니다. 랜선을 확인해주세요.', errors: [] });
+      }
+      return config;
+    });
+
     this.axiosInstance.interceptors.response.use(
       ({ data, headers, status, config }: { data: any; headers: any; status: any; config: any }) => ({
         data,
@@ -37,8 +43,7 @@ export default class Api {
       (error: AxiosError<IBusinessErrorResponse>) => {
         let errResponse: IBusinessErrorResponse;
         if (!error.response) {
-          const message =
-            error.message === 'Network Error' ? '인터넷 상태가 안좋습니다. 랜선을 확인해주세요.' : error.message;
+          const message = error.message === 'Network Error' ? '서버오류입니다.' : error.message;
           errResponse = {
             status: HTTP_STATUS.INTERNAL_SERVER_ERROR,
             message,
