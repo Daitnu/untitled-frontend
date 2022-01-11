@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './router';
-import './i18n';
+import './locales';
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));
