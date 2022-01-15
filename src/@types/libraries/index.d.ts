@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 export interface IValidation {
   fieldName: string;
-  rules: ((v: string, v2?: string) => true | string)[];
+  rules: ((v: string, v2?: string) => any)[];
   comparisonValue?: string;
 }
 
