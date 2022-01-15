@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PATH_URL } from '~/constants';
+import storage from '~/libraries/store';
 import * as S from './styled';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import { Button } from 'antd';
+import { apiInstance } from '~/libraries/api';
 
 const Header = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (storage.local.get('accessToken')) {
+      apiInstance.post({ url: '/reissue', data: { accessToken: storage.local.get('accessToken') } });
+    }
+  }, []);
 
   return (
     <S.Header>

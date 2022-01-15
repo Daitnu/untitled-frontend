@@ -17,7 +17,7 @@ const config = {
     Accept: MEDIA_TYPE.JSON,
   },
   timeout: API_TIME_OUT,
-  withCredentials: false,
+  withCredentials: true,
 };
 
 export default class Api {
@@ -54,11 +54,6 @@ export default class Api {
         } else {
           const { status, message, code } = error.response.data;
           errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
-          // if (error.response.status === 401) {
-          // TODO: reissue api call
-
-          // return Promise.reject(this.get({ url: API_PATH.ACCOUNT.REISSUE }));
-          // }
         }
         return Promise.reject(errResponse);
       },
