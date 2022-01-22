@@ -5,6 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const RobotstxtPlugin = require('robotstxt-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const robotsOptions = require('./robots-txt.config');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   mode: 'production',
@@ -85,6 +86,11 @@ module.exports = {
     new RobotstxtPlugin(robotsOptions),
     new Dotenv({
       path: './.env',
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'bundleAnalyzer.html',
+      openAnalyzer: false,
     }),
   ],
 };
