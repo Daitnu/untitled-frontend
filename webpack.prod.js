@@ -26,6 +26,14 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.json'],
   },
 
+  // https://webpack.kr/guides/code-splitting/
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+
   module: {
     rules: [
       {
