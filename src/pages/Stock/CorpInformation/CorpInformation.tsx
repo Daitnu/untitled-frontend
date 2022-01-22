@@ -7,7 +7,7 @@ import * as S from './styled';
 
 const CorpInformation: React.FC = () => {
   document.title = `국내주식목록:${PROJECT_NAME}`;
-  const { code: stringCode } = useParams();
+  const { code: stringCode } = useParams<{ code: string }>();
   const code = Number(stringCode);
 
   if (!Number.isInteger(code)) {
