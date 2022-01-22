@@ -6,33 +6,39 @@ export const number = (value: string) =>
 
 export const required = (value: string) =>
   (!!value && !validator.isEmpty(value, { ignore_whitespace: true })) ||
-  i18n.t('RULE.REQUIRED', { defaultValue: '필수입력값 입니다.' });
+  (i18n.t('RULE.REQUIRED', { defaultValue: '필수입력값 입니다.' }) as string);
 
 export const email = (value: string) =>
-  validator.isEmail(value) || i18n.t('RULE.EMAIL', { defaultValue: '이메일형식이 아닙니다.' });
+  validator.isEmail(value) || (i18n.t('RULE.EMAIL', { defaultValue: '이메일형식이 아닙니다.' }) as string);
 
 export const length = (min: number, max: number) => (value: string) =>
   validator.isLength(value, { min, max }) ||
-  i18n.t('RULE.LENGTH_MIN_MAX', { defaultValue: `최소길이 {{min}}, 최고길이 {{max}}만 입력가능합니다.`, min, max });
+  (i18n.t('RULE.LENGTH_MIN_MAX', {
+    defaultValue: `최소길이 {{min}}, 최고길이 {{max}}만 입력가능합니다.`,
+    min,
+    max,
+  }) as string);
 
 export const lengthMin = (min: number) => (value: string) =>
-  validator.isLength(value, { min }) || i18n.t('RULE.LENGTH_MIN', { defaultValue: `최소길이는 {{min}}입니다.`, min });
+  validator.isLength(value, { min }) ||
+  (i18n.t('RULE.LENGTH_MIN', { defaultValue: `최소길이는 {{min}}입니다.`, min }) as string);
 
 export const lengthMax = (max: number) => (value: string) =>
-  validator.isLength(value, { max }) || i18n.t('RULE.LENGTH_MAX', { defaultValue: `최대길이는 {{max}}입니다.`, max });
+  validator.isLength(value, { max }) ||
+  (i18n.t('RULE.LENGTH_MAX', { defaultValue: `최대길이는 {{max}}입니다.`, max }) as string);
 
 export const alphanumeric = (value: string) =>
   validator.isAlphanumeric(value) ||
-  i18n.t('RULE.ALLOW_ALPAH_NUMBER', { defaultValue: '영어와 숫자만 입력가능합니다.' });
+  (i18n.t('RULE.ALLOW_ALPAH_NUMBER', { defaultValue: '영어와 숫자만 입력가능합니다.' }) as string);
 
 export const equalsTwoField = (comparisonFieldName: string) => {
   return function compareTwoField(str, comparison) {
     return (
       validator.equals(str, comparison) ||
-      i18n.t(`RULE.NOT_EQUALS_TWO_FIELD`, {
+      (i18n.t(`RULE.NOT_EQUALS_TWO_FIELD`, {
         defaultValue: '{{comparisonFieldName}}와 값이 다릅니다.',
         comparisonFieldName,
-      })
+      }) as string)
     );
   };
 };
