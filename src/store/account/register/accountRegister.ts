@@ -1,6 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import sagaUtils from '~/libraries/sagaUtils';
-// import { ACCOUNT_REGISTER_POST_TYPES, ACCOUNT_REGISTER_POST_ACTIONS } from './accountRegisterStore';
 import AccountApi from '~/store/account/AccountApi';
 import { IHTTPResponse, IResponseAccountRegister } from '@t/response';
 import { historyPush } from '~/libraries/api';

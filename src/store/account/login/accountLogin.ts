@@ -13,11 +13,6 @@ export const { ACTIONS: ACCOUNT_LOGIN_POST_ACTIONS, TYPES: ACCOUNT_LOGIN_POST_TY
   IRequestAccountLogin
 >('ACCOUNT_LOGIN_POST');
 
-export const { ACTIONS: ACCOUNT_TOKEN_ACTIONS, TYPES: ACCOUNT_TOKEN_TYPES } = sagaUtils.createActionAndTypes<
-  null,
-  IAccontToken
->('ACCOUNT_TOKEN');
-
 export const accountLoginPostRequest = ACCOUNT_LOGIN_POST_ACTIONS.REQUEST;
 
 export const accountLoginPostSuccess = ACCOUNT_LOGIN_POST_ACTIONS.SUCCESS;
@@ -30,9 +25,8 @@ const api = new AccountApi();
 
 const successCb = function* ({ status, data }: IHTTPResponse<IResponseAccountLogin>) {
   if (status === HTTP_STATUS.OK) {
-    const { refreshToken, accessToken, accessTokenExpiresIn, grantType }: IResponseAccountLogin = data;
+    const { accessToken }: IResponseAccountLogin = data;
     storage.local.set('accessToken', accessToken);
-    yield put(ACCOUNT_TOKEN_ACTIONS.SUCCESS(data));
     yield call(historyPush, PATH_URL.HOME);
     yield put(accountLoginPostClear());
   }
@@ -47,8 +41,6 @@ const accountLoginPost$ = sagaUtils.makeApiCallSagaFunc({
 export const accountLoginPostReducer = sagaUtils.makeApiReducer<IResponseAccountLogin, IRequestAccountLogin>(
   ACCOUNT_LOGIN_POST_TYPES.DEFAULT,
 );
-
-export const accountTokenReducer = sagaUtils.makeApiReducer<null, IAccontToken>(ACCOUNT_TOKEN_TYPES.DEFAULT);
 
 export function* accountLoginPostSaga() {
   yield all([takeLatest(ACCOUNT_LOGIN_POST_TYPES.REQUEST, accountLoginPost$)]);
