@@ -2,6 +2,10 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { IHTTPResponse, IBusinessErrorResponse } from '@t/response';
 import { IRequestParam } from '@t/request';
 import HTTP_STATUS from '../httpStatus';
+import storage from '~/libraries/store';
+import API_PATH, { PATH_URL } from '~/constants/path';
+import { history } from './history';
+import { IResponseAccessTokenReissue } from '~/@types/response/account/reissue';
 export * from './history';
 
 const API_SERVER: string = process.env.REACT_APP_API_BASE_URL || '';
@@ -54,6 +58,23 @@ export default class Api {
         } else {
           const { status, message, code } = error.response.data;
           errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
+          if (status === 401) {
+            if (error.request.responseURL !== error.config.baseURL + API_PATH.ACCOUNT.REISSUE) {
+              return this.axiosInstance
+                .post<IResponseAccessTokenReissue>(API_PATH.ACCOUNT.REISSUE, {
+                  accessToken: storage.local.get('accessToken') as string,
+                })
+                .then((res) => {
+                  error.config.headers['Authorization'] = `${res.data.grantType} ${res.data.accessToken}`;
+                  return this.axiosInstance.request(error.config);
+                })
+                .catch((err) => {
+                  return Promise.reject(err);
+                });
+            } else {
+              history.push(PATH_URL.LOGIN);
+            }
+          }
         }
         return Promise.reject(errResponse);
       },
