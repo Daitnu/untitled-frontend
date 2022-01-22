@@ -72,6 +72,7 @@ export default class Api {
                   return Promise.reject(err);
                 });
             } else {
+              storage.local.remove('accessToken');
               history.push(PATH_URL.LOGIN);
             }
           }
