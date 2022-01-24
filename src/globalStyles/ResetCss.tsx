@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { BREAK_POINT_MOBILE } from '~/constants';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 export const ResetCss = createGlobalStyle`
   * { font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important; }
