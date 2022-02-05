@@ -25,8 +25,9 @@ const api = new AccountApi();
 
 const successCb = function* ({ status, data }: IHTTPResponse<IResponseAccountLogin>) {
   if (status === HTTP_STATUS.OK) {
-    const { accessToken }: IResponseAccountLogin = data;
+    const { accessToken, grantType }: IResponseAccountLogin = data;
     storage.local.set('accessToken', accessToken);
+    storage.local.set('grantType', grantType);
     yield call(historyPush, PATH_URL.HOME);
     yield put(accountLoginPostClear());
   }
