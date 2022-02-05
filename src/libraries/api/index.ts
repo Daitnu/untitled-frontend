@@ -2,7 +2,6 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { IHTTPResponse, IBusinessErrorResponse } from '@t/response';
 import { IRequestParam } from '@t/request';
 import HTTP_STATUS from '../httpStatus';
-import storage from '~/libraries/store';
 import API_PATH, { PATH_URL } from '~/constants/path';
 import { history } from './history';
 import { IResponseAccessTokenReissue } from '~/@types/response/account/reissue';
@@ -62,7 +61,7 @@ export default class Api {
             if (error.request.responseURL !== error.config.baseURL + API_PATH.ACCOUNT.REISSUE) {
               return this.axiosInstance
                 .post<IResponseAccessTokenReissue>(API_PATH.ACCOUNT.REISSUE, {
-                  accessToken: storage.local.get('accessToken') as string,
+                  accessToken: localStorage.getItem('accessToken'),
                 })
                 .then((res) => {
                   error.config.headers['Authorization'] = `${res.data.grantType} ${res.data.accessToken}`;
@@ -72,7 +71,7 @@ export default class Api {
                   return Promise.reject(err);
                 });
             } else {
-              storage.local.remove('accessToken');
+              localStorage.removeItem('accessToken');
               history.push(PATH_URL.LOGIN);
             }
           }

@@ -1,6 +1,5 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import sagaUtils from '~/libraries/sagaUtils';
-import storage from '~/libraries/store';
 import AccountApi from '~/store/account/AccountApi';
 import { IRequestAccountLogin } from '~/@types/request';
 import { IHTTPResponse, IAccontToken, IResponseAccountLogin } from '~/@types/response';
@@ -26,8 +25,8 @@ const api = new AccountApi();
 const successCb = function* ({ status, data }: IHTTPResponse<IResponseAccountLogin>) {
   if (status === HTTP_STATUS.OK) {
     const { accessToken, grantType }: IResponseAccountLogin = data;
-    storage.local.set('accessToken', accessToken);
-    storage.local.set('grantType', grantType);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('grantType', grantType);
     yield call(historyPush, PATH_URL.HOME);
     yield put(accountLoginPostClear());
   }
