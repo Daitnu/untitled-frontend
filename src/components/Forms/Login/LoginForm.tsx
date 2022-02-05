@@ -5,10 +5,10 @@ import * as GS from '~/globalStyles';
 import { KEY_CODE, PATH_URL } from '~/constants';
 import validation from '~/libraries/validation';
 import { useDispatch, useSelector } from 'react-redux';
-import { accountLoginPostRequest } from '~/store/account/login';
+import { accountLoginPostClear, accountLoginPostRequest } from '~/store/account/login';
 import { IValidations } from '~/@types/libraries';
 import { RootState } from '~/store';
-import { message, Button, Space } from 'antd';
+import { message } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 interface IUser {
@@ -54,6 +54,7 @@ const LoginForm: React.FC = () => {
   useEffect(() => {
     if (loginApiState.errors?.message) {
       message.error(loginApiState.errors.message, 10);
+      dispatch(accountLoginPostClear());
     }
   }, [loginApiState.errors]);
 
