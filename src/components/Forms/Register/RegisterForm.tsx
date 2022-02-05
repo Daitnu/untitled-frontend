@@ -8,6 +8,7 @@ import validation from '~/libraries/validation';
 import { PATH_URL } from '~/constants';
 import { IValidation, IValidations } from '~/@types/libraries';
 import { useTranslation } from 'react-i18next';
+import FormInput from '~/components/Molecules/FormInput';
 
 interface IRegisterForm {
   id: string;
@@ -41,6 +42,8 @@ export const RegisterForm: React.FC = () => {
     const id = 'pwConfirm';
     const value = userValues.pwConfirm;
     const validationResult = validateBlur(id, value);
+
+    console.log('validationResult', validationResult);
 
     setErrorMsg({
       ...errorMsg,
@@ -110,26 +113,31 @@ export const RegisterForm: React.FC = () => {
         <LS.IconWrapper>
           <LS.UserIcon />
         </LS.IconWrapper>
-        <LS.FormInput
-          type="text"
+        <FormInput
           id="id"
+          width={250}
+          height={50}
+          borderWidth={0}
+          padding={10}
           placeholder={t('REGISTER.ID', '아이디')}
           maxLength={20}
-          autoComplete="off"
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
+
       <S.ErrorMsg>{errorMsg.id}</S.ErrorMsg>
       <LS.FormItemWithIcon isError={!!errorMsg.name}>
         <LS.IconWrapper>
           <S.UserNameIcon />
         </LS.IconWrapper>
-        <LS.FormInput
-          type="text"
+        <FormInput
           id="name"
+          width={250}
+          height={50}
+          borderWidth={0}
+          padding={10}
           placeholder={t('REGISTER.NAME', '이름')}
           maxLength={20}
-          autoComplete="off"
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
@@ -138,11 +146,13 @@ export const RegisterForm: React.FC = () => {
         <LS.IconWrapper>
           <LS.EmailIcon />
         </LS.IconWrapper>
-        <LS.FormInput
-          type="email"
+        <FormInput
           id="email"
+          width={250}
+          height={50}
+          borderWidth={0}
+          padding={10}
           placeholder={t('REGISTER.EMAIL', '이메일')}
-          autoComplete="off"
           maxLength={40}
           onChange={handleInputChange}
         />
@@ -152,11 +162,13 @@ export const RegisterForm: React.FC = () => {
         <LS.IconWrapper>
           <LS.PasswordIcon />
         </LS.IconWrapper>
-        <LS.FormInput
-          type="password"
+        <FormInput
           id="pw"
+          width={250}
+          height={50}
+          borderWidth={0}
+          padding={10}
           placeholder={t('REGISTER.PW', '비밀번호')}
-          autoComplete="off"
           maxLength={20}
           onChange={handleInputChange}
         />
@@ -166,15 +178,15 @@ export const RegisterForm: React.FC = () => {
         <LS.IconWrapper>
           <LS.PasswordIcon />
         </LS.IconWrapper>
-
-        <LS.FormInput
-          type="password"
+        <FormInput
           id="pwConfirm"
+          width={250}
+          height={50}
+          borderWidth={0}
+          padding={10}
           placeholder={t('REGISTER.PW_CHECK', '비밀번호 확인')}
-          autoComplete="off"
           maxLength={20}
           onChange={handleInputChange}
-          // disabled={!userValues.pw || errorMsg.pw}
         />
       </LS.FormItemWithIcon>
       <S.ErrorMsg>{errorMsg.pwConfirm}</S.ErrorMsg>
