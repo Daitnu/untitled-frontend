@@ -6,6 +6,7 @@ const RobotstxtPlugin = require('robotstxt-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const robotsOptions = require('./robots-txt.config');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -32,6 +33,8 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
     },
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 
   module: {

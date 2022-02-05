@@ -6,12 +6,13 @@ const RobotstxtPlugin = require('robotstxt-webpack-plugin');
 const robotsOptions = require('./robots-txt.config');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
   output: {
-    filename: 'bundle.js',
+    filename: '[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
@@ -24,6 +25,20 @@ module.exports = {
       Assets: path.resolve(__dirname, 'assets'),
     },
     extensions: ['.ts', '.tsx', '.js', '.json'],
+  },
+
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        // terserOptions: { ecma: 6, compress: { drop_console: true }, output: { comments: false } },
+        // parallel: 4,
+      }),
+    ],
   },
 
   module: {
