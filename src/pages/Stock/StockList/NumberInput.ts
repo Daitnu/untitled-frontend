@@ -5,8 +5,6 @@ export class NumberInput {
     const el = document.createElement('input');
     const { maxLength } = props.columnInfo.editor.options;
 
-    console.log('columns ', props.rows);
-
     el.type = 'text';
     el.maxLength = maxLength;
     el.value = String(props.value);

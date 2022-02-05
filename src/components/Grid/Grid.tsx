@@ -58,7 +58,7 @@ const Grid = ({ data, columns, onClick }) => {
       showDummyRows={true}
       onClick={onClick}
       onEditingFinish={(event) => onEditingFinishedHandle(event, data)}
-      onSort={(event) => console.log('onsort event', event)}
+      // onSort={(event) =>  }
     />
   );
 };

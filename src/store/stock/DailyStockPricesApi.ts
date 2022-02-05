@@ -12,7 +12,6 @@ export default class DailyStockPriceApi extends Api {
   public async getdailyStockPrices({
     token,
   }: IRequestParam<null>): Promise<IHTTPResponse<IResponseDailyStockPrices> | IBusinessErrorResponse> {
-    console.log('getdailyStockPrices!!!', token);
     const fullPath = API_PATH.STOCK + '/';
     return this.get<IResponseDailyStockPrices>({ url: fullPath, token });
   }

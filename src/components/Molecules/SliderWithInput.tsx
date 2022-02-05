@@ -29,10 +29,9 @@ export const SliderWithInput = ({ labelName, min = 0, max = 0 }: SilderWidthInpu
   };
 
   const onChangeCheckbox = (e) => {
-    console.log(`checked = ${e.target.checked}`);
+    // todo
   };
 
-  console.log('range ', rangeValues);
   return (
     <Row align="middle">
       <Col flex="70px">
