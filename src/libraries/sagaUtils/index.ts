@@ -14,8 +14,6 @@ const makeApiCallSagaFunc = ({ type, apiFunc, successCb, failCb }: ApiCallSagaFu
     try {
       const accessToken = localStorage.getItem('accessToken');
       const grantType = localStorage.getItem('grantType');
-
-      console.log('accessToken', accessToken);
       const authorizationHeader = accessToken ? `${grantType} ${accessToken}` : null;
       const payload = yield call(apiFunc, { data: action.payload, token: authorizationHeader });
       yield put({ type: SUCCESS, payload });

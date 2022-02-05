@@ -58,7 +58,10 @@ export default class Api {
           const { status, message, code } = error.response.data;
           errResponse = { status, message, code, errors: error.response.data.errors, isError: true };
           if (status === 401) {
-            if (error.request.responseURL !== error.config.baseURL + API_PATH.ACCOUNT.REISSUE) {
+            if (
+              error.request.responseURL !== error.config.baseURL + API_PATH.ACCOUNT.REISSUE &&
+              !!localStorage.getItem('accessToken')
+            ) {
               return this.axiosInstance
                 .post<IResponseAccessTokenReissue>(API_PATH.ACCOUNT.REISSUE, {
                   accessToken: localStorage.getItem('accessToken'),
