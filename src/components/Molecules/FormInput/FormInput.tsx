@@ -3,6 +3,7 @@ import * as S from './styled';
 import Input from '~/components/Atoms/Input';
 
 interface IFormInput {
+  type?: 'text' | 'password';
   id: string;
   width: number;
   height: number;
@@ -19,6 +20,7 @@ interface IFormInput {
 }
 
 const FormInput: React.FC<IFormInput> = ({
+  type = 'text',
   id,
   width,
   height,
@@ -43,6 +45,7 @@ const FormInput: React.FC<IFormInput> = ({
       borderColor={borderColor}
       backgroundColor={backgroundColor}>
       <Input
+        type={type}
         id={id}
         width={width}
         height={height}
