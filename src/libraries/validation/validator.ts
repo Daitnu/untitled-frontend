@@ -53,18 +53,14 @@ export const field = ({
 const validate = ({ validation, value, returnAllError, key }: IValidate): IValidationResult => {
   const allError: IError[] = [];
   const { fieldName, rules }: IValidation = validation;
-  let { comparisonValue } = validation;
+  const { comparisonValue } = validation;
 
   if (typeof value === 'number') {
     value = Number.isNaN(value) ? '' : String(value);
   }
 
   for (const rule of rules) {
-    const isCompareTwoField = rule.name === 'compareTwoField';
-    if (isCompareTwoField) {
-      if (!comparisonValue) comparisonValue = fieldName + value;
-    }
-    const result = isCompareTwoField ? rule(value, comparisonValue) : rule(value);
+    const result = rule(value, comparisonValue);
     if (result !== true) {
       const error = { fieldName, reason: result, key };
       allError.push(error);

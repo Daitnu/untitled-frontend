@@ -36,7 +36,7 @@ export const alphanumeric = (value: string) =>
   (i18n.t('RULE.ALLOW_ALPAH_NUMBER', { defaultValue: '영어와 숫자만 입력가능합니다.' }) as string);
 
 export const equalsTwoField = (comparisonFieldName: string) => {
-  return function compareTwoField(str, comparison) {
+  return (str, comparison) => {
     return (
       equals(str, comparison) ||
       (i18n.t(`RULE.NOT_EQUALS_TWO_FIELD`, {
