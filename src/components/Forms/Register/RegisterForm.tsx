@@ -8,7 +8,9 @@ import validation from '~/libraries/validation';
 import { PATH_URL } from '~/constants';
 import { IValidation, IValidations } from '~/@types/libraries';
 import { useTranslation } from 'react-i18next';
+
 import FormInput from '~/components/Molecules/FormInput';
+import Label from '~/components/Atoms/label';
 
 interface IRegisterForm {
   id: string;
@@ -42,8 +44,6 @@ export const RegisterForm: React.FC = () => {
     const id = 'pwConfirm';
     const value = userValues.pwConfirm;
     const validationResult = validateBlur(id, value);
-
-    console.log('validationResult', validationResult);
 
     setErrorMsg({
       ...errorMsg,
@@ -124,8 +124,11 @@ export const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
+      <Label height={16} marginTop={4} fontSize={12} lineHeight={16} color={'red'}>
+        {errorMsg.id}
+      </Label>
 
-      <S.ErrorMsg>{errorMsg.id}</S.ErrorMsg>
+      {/* <S.ErrorMsg>{errorMsg.id}</S.ErrorMsg> */}
       <LS.FormItemWithIcon isError={!!errorMsg.name}>
         <LS.IconWrapper>
           <S.UserNameIcon />
@@ -141,7 +144,9 @@ export const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
-      <S.ErrorMsg>{errorMsg.name}</S.ErrorMsg>
+      <Label height={16} marginTop={4} fontSize={12} lineHeight={16} color={'red'}>
+        {errorMsg.name}
+      </Label>
       <LS.FormItemWithIcon isError={!!errorMsg.email}>
         <LS.IconWrapper>
           <LS.EmailIcon />
@@ -157,13 +162,16 @@ export const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
-      <S.ErrorMsg>{errorMsg.email}</S.ErrorMsg>
+      <Label height={16} marginTop={4} fontSize={12} lineHeight={16} color={'red'}>
+        {errorMsg.email}
+      </Label>
       <LS.FormItemWithIcon isError={!!errorMsg.pw}>
         <LS.IconWrapper>
           <LS.PasswordIcon />
         </LS.IconWrapper>
         <FormInput
           id="pw"
+          type="password"
           width={250}
           height={50}
           borderWidth={0}
@@ -173,13 +181,16 @@ export const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
-      <S.ErrorMsg>{errorMsg.pw}</S.ErrorMsg>
+      <Label height={16} marginTop={4} fontSize={12} lineHeight={16} color={'red'}>
+        {errorMsg.pw}
+      </Label>
       <LS.FormItemWithIcon isError={!!errorMsg.pwConfirm}>
         <LS.IconWrapper>
           <LS.PasswordIcon />
         </LS.IconWrapper>
         <FormInput
           id="pwConfirm"
+          type="password"
           width={250}
           height={50}
           borderWidth={0}
@@ -189,7 +200,9 @@ export const RegisterForm: React.FC = () => {
           onChange={handleInputChange}
         />
       </LS.FormItemWithIcon>
-      <S.ErrorMsg>{errorMsg.pwConfirm}</S.ErrorMsg>
+      <Label height={16} marginTop={4} fontSize={12} lineHeight={16} color={'red'}>
+        {errorMsg.pwConfirm}
+      </Label>
       <S.RegisterButton onClick={handleSubmit}>{t('REGISTER.SUBMIT', '회원가입')}</S.RegisterButton>
       <Link to={PATH_URL.LOGIN}>
         <S.RegisterButton>{t('REGISTER.GO_LOGIN', '로그인하러 가기')}</S.RegisterButton>
