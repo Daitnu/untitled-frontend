@@ -35,7 +35,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        terserOptions: { ecma: 6, compress: { drop_console: true }, output: { comments: false } },
+        terserOptions: { ecma: 6, compress: { drop_console: false }, output: { comments: false } },
         parallel: 4,
       }),
     ],

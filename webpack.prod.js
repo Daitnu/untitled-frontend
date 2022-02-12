@@ -34,7 +34,12 @@ module.exports = {
       chunks: 'all',
     },
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: { ecma: 6, compress: { drop_console: true }, output: { comments: false } },
+        parallel: 4,
+      }),
+    ],
   },
 
   module: {
