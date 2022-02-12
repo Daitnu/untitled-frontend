@@ -68,6 +68,7 @@ export default class Api {
                 })
                 .then((res) => {
                   error.config.headers['Authorization'] = `${res.data.grantType} ${res.data.accessToken}`;
+                  localStorage.setItem('accessToken', res.data.accessToken);
                   return this.axiosInstance.request(error.config);
                 })
                 .catch((err) => {
