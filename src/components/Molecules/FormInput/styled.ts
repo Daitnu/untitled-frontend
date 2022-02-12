@@ -1,6 +1,31 @@
 import styled from 'styled-components';
 import * as GS from '~/globalStyles';
 
+const border = {
+  radius: {
+    common: '8px',
+  },
+};
+
+const color = {
+  font: {
+    facebook: '#4267b2',
+    twitter: '#03a9f4',
+    google: '#f44235',
+    divideContent: '#acadbc',
+  },
+  border: {
+    common: '#cfcdcb',
+  },
+  button: {
+    login: '#4786ff',
+  },
+};
+
+interface IFormItemContainer {
+  isError?: boolean;
+}
+
 interface InputContainerProps {
   width: number;
   height: number;
@@ -19,6 +44,16 @@ interface IconWrapperProps {
 interface IconProps {
   icon: any;
 }
+
+export const FormItemContainer = styled(GS.FlexJustifyAlignCenter)<IFormItemContainer>`
+  margin-top: 10px;
+  width: 300px;
+  height: 50px;
+  border: 2px solid ${(props) => (props.isError ? 'red' : color.border.common)};
+  border-radius: ${border.radius.common};
+  background-color: white;
+  overflow: hidden;
+`;
 
 export const InputContainer = styled(GS.FlexJustifyAlignCenter)<InputContainerProps>`
   width: ${({ width }) => width}px;

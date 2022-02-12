@@ -1,7 +1,23 @@
 import React from 'react';
 import * as S from './styled';
 import Input from '~/components/Atoms/Input';
+import Icon from '~/components/Atoms/Icon';
+import Label from '~/components/Atoms/label';
 
+interface IIcon {
+  image: any;
+  width: number;
+  height: number;
+  borderRight: string;
+}
+interface ILabel {
+  message?: string;
+  height: number;
+  marginTop: number;
+  fontSize: number;
+  lineHeight: number;
+  color: string;
+}
 interface IFormInput {
   type?: 'text' | 'password';
   id: string;
@@ -17,6 +33,8 @@ interface IFormInput {
   autoComplete?: boolean;
   maxLength?: number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  icon?: IIcon;
+  errorLabel?: ILabel;
 }
 
 const FormInput: React.FC<IFormInput> = ({
@@ -34,28 +52,47 @@ const FormInput: React.FC<IFormInput> = ({
   autoComplete = false,
   maxLength,
   onChange,
+  icon,
+  errorLabel,
 }) => {
   return (
-    <S.InputContainer
-      width={width}
-      height={height}
-      borderRadius={borderRadius}
-      isError={isError}
-      borderWidth={borderWidth}
-      borderColor={borderColor}
-      backgroundColor={backgroundColor}>
-      <Input
-        type={type}
-        id={id}
-        width={width}
-        height={height}
-        padding={padding}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        maxLength={maxLength}
-        onChange={onChange}
-      />
-    </S.InputContainer>
+    <>
+      <S.FormItemContainer isError={isError}>
+        {!!icon && (
+          <Icon image={icon.image} width={icon.width} height={icon.height} borderRight={icon.borderRight}></Icon>
+        )}
+        <S.InputContainer
+          width={width}
+          height={height}
+          borderRadius={borderRadius}
+          isError={isError}
+          borderWidth={borderWidth}
+          borderColor={borderColor}
+          backgroundColor={backgroundColor}>
+          <Input
+            type={type}
+            id={id}
+            width={width}
+            height={height}
+            padding={padding}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+            maxLength={maxLength}
+            onChange={onChange}
+          />
+        </S.InputContainer>
+      </S.FormItemContainer>
+      {!!errorLabel && (
+        <Label
+          height={errorLabel.height}
+          marginTop={errorLabel.marginTop}
+          fontSize={errorLabel.fontSize}
+          lineHeight={errorLabel.lineHeight}
+          color={errorLabel.color}>
+          {errorLabel.message}
+        </Label>
+      )}
+    </>
   );
 };
 
