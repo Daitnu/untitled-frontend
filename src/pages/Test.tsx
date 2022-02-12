@@ -3,12 +3,23 @@ import React from 'react';
 import UButton from '~/components/Atoms/UButton';
 import UModal from '~/components/Molecules/UModal';
 import { apiInstance } from '~/libraries/api';
+import webstomp from 'webstomp-client';
+const websocket = webstomp.client('ws://localhost:8080/realtime', {
+  protocols: ['v12.stomp'],
+});
 
 const download = async () => {
   const response = await apiInstance.download('cmm/exportCSV', '헤헤.csv');
 };
 
 const Test: React.FC = () => {
+  websocket.connect({}, () => {
+    console.log('websocket connected');
+
+    websocket.subscribe('/sub/test', (frame) => {
+      console.log('frame', frame);
+    });
+  });
   return (
     <>
       <div>hello</div>
