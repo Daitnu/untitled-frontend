@@ -11,6 +11,15 @@ import { useTranslation } from 'react-i18next';
 
 import FormInput from '~/components/Molecules/FormInput';
 import Label from '~/components/Atoms/label';
+import Icon from '~/components/Atoms/Icon';
+
+import userIcon from 'Assets/images/accounts/user.png';
+import nameIcon from 'Assets/images/accounts/name.png';
+import passwordIcon from 'Assets/images/accounts/password.png';
+import emailIcon from 'Assets/images/accounts/email.png';
+import facebookIcon from 'Assets/facebook.png';
+import twitterIcon from 'Assets/twitter.png';
+import googleIcon from 'Assets/google.png';
 
 interface IRegisterForm {
   id: string;
@@ -110,9 +119,7 @@ export const RegisterForm: React.FC = () => {
   return (
     <div>
       <LS.FormItemWithIcon isError={!!errorMsg.id}>
-        <LS.IconWrapper>
-          <LS.UserIcon />
-        </LS.IconWrapper>
+        <Icon image={userIcon} width={75} height={50} borderRight={'1px solid black'} />
         <FormInput
           id="id"
           width={250}
@@ -127,12 +134,8 @@ export const RegisterForm: React.FC = () => {
       <Label height={16} marginTop={4} fontSize={12} lineHeight={16} color={'red'}>
         {errorMsg.id}
       </Label>
-
-      {/* <S.ErrorMsg>{errorMsg.id}</S.ErrorMsg> */}
       <LS.FormItemWithIcon isError={!!errorMsg.name}>
-        <LS.IconWrapper>
-          <S.UserNameIcon />
-        </LS.IconWrapper>
+        <Icon image={nameIcon} width={75} height={50} borderRight={'1px solid black'} />
         <FormInput
           id="name"
           width={250}
@@ -148,9 +151,7 @@ export const RegisterForm: React.FC = () => {
         {errorMsg.name}
       </Label>
       <LS.FormItemWithIcon isError={!!errorMsg.email}>
-        <LS.IconWrapper>
-          <LS.EmailIcon />
-        </LS.IconWrapper>
+        <Icon image={emailIcon} width={75} height={50} borderRight={'1px solid black'} />
         <FormInput
           id="email"
           width={250}
@@ -166,9 +167,7 @@ export const RegisterForm: React.FC = () => {
         {errorMsg.email}
       </Label>
       <LS.FormItemWithIcon isError={!!errorMsg.pw}>
-        <LS.IconWrapper>
-          <LS.PasswordIcon />
-        </LS.IconWrapper>
+        <Icon image={passwordIcon} width={75} height={50} borderRight={'1px solid black'} />
         <FormInput
           id="pw"
           type="password"
@@ -185,9 +184,7 @@ export const RegisterForm: React.FC = () => {
         {errorMsg.pw}
       </Label>
       <LS.FormItemWithIcon isError={!!errorMsg.pwConfirm}>
-        <LS.IconWrapper>
-          <LS.PasswordIcon />
-        </LS.IconWrapper>
+        <Icon image={passwordIcon} width={75} height={50} borderRight={'1px solid black'} />
         <FormInput
           id="pwConfirm"
           type="password"
