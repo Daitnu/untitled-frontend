@@ -13,7 +13,9 @@ import { IValidations } from '~/@types/libraries';
 import { RootState } from '~/store';
 import { message } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import FormInput from '~/components/Molecules/FormInput';
+import Button from '~/components/Atoms/Button';
 
 import userIcon from 'Assets/images/accounts/user.png';
 import passwordIcon from 'Assets/images/accounts/password.png';
@@ -167,11 +169,22 @@ const LoginPage: React.FC = () => {
                 <S.DivideLine />
                 <S.DivideLineContent>OR</S.DivideLineContent>
               </S.DivideLineContainer>
+
               <S.FormItemWithIcon>
                 <S.IconWrapper>
                   <S.FacebookIcon />
                 </S.IconWrapper>
-                <S.FacebookButton>{t('LOGIN.FACEBOOK', '페이스북으로 로그인하기')}</S.FacebookButton>
+                <Button
+                  color={'#4267b2'}
+                  fontSize={16}
+                  lineHeight={24}
+                  cursor={'pointer'}
+                  border={'none'}
+                  outline={'none'}
+                  borderRadius={8}
+                  backgroundColor={'white'}>
+                  {t('LOGIN.FACEBOOK', '페이스북으로 로그인하기')}
+                </Button>
               </S.FormItemWithIcon>
               <S.FormItemWithIcon>
                 <S.IconWrapper>
