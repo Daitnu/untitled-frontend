@@ -11,6 +11,7 @@ interface IInput {
   autoComplete?: boolean;
   maxLength?: number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 const Input: React.FC<IInput> = ({
@@ -23,6 +24,7 @@ const Input: React.FC<IInput> = ({
   autoComplete,
   maxLength,
   onChange,
+  onKeyDown,
 }) => {
   const autoCompleteValue = autoComplete ? 'on' : 'off';
   return (
@@ -36,6 +38,7 @@ const Input: React.FC<IInput> = ({
       autoComplete={autoCompleteValue}
       maxLength={maxLength}
       onChange={onChange}
+      onKeyDown={onKeyDown}
     />
   );
 };

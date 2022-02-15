@@ -33,6 +33,7 @@ interface IFormInput {
   autoComplete?: boolean;
   maxLength?: number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   icon?: IIcon;
   errorLabel?: ILabel;
 }
@@ -52,6 +53,7 @@ const FormInput: React.FC<IFormInput> = ({
   autoComplete = false,
   maxLength,
   onChange,
+  onKeyDown,
   icon,
   errorLabel,
 }) => {
@@ -79,6 +81,7 @@ const FormInput: React.FC<IFormInput> = ({
             autoComplete={autoComplete}
             maxLength={maxLength}
             onChange={onChange}
+            onKeyDown={onKeyDown}
           />
         </S.InputContainer>
       </S.FormItemContainer>
