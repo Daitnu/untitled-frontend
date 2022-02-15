@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './styled';
 import Input from '~/components/Atoms/Input';
 import Icon from '~/components/Atoms/Icon';
-import Label from '~/components/Atoms/label';
+import Label from '~/components/Atoms/Label';
 
 interface IIcon {
   image: any;
