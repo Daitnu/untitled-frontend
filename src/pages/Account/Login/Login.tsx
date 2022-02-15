@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as GS from '~/globalStyles';
-import LoginForm from '~/components/Forms/Login/LoginForm';
 import backgoundImage from 'Assets/back.jpg';
 import { ThreeLayerTemplate } from '~/components/templates';
 
