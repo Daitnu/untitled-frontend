@@ -10,9 +10,8 @@ import { ThemeProvider } from 'styled-components';
 import { history } from './libraries/api';
 import rootReducer, { rootSaga } from './store';
 import { ResetCss } from '~/globalStyles/';
-import { StockListPage, NotFoundPage, CorperateInfomationPage, LoginPage, RegisterPage } from './pages';
+import { StockListPage, NotFoundPage, CorperateInfomationPage, LoginPage, RegisterPage, LogoutPage } from './pages';
 import Test from './pages/Test';
-import LogoutPage from './pages/Account/Logout/Logout';
 import { PATH_URL } from './constants';
 
 export const theme = {
