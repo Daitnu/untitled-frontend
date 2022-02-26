@@ -13,6 +13,7 @@
 
   "HEADER": {
     "LOGIN": "Login",
+    "LOGOUT": "Logout",
     "STOCK": "Stock"
   },
 

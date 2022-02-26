@@ -13,6 +13,7 @@
 
   "HEADER": {
     "LOGIN": "로그인",
+    "LOGOUT": "로그아웃",
     "STOCK": "주식"
   },
 
