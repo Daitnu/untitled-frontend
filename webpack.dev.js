@@ -32,13 +32,13 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
     },
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: { ecma: 6, compress: { drop_console: false }, output: { comments: false } },
-        parallel: 4,
-      }),
-    ],
+    // minimize: true,
+    // minimizer: [
+    //   new TerserPlugin({
+    //     terserOptions: { ecma: 6, compress: { drop_console: false }, output: { comments: false } },
+    //     parallel: 4,
+    //   }),
+    // ],
   },
 
   module: {
