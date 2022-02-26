@@ -5,6 +5,7 @@ export const PATH_URL = {
   LOGOUT: 'logout' as const,
   REGISTER: '/register' as const,
   FORGOT_PASSWORD: '/forgot-password' as const,
+  CORP_CORPCODE: '/corp/:code' as const,
 };
 
 const API_PATH = {

@@ -12,6 +12,8 @@ import rootReducer, { rootSaga } from './store';
 import { ResetCss } from '~/globalStyles/';
 import { StockListPage, NotFoundPage, CorperateInfomationPage, LoginPage, RegisterPage } from './pages';
 import Test from './pages/Test';
+import LogoutPage from './pages/Account/Logout/Logout';
+import { PATH_URL } from './constants';
 
 export const theme = {
   colors: {
@@ -31,10 +33,11 @@ const AppRouter: React.FC = () => (
       <Provider store={store}>
         <Router history={history}>
           <Switch>
-            <Route path="/" exact component={StockListPage} />
-            <Route path="/corp/:code" exact component={CorperateInfomationPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/register" component={RegisterPage} />
+            <Route path={PATH_URL.HOME} exact component={StockListPage} />
+            <Route path={PATH_URL.CORP_CORPCODE} exact component={CorperateInfomationPage} />
+            <Route path={PATH_URL.LOGIN} component={LoginPage} />
+            <Route path={PATH_URL.LOGOUT} component={LogoutPage} />
+            <Route path={PATH_URL.REGISTER} component={RegisterPage} />
             <Route path="/test" component={Test} />
             <Route path="*" component={NotFoundPage} />
           </Switch>
