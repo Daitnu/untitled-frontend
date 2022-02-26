@@ -27,6 +27,8 @@ const successCb = function* ({ status, data }: IHTTPResponse<IResponseAccountLog
     const { accessToken, grantType }: IResponseAccountLogin = data;
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('grantType', grantType);
+    const event = new Event('accessTokenChanged');
+    window.dispatchEvent(event);
     yield call(historyPush, PATH_URL.HOME);
     yield put(accountLoginPostClear());
   }

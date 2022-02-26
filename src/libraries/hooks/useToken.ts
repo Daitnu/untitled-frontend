@@ -12,7 +12,7 @@ const useToken = (): IUseLogin | null => {
   useEffect(() => {
     const getUserTokenData = () => {
       const accessToken = localStorage.getItem('accessToken');
-      if (!!accessToken) {
+      if (accessToken !== null) {
         const base64Url = accessToken.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         const jsonPayload = decodeURIComponent(
@@ -34,9 +34,10 @@ const useToken = (): IUseLogin | null => {
       }
     };
 
-    window.addEventListener('storage', getUserTokenData);
+    getUserTokenData();
+    window.addEventListener('accessTokenChanged', getUserTokenData);
     return () => {
-      window.removeEventListener('storage', getUserTokenData);
+      window.removeEventListener('accessTokenChanged', getUserTokenData);
     };
   }, []);
 

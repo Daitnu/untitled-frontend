@@ -60,7 +60,7 @@ export default class Api {
           if (status === 401) {
             if (
               error.request.responseURL !== error.config.baseURL + API_PATH.ACCOUNT.REISSUE &&
-              !!localStorage.getItem('accessToken')
+              localStorage.getItem('accessToken') !== null
             ) {
               return this.axiosInstance
                 .post<IResponseAccessTokenReissue>(API_PATH.ACCOUNT.REISSUE, {
@@ -69,6 +69,8 @@ export default class Api {
                 .then((res) => {
                   error.config.headers['Authorization'] = `${res.data.grantType} ${res.data.accessToken}`;
                   localStorage.setItem('accessToken', res.data.accessToken);
+                  const event = new Event('accessTokenChanged');
+                  window.dispatchEvent(event);
                   return this.axiosInstance.request(error.config);
                 })
                 .catch((err) => {
