@@ -7,11 +7,11 @@ interface IUseLogin {
 }
 
 const useToken = (): IUseLogin | null => {
-  const accessToken = localStorage.getItem('accessToken');
   const [tokenData, setTokenData] = useState<IUseLogin | null>(null);
 
   useEffect(() => {
     const getUserTokenData = () => {
+      const accessToken = localStorage.getItem('accessToken');
       if (!!accessToken) {
         const base64Url = accessToken.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
