@@ -10,13 +10,6 @@ import useToken from '~/libraries/hooks/useToken';
 const Header = () => {
   const { t } = useTranslation();
   const token = useToken();
-  const count = useRef(0);
-
-  useEffect(() => {
-    console.log({ token });
-  }, [token]);
-
-  console.log('헤더 렌더링', ++count.current);
 
   return (
     <S.Header>
