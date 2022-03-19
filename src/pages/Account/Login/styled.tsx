@@ -170,8 +170,9 @@ export const LoginButton = styled.button`
   cursor: pointer;
 `;
 
-export const SNSLoginButton = styled(GS.FullWidth.withComponent('button'))`
+export const SNSLoginButton = styled.button`
   border: none;
+  width: 100%;
   height: 100%;
   border-radius: ${border.radius.common};
   background-color: white;

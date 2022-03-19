@@ -174,17 +174,7 @@ const LoginPage: React.FC = () => {
                 <S.IconWrapper>
                   <S.FacebookIcon />
                 </S.IconWrapper>
-                <Button
-                  color={'#4267b2'}
-                  fontSize={16}
-                  lineHeight={24}
-                  cursor={'pointer'}
-                  border={'none'}
-                  outline={'none'}
-                  borderRadius={8}
-                  backgroundColor={'white'}>
-                  {t('LOGIN.FACEBOOK', '페이스북으로 로그인하기')}
-                </Button>
+                <S.FacebookButton>{t('LOGIN.FACEBOOK', '페이스북으로 로그인하기')}</S.FacebookButton>
               </S.FormItemWithIcon>
               <S.FormItemWithIcon>
                 <S.IconWrapper>
