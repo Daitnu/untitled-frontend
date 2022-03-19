@@ -86,8 +86,11 @@ export const FullScreenWrap = styled.div<IFullScreenWrap>`
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   background: ${(props: any) => `center/cover no-repeat url(${props.bg})` || 'none'};
 `;
 

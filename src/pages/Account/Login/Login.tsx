@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as S from './styled';
 import * as GS from '~/globalStyles';
 import backgoundImage from 'Assets/back.jpg';
-import { ThreeLayerTemplate } from '~/components/templates';
+import { ReactiveHeightWidthTemplate } from '~/components/templates';
 
 import { KEY_CODE, PATH_URL } from '~/constants';
 import validation from '~/libraries/validation';
@@ -98,7 +98,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <ThreeLayerTemplate>
+    <ReactiveHeightWidthTemplate>
       <GS.FullScreenWrap bg={backgoundImage}>
         <S.CenterWrap>
           <S.LoginFormArea>
@@ -203,7 +203,7 @@ const LoginPage: React.FC = () => {
           <S.BackgoundImage />
         </S.CenterWrap>
       </GS.FullScreenWrap>
-    </ThreeLayerTemplate>
+    </ReactiveHeightWidthTemplate>
   );
 };
 

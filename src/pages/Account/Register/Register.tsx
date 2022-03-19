@@ -7,7 +7,7 @@ import { IValidation, IValidations } from '~/@types/libraries';
 import { accountRegisterPostRequest } from '~/store/account/register';
 import validation from '~/libraries/validation';
 import { PATH_URL } from '~/constants';
-import { ThreeLayerTemplate } from '~/components/templates';
+import { ReactiveHeightWidthTemplate } from '~/components/templates';
 import FormInput from '~/components/Molecules/FormInput';
 
 import backgoundImage from 'Assets/back.jpg';
@@ -115,7 +115,7 @@ const RegisterPage: React.FC = () => {
   );
 
   return (
-    <ThreeLayerTemplate>
+    <ReactiveHeightWidthTemplate>
       <GS.FullScreenWrap bg={backgoundImage}>
         <LS.CenterWrap>
           <LS.LoginFormArea>
@@ -231,7 +231,7 @@ const RegisterPage: React.FC = () => {
           <LS.BackgoundImage />
         </LS.CenterWrap>
       </GS.FullScreenWrap>
-    </ThreeLayerTemplate>
+    </ReactiveHeightWidthTemplate>
   );
 };
 
