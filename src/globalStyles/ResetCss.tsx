@@ -28,6 +28,11 @@ export const ResetCss = createGlobalStyle`
   text-decoration: none;
   color : inherit;
 }
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {

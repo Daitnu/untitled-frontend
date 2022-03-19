@@ -2,17 +2,14 @@ import styled from 'styled-components';
 import { CommonDiv } from '~/globalStyles';
 
 export const Wrap = styled.div`
-  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 `;
 
 export const ContainerMiddle = styled(CommonDiv)`
   padding: 0.5rem;
   width: 50%;
-`;
-
-export const ContainerWide = styled(CommonDiv)`
-  width: 99%;
-  max-width: 2300px;
 `;
 
 export const Section = styled(CommonDiv)`
@@ -22,6 +19,9 @@ export const Section = styled(CommonDiv)`
 
   & + & {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 `;
 

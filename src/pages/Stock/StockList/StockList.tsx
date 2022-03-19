@@ -9,7 +9,7 @@ import { RootState } from '~/store';
 import { dailyStockPricesGetRequest } from '~/store/stock/dailyStockPrices';
 import { StockListSearch } from '~/components/StockListSearch';
 import * as S from './styled';
-import { ThreeLayerTemplate } from '~/components/templates';
+import { ReactiveHeightWidthTemplate } from '~/components/templates';
 import { gridColumns } from './columnOptions';
 import { Col, Row } from 'antd';
 
@@ -118,7 +118,7 @@ const StockList: React.FC = () => {
     const { data } = response;
     const gridDatas = converToStockListData(data);
     content = (
-      <>
+      <S.Wrap>
         <S.Section>
           <Row>
             <Col span={12}>
@@ -130,18 +130,16 @@ const StockList: React.FC = () => {
           </Row>
         </S.Section>
         <S.Section>
-          <S.ContainerWide>
-            <Grid data={gridDatas} columns={gridColumns} onClick={onClickGridCell(gridDatas)} />
-          </S.ContainerWide>
+          <Grid data={gridDatas} columns={gridColumns} onClick={onClickGridCell(gridDatas)} />
         </S.Section>
-      </>
+      </S.Wrap>
     );
   }
 
   return (
-    <ThreeLayerTemplate isLoading={loading} errors={dailyStockpricesResponseError}>
-      <S.Wrap>{content}</S.Wrap>
-    </ThreeLayerTemplate>
+    <ReactiveHeightWidthTemplate isLoading={loading} errors={dailyStockpricesResponseError}>
+      {content}
+    </ReactiveHeightWidthTemplate>
   );
 };
 
