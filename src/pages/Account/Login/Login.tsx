@@ -172,9 +172,9 @@ const LoginPage: React.FC = () => {
 
               <S.FormItemWithIcon>
                 <S.IconWrapper>
-                  <S.FacebookIcon />
+                  <S.KakaoIcon />
                 </S.IconWrapper>
-                <S.FacebookButton>{t('LOGIN.FACEBOOK', '페이스북으로 로그인하기')}</S.FacebookButton>
+                <S.KakaoButton>{t('LOGIN.KAKAO', '카카오 로그인하기')}</S.KakaoButton>
               </S.FormItemWithIcon>
               <S.FormItemWithIcon>
                 <S.IconWrapper>

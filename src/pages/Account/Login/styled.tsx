@@ -8,6 +8,7 @@ import emailIcon from 'Assets/images/accounts/email.png';
 import facebookIcon from 'Assets/facebook.png';
 import twitterIcon from 'Assets/twitter.png';
 import googleIcon from 'Assets/google.png';
+import kakaoIcon from 'Assets/kakao.png';
 
 const width = 760 as const;
 const height = 600 as const;
@@ -79,6 +80,7 @@ const color = {
     twitter: '#03a9f4',
     google: '#f44235',
     divideContent: '#acadbc',
+    kakao: '#FEE500',
   },
   border: {
     common: '#cfcdcb',
@@ -203,6 +205,10 @@ export const FacebookIcon = styled(GS.IconStyle)`
   background-image: url(${facebookIcon});
 `;
 
+export const KakaoIcon = styled(GS.IconStyle)`
+  background-image: url(${kakaoIcon});
+`;
+
 export const TwitterIcon = styled(GS.IconStyle)`
   background-image: url(${twitterIcon});
 `;
@@ -213,6 +219,12 @@ export const GoogleIcon = styled(GS.IconStyle)`
 
 export const FacebookButton = styled(SNSLoginButton)`
   color: ${color.font.facebook};
+  font-size: 16px;
+  line-height: 24px;
+`;
+
+export const KakaoButton = styled(SNSLoginButton)`
+  color: ${color.font.kakao};
   font-size: 16px;
   line-height: 24px;
 `;
